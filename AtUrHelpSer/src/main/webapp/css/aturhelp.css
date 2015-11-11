@@ -1,0 +1,212 @@
+
+body{
+      padding:0px;
+      margin:0px;
+      font-size: 13px;
+      font-family:Arial, 'Times New Romanl', Times, serif
+      color:#408080;
+      line-height:150%;
+      background-color:#f0f0f0;
+}
+form{
+	margin:0px;
+	padding:0px;
+}
+body, table, tr, td, div, span {
+	font-size:13px;
+  font-family:Arial, 'Times New Romanl', Times, serif
+	line-height:150%;	
+}
+a:link {
+	color: #ffffff;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #3ab1d3;
+}
+a:hover {
+	text-decoration: underline;
+	color: #ffffff;
+}
+a:active {
+	text-decoration: none;
+	color: #c0c0c0;
+}
+#header{
+    width:1170px;
+    height:163px;
+    clear:both;
+    text-align:left;
+}
+
+#middle{
+    width:1170px;
+    height:422px;
+    clear:both;
+    margin-top:8px;
+    text-align:left;
+}
+
+#slide{
+    width:800px;
+    height:418px;
+    margin-left:0px;
+    margin-top:0px;
+    float:left;
+    display:inline;
+    text-align:left;
+}
+
+#inovative{
+    width:370px;
+    height:418px;
+    margin-left:0px;
+    margin-top:0px;
+    float:left;
+    display:inline;
+    background-image: url(../images/aturhelp/banner-right-side-bg.png);
+    background-repeat: repeat;
+    background-position:left;
+    text-align:left;
+}
+
+.w_ctr_15 {width:800px;height:418px;overflow:hidden;}
+.w_ctr_15 ul,ol{list-style:none outside;margin:0px;padding:0px;}
+.w_ctr_15 .JQ-slide{width:800px;height:418px;overflow:hidden;position:relative;} 
+.w_ctr_15 .JQ-slide-content{position:absolute;} 
+.w_ctr_15 .JQ-slide-content li{width:800px;height:418px;float:left;display:inline;position:relative; margin:0px;list-style:none;} 
+.w_ctr_15 .JQ-slide-content li img{width:800px;height:418px;border:0 none;vertical-align:top;} 
+.w_ctr_15 .JQ-slide-content li span{display:none;background:#ff0000;color:#ffffff;font-size:14px;font-weight:bold;padding:5px;line-height:150%;position:absolute;left:0px;bottom:0px;z-index:10;width:790px;height:50px;overflow:hidden;filter:alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity:0.5;opacity:0.5;} 
+.w_ctr_15 .JQ-slide-nav{position:absolute;bottom:14px;right:8px;z-index:30;}
+.w_ctr_15 .JQ-slide-nav li{float:left;display:inline;background:url(../images/focus_li.png) no-repeat;width:10px;height:10px;text-indent:-999em;overflow:hidden;cursor:pointer;margin-right:5px;} 
+.w_ctr_15 .JQ-slide-nav li.on{background-position:-15px 0;} 
+
+
+#aturhelplogo{
+    width:370px;
+    height:138px;
+    margin-left:0px;
+    margin-top:11px;
+    float:left;
+    display:inline;
+    text-align:left;
+}
+
+#home{
+    width:139px;
+    height:140px;
+    margin-left:20px;
+    margin-top:11px;
+    float:left;
+    display:inline;
+    text-align:left;
+}
+
+#about{
+    width:138px;
+    height:140px;
+    margin-left:21px;
+    margin-top:11px;
+    float:left;
+    display:inline;
+    text-align:left;
+}
+
+#blog{
+    width:137px;
+    height:140px;
+    margin-left:22px;
+    margin-top:11px;
+    float:left;
+    display:inline;
+    text-align:left;
+}
+
+#projects{
+    width:142px;
+    height:140px;
+    margin-left:21px;
+    margin-top:11px;
+    float:left;
+    display:inline;
+    text-align:left;
+}
+
+#contacts{
+    width:142px;
+    height:140px;
+    margin-left:18px;
+    margin-top:11px;
+    float:left;
+    display:inline;
+    text-align:left;
+}
+
+#bigletter2{
+    width:326px;
+    height:38px;
+    clear:both;
+    margin-left:30px;
+    margin-top:0px;
+    display:inline-block;
+    text-align:left;
+     color:#1e8bc3;
+     font-size:22px;
+     font-family:'Trebuchet MS', Arial, Helvetica;
+}
+
+#bigletter3{
+    width:326px;
+    height:172px;
+    clear:both;
+    margin-left:30px;
+    margin-top:0px;
+    display:inline-block;
+    text-align:left;
+     color:#408080;
+     font-family:Arial, 'Times New Roman',Times, serif;
+}
+
+#bigletter1{
+    width:308px;
+    height:60px;
+    clear:both;
+    margin-left:30px;
+    margin-top:17px;
+    display:inline-block;
+    text-align:left;
+     font-weight:bold;
+     color:#f86924;
+     font-size:28px;
+     font-family:Arial, 'Times New Roman',Times, serif;
+     line-height:30px;
+}
+
+#footer{
+    width:100%;
+    height:50px;
+    clear:both;
+    margin-top:10px;
+    margin-bottom:2px;
+    background-image: url(../images/aturhelp/bg_repeat_x_1.png);
+    background-repeat: repeat-x;
+    background-position:0px -328px;
+    text-align:center;
+    line-height:8px;
+}
+
+
+#footer-inline{
+    width:602px;
+    height:29px;
+    margin-left:418px;
+    margin-top:10px;
+    display:inline-block;
+    text-align:left;
+     color:#ffffff;
+     font-size:12px;
+     font-family:Arial, 'Times New Roman',Times, serif;
+     line-height:30px;
+}
+
