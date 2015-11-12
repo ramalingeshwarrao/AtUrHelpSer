@@ -31,4 +31,5 @@ public interface HelpService {
 	public List<Help> getLogData(String deviceId);
 	public List<Help> getCustomerLogData(String deviceId);
 	public String getDeviceIdFromTicketId(String ticketNo);
+	public Boolean insertRegisterAdmin(AdminInfo adminInfo);
 }

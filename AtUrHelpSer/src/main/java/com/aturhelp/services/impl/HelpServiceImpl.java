@@ -248,4 +248,9 @@ public class HelpServiceImpl implements HelpService {
 		return helpDAO.getDeviceIdFromTicketId(ticketNo);
 	}
 
+	@Override
+	public Boolean insertRegisterAdmin(AdminInfo adminInfo) {
+		return helpDAO.insertRegisterAdmin(adminInfo);
+	}
+
 }

@@ -172,4 +172,20 @@ public class HelpResource {
 		return help;
 	}
 	
+	@POST
+	@Path("insert/registeradmin")
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
+	public AdminInfo createRegisterAdmin(AdminInfo adminInfo) {
+		boolean isInserted = helpService.insertRegisterAdmin(adminInfo);
+		AdminInfo adminInfoStat = new AdminInfo();
+		if (isInserted) {
+			adminInfoStat.setStatus(0); //Succesfull
+		} else {
+			adminInfoStat.setStatus(1);
+		}
+		return adminInfoStat;
+	}
+	
+	
 }

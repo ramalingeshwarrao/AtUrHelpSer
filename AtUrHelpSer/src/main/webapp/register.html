@@ -33,7 +33,7 @@
                </span>
                </p>
                
-               <p>Emal:<br>
+               <p>Email:<br>
                <input type="email" name="email" ng-model="email" placeholder="Enter Email"  required/>
                <span style="color:red" ng-show="registerform.email.$dirty && registerform.email.$invalid">
                <span ng-show="registerform.email.$error.required">Email is required</span>
@@ -49,7 +49,7 @@
                
                <p>
                <button class="btn btn-primary" ng-click="register()" ng-disabled="
-               registerform.fullname.$invalid || registerform.email.$invalid || registerform.number.$invalid">Login</button>
+               registerform.fullname.$invalid || registerform.email.$invalid || registerform.number.$invalid">Submit</button>
                </p>
                </div>
                </form>

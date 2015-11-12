@@ -402,4 +402,27 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 		return null;
 	}
 
+	@Override
+	public Boolean insertRegisterAdmin(final AdminInfo adminInfo) {
+		try {
+			this.jdbcTemplate.update(new PreparedStatementCreator() {
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con)
+						throws SQLException {
+					PreparedStatement ps = con
+							.prepareStatement(SQLQuery.INSERT_REGISTER_ADMIN);
+					ps.setString(1, adminInfo.getName());
+					ps.setString(2, adminInfo.getEmail());
+					ps.setString(3, adminInfo.getMobileNo());
+					ps.setBoolean(4, false);
+					return ps;
+				}
+			});
+		} catch (Exception e) {
+			LOG.error("Fail to insert register admins", e);
+			return false;
+		}
+		return true;
+	}
+
 }
