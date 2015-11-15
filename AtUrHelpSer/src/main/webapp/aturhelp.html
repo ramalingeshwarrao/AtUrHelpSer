@@ -1,43 +1,26 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>AtUrHelp.</title>
-<meta name="keywords" content="aturhelp web page, aturhelp web page template" />
-<meta name="description" content="This is aturhelp style web pag" />
-
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/aturhelp.css" />
-
-<script type="text/javascript" src="js/angular.min.js"></script>
-<script type="text/javascript" src="js/aturhelp.js"></script>
-
-
-<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.slide.js"></script>
-
-
-</head>
-<body ng-app="aturhelpapp">
-  <center>
-     <div ng-include="'header.html'"></div> 
-     <div id="middle">
-          <div id="slide">
-          	<div class="w_ctr_15">
-          		<div class="JQ-slide">
-          			<ul class="JQ-slide-content">
-          				<li><a href="aturhelp.html"><img src="images/aturhelp/banner-image-1.png" width="800" height="418" alt=""/><span></span></a></li>
-          				<li><a href="aturhelp.html"><img src="images/aturhelp/banner-image-2.png" width="800" height="418" alt=""/><span></span></a></li>
-          				<li><a href="aturhelp.html"><img src="images/aturhelp/banner-image-3.png" width="800" height="418" alt=""/><span></span></a></li>
-          			</ul>
-          			<ul class="JQ-slide-nav">
-          				<li class="on">1</li>
-          				<li>2</li>
-          				<li>3</li>
-          			</ul>
-          		</div>
-          	</div>
-          	<script type="text/javascript">
+<div id="middle">
+	<div id="slide">
+		<div class="w_ctr_15">
+			<div class="JQ-slide">
+				<ul class="JQ-slide-content">
+					<li><a href="aturhelp.html"><img
+							src="images/aturhelp/banner-image-1.png" width="800" height="418"
+							alt="" /><span></span></a></li>
+					<li><a href="aturhelp.html"><img
+							src="images/aturhelp/banner-image-2.png" width="800" height="418"
+							alt="" /><span></span></a></li>
+					<li><a href="aturhelp.html"><img
+							src="images/aturhelp/banner-image-3.png" width="800" height="418"
+							alt="" /><span></span></a></li>
+				</ul>
+				<ul class="JQ-slide-nav">
+					<li class="on">1</li>
+					<li>2</li>
+					<li>3</li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript">
           		$(function (){
           		
           			$(".w_ctr_15 .JQ-slide").Slide({
@@ -48,41 +31,46 @@
           		
           		});
           	</script>
-          </div>
-          <div id="inovative">
-            <div id="bigletter1">Login:</div>
-             <div id="letter">
-               <form ng-controller="logincontroller" name="loginform">
-               
-               <p>UserName:<br>
-               <input type="text" name="username" ng-model="username" placeholder="Enter UserName" required/>
-               <span style="color:red" ng-show="loginform.username.$dirty && loginform.username.$invalid">
-               <span ng-show="loginform.username.$error.required">User Name is required</span>
-               </span>
-               </p>
-               
-               <p>Password:<br>
-               <input type="password" name="pass" ng-model="pass" placeholder="Enter Password"  required/>
-               <span style="color:red" ng-show="loginform.pass.$dirty && loginform.pass.$invalid">
-               <span ng-show="loginform.pass.$error.required">Password is required</span>
-               </span>
-               </p>
-               
-               <p>
-               <button class="btn btn-primary" ng-click="login()" ng-disabled="loginform.username.$invalid || loginform.pass.$invalid">Login</button>
-               </p>
-               
-               <p>
-               <a href="register.html">Register Here</a>
-               </p>
-               </form>
-              </div>
-             </div>
-               <div id="bigletter3"><!-- need to provide some text --><br /></div>
-          </div>
-     </div>
-     
-     <div ng-include="'footer.html'"></div> 
-  </center>
-</body>
-</html>
+	</div>
+	<div id="inovative">
+		<div id="bigletter1">Login:</div>
+		<div id="letter">
+			<form name="loginform">
+
+				<p>
+					UserName:<br> <input type="text" name="username"
+						ng-model="username" placeholder="Enter UserName" required /> <span
+						style="color: red"
+						ng-show="loginform.username.$dirty && loginform.username.$invalid">
+						<span ng-show="loginform.username.$error.required">User
+							Name is required</span>
+					</span>
+				</p>
+
+				<p>
+					Password:<br> <input type="password" name="pass"
+						ng-model="pass" placeholder="Enter Password" required /> <span
+						style="color: red"
+						ng-show="loginform.pass.$dirty && loginform.pass.$invalid">
+						<span ng-show="loginform.pass.$error.required">Password is
+							required</span>
+					</span>
+				</p>
+
+				<p>
+					<button class="btn btn-primary" ng-click="login()"
+						ng-disabled="loginform.username.$invalid || loginform.pass.$invalid">Login</button>
+				</p>
+
+				<p>
+					<a href="#register">Register Here</a>
+				</p>
+			</form>
+		</div>
+	</div>
+	<div id="bigletter3">
+		<!-- need to provide some text -->
+		<br />
+	</div>
+</div>
+

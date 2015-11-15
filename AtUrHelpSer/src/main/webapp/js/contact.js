@@ -1,6 +1,8 @@
 (function(){
 	
+	'use strict';
 	
-    var aturhelpapp = angular.module('contactapp',[]);
-
+	$ATURHELP.ContactController = ['$scope', '$http', function () {
+		
+	}];
 })();

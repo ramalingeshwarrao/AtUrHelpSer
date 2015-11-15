@@ -1,6 +1,9 @@
 (function(){
 	
+	'use strict';
 	
-    var aturhelpapp = angular.module('projectsapp',[]);
-
+	$ATURHELP.ProjectsController = ['$scope', '$http', function () {
+		
+	}];
+	
 })();

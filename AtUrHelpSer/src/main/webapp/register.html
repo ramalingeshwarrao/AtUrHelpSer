@@ -1,63 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>AtUrHelp.</title>
-<meta name="keywords" content="aturhelp web page, aturhelp web page template" />
-<meta name="description" content="This is aturhelp style web pag" />
 
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/aturhelp.css" />
+<div id="middle">
+	<div class="slide">
+		<div id="letter">
+			<form name="registerform">
 
-<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.slide.js"></script>
+				<div id="bigletter2">
+					<p>By registering we will contact you..</p>
+				</div>
 
-<script type="text/javascript" src="js/angular.min.js"></script>
-<script type="text/javascript" src="js/register.js"></script>
-</head>
-<body ng-app="registerapp">
-<center>
-     <div ng-include="'header.html'"></div> 
-     <div id="middle">
-          <div class="slide">
-          <div id="letter">
-               <form ng-controller="registercontroller" name="registerform">
-               
-               <div id="bigletter2"><p> By registering we will contact you..</p></div>
-               
-               <div id="letter">
-               <p>FullName:<br>
-               <input type="text" name="fullname" ng-model="fullname" placeholder="Enter FullName" required/>
-               <span style="color:red" ng-show="registerform.fullname.$dirty && registerform.fullname.$invalid">
-               <span ng-show="registerform.fullname.$error.required">Full Name is required</span>
-               </span>
-               </p>
-               
-               <p>Email:<br>
-               <input type="email" name="email" ng-model="email" placeholder="Enter Email"  required/>
-               <span style="color:red" ng-show="registerform.email.$dirty && registerform.email.$invalid">
-               <span ng-show="registerform.email.$error.required">Email is required</span>
-               </span>
-               </p>
-               
-               <p>Mobile No:<br>
-               <input type="number" name="number" ng-model="number" placeholder="Enter Mobile No"  required/>
-               <span style="color:red" ng-show="registerform.number.$dirty && registerform.number.$invalid">
-               <span ng-show="registerform.number.$error.required">Mobile No is required</span>
-               </span>
-               </p>
-               
-               <p>
-               <button class="btn btn-primary" ng-click="register()" ng-disabled="
+				<div id="letter">
+					<p>
+						FullName:<br> <input type="text" name="fullname"
+							ng-model="fullname" placeholder="Enter FullName" required /> <span
+							style="color: red"
+							ng-show="registerform.fullname.$dirty && registerform.fullname.$invalid">
+							<span ng-show="registerform.fullname.$error.required">Full
+								Name is required</span>
+						</span>
+					</p>
+
+					<p>
+						Email:<br> <input type="email" name="email" ng-model="email"
+							placeholder="Enter Email" required /> <span style="color: red"
+							ng-show="registerform.email.$dirty && registerform.email.$invalid">
+							<span ng-show="registerform.email.$error.required">Email
+								is required</span>
+						</span>
+					</p>
+
+					<p>
+						Mobile No:<br> <input type="number" name="number"
+							ng-model="number" placeholder="Enter Mobile No" required /> <span
+							style="color: red"
+							ng-show="registerform.number.$dirty && registerform.number.$invalid">
+							<span ng-show="registerform.number.$error.required">Mobile
+								No is required</span>
+						</span>
+					</p>
+
+					<p>
+						<button class="btn btn-primary" ng-click="register()"
+							ng-disabled="
                registerform.fullname.$invalid || registerform.email.$invalid || registerform.number.$invalid">Submit</button>
-               </p>
-               </div>
-               </form>
-              </div>
-          </div>
-          
-     </div>
-     <div ng-include="'footer.html'"></div> 
-  </center>
-  </body>
-</html>
+					</p>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</div>

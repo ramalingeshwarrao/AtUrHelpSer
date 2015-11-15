@@ -1,6 +1,9 @@
 (function(){
 	
+	'use stict';
 	
-    var aturhelpapp = angular.module('blogapp',[]);
+	$ATURHELP.BlogController = ['$scope', '$http', function ($scope, $http) {
+		
+	}];
 
 })();

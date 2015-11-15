@@ -1,13 +1,15 @@
-(function(){
-	
-	
-    var aturhelpapp = angular.module('aturhelpapp',[]);
-    aturhelpapp.controller('logincontroller', function($scope) {
-    	$scope.username="";
-    	$scope.password="";
-    	$scope.login = function () {
-    		alert("inside login method");
-    	}
-    });
-
-})();
+(
+		function () {
+		
+			'use strict';
+			
+			$ATURHELP.AturhelpController = ['$scope', '$http', function ($scope, $http) {
+				$scope.username = "";
+				$scope.pass = "";
+				$scope.login = function() {
+					alert("inside the login method 1234345");
+				};
+			}];
+		}
+		
+)();

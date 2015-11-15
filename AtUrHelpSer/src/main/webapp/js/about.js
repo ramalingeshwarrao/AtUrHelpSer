@@ -1,6 +1,10 @@
 (function(){
 	
+	'use strict';
 	
-    var aturhelpapp = angular.module('aboutapp',[]);
+	$ATURHELP.AboutController = ['$scope', '$http', function($scope, $htpp) {
+		
+	}];
+    
 
 })();
