@@ -19,7 +19,7 @@
 					$http(
 							{
 								method : 'POST',
-								url : 'http://localhost:8090/AtUrHelpSer/aturhelp/hr/insert/registeradmin',
+								url : $ATURHELP.aturhelpRest+'/insert/registeradmin',
 								data : $scope.admininfo,
 								headers : {
 									'Content-Type' : 'application/json'

@@ -4,14 +4,15 @@
 		'use strict';
 		
 		//Define global variable
-		var $ATURHELP = window.$ATURHELP;
+		var $ATURHELP = window.$ATURHELP, aturhelpRest;
 		
 		if (! $ATURHELP || typeof $ATURHELP != 'object') {
 			$ATURHELP = window.$ATURHELP = {};
 		}
 		
-		var MainModule;
+		var MainModule ;
 		
+		$ATURHELP.aturhelpRest = "/aturhelp/hr";
 		MainModule = angular.module('MainModule', ['ngRoute']);
 		
 		//Add config
