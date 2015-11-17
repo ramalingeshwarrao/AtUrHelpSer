@@ -253,4 +253,9 @@ public class HelpServiceImpl implements HelpService {
 		return helpDAO.insertRegisterAdmin(adminInfo);
 	}
 
+	@Override
+	public String getPassword(String userName) {
+		return helpDAO.getPassword(userName);
+	}
+
 }

@@ -425,4 +425,26 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 		return true;
 	}
 
+	@Override
+	public String getPassword(String userName) {
+		try {
+			List<String> list = this.jdbcTemplate.query(
+					SQLQuery.GET_PASSWORD_BY_USER_ID,
+					new Object[] { userName }, new RowMapper<String>() {
+						@Override
+						public String mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							return rs.getString("password");
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return list.get(0);
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get deviceid from ticket id", e);
+			return null;
+		}
+		return null;
+	}
+
 }
