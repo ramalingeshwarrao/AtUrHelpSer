@@ -43,7 +43,7 @@
 	
 	<welcome-file-list>
   	    <welcome-file>
-  	        main.html
+  	       main.jsp
   	    </welcome-file>
   	</welcome-file-list>
   
