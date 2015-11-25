@@ -1,0 +1,48 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/provideradmin**" access="ROLE_USER" />
+		<security:form-login 
+		    login-page="/providerlogin" 
+		    default-target-url="/provideradmin" 
+			authentication-failure-url="/providerlogin?error" 
+			username-parameter="username"
+			password-parameter="password" />
+		<security:logout logout-success-url="/providerlogin?logout" />
+		<!-- enable csrf protection -->
+		<!-- 
+		<security:csrf/>
+		<security:intercept-url pattern="/aturhelp/hr/insert/registeradmin" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		 -->
+	</security:http>
+	
+	<!-- 
+	<http auto-config="true">
+		<intercept-url pattern="/admin**" access="ROLE_USER" />
+		<form-login 
+		    login-page="/adminlogin" 
+		    default-target-url="/admin" 
+			authentication-failure-url="/adminlogin?error" 
+			username-parameter="username"
+			password-parameter="password" />
+		<logout logout-success-url="/adminlogin?logout" />
+		<csrf/>
+	</http>
+	 -->
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider ref="CustomAuthenticationProvider" />
+	</security:authentication-manager>
+	
+	
+	<util:list id="csrfIgnoreURLs">
+	    <value>/aturhelp/hr/insert/registeradmin</value>
+	</util:list>
+
+</beans>

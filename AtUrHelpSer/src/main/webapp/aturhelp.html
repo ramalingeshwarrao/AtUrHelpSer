@@ -35,32 +35,20 @@
 	<div id="inovative">
 		<div id="bigletter1">Login:</div>
 		<div id="letter">
-			<form name="loginform">
+			<form name="loginform" >
 
 				<p>
-					UserName:<br> <input type="text" name="username"
-						ng-model="username" placeholder="Enter UserName" required /> <span
-						style="color: red"
-						ng-show="loginform.username.$dirty && loginform.username.$invalid">
-						<span ng-show="loginform.username.$error.required">User
-							Name is required</span>
-					</span>
+					<a href="/AtUrHelpSer/adminlogin"> Admin </a>  
 				</p>
-
+				<hr>
 				<p>
-					Password:<br> <input type="password" name="pass"
-						ng-model="pass" placeholder="Enter Password" required /> <span
-						style="color: red"
-						ng-show="loginform.pass.$dirty && loginform.pass.$invalid">
-						<span ng-show="loginform.pass.$error.required">Password is
-							required</span>
-					</span>
+					<a href="/AtUrHelpSer/providerlogin"> Provider </a>
 				</p>
-
+				<hr>
 				<p>
-					<button class="btn btn-primary" ng-click="login()"
-						ng-disabled="loginform.username.$invalid || loginform.pass.$invalid">Login</button>
+					<a href="/AtUrHelpSer/login"> Customer </a>
 				</p>
+				<hr>
 
 				<p>
 					<a href="#register">Register Here</a>

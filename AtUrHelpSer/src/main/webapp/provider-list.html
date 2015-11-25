@@ -1,0 +1,27 @@
+<div class="container">
+
+<h3>Open Complaints</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Ticket No</th>
+      <th>Subject</th>
+      <th>Description</th>
+      <th>Close</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="complaint in complaints">
+      <td>{{ complaint.ticketid }}</td>
+      <td>{{ complaint.subject }}</td>
+      <td>{{ complaint.desc }}</td>
+      <td>
+        <button class="btn" ng-click="editUser(complaint.ticketid)">
+          <span class="glyphicon glyphicon-pencil"></span>  Close
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

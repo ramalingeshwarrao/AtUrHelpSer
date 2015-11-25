@@ -21,4 +21,9 @@ public class Constants {
 	
 	public static final String ADMIN_NOTIFICATION = "ADMIN_NOTIFICATION";
 	public static final String CUSTOMER_NOTIFICATION = "CUSTOMER_NOTIFICATION";
+	
+	public static final String INVALID_USERNAME_PASSWORD = "Invalid username and password!";
+	public static final String LOGOUT_SUCCESS = "You've been logged out successfully.";
+	public static final String ERROR = "error";
+	public static final String MSG = "msg";
 }
