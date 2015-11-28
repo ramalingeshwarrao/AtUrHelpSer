@@ -1,27 +1,31 @@
 <div class="container">
 
-<h3>Open Complaints</h3>
+<h3 style="text-align: left;">Open Complaints :</h3>
+
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Ticket No</th>
       <th>Subject</th>
-      <th>Description</th>
+      <th>Area</th>
+      <th ng-show="( userType == 'SU')">Location</th>
       <th>Close</th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="complaint in complaints">
-      <td>{{ complaint.ticketid }}</td>
-      <td>{{ complaint.subject }}</td>
-      <td>{{ complaint.desc }}</td>
+    <tr ng-repeat="log in log">
+      <td>{{ log.ticketno }}</td>
+      <td>{{ log.htype }}</td>
+      <td>{{ log.hdes }}</td>
+      <td ng-show="( userType == 'SU')">{{ log.area }}</td>
       <td>
-        <button class="btn" ng-click="editUser(complaint.ticketid)">
-          <span class="glyphicon glyphicon-pencil"></span>  Close
+        <button class="btn btn-info btn-lg" ng-click="editUser(log.ticketno)">
+          <span class="glyphicon glyphicon-pencil"></span>Close
         </button>
       </td>
     </tr>
   </tbody>
 </table>
+<div class="spinner" ng-show="loading"></div>
 </div>

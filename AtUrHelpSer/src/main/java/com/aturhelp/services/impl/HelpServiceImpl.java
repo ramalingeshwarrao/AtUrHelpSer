@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.AdminInfo;
+import com.aturhelp.common.BootStrapData;
 import com.aturhelp.common.Help;
 import com.aturhelp.common.Location;
 import com.aturhelp.common.Mail;
@@ -256,6 +257,16 @@ public class HelpServiceImpl implements HelpService {
 	@Override
 	public String getPassword(String userName) {
 		return helpDAO.getPassword(userName);
+	}
+
+	@Override
+	public BootStrapData getBootStrapData() {
+		return helpDAO.getBootStrapData();
+	}
+
+	@Override
+	public List<Help> getLogData(String providerName, String area, String name) {
+		return helpDAO.getLogData(providerName, area, name);
 	}
 
 }

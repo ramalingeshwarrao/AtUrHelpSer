@@ -14,6 +14,7 @@ public class Help {
 	private Integer status;
 	private String mobileNo;
 	private String mail;
+	private String area;
 	
 	@XmlElement(name ="htype")
 	public String getHelpType() {
@@ -77,6 +78,14 @@ public class Help {
 	}
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+	
+	@XmlElement(name ="area")
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
 	}
 	
 	

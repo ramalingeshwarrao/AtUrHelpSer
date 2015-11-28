@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" ng-app="ProviderModule">
+<html lang="en"  >
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>AtUrHelp.</title>
 	<meta name="keywords" content="aturhelp web page, aturhelp web page template" />
 	<meta name="description" content="This is aturhelp style web pag" />
 	
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>	
@@ -19,7 +19,7 @@
 	
 
 </head>
-<body ng-app="ProviderModule">
+<body ng-app="ProviderModule" ng-conroller="ProviderController" >
   <center>
      <div ng-view>
      ..loading

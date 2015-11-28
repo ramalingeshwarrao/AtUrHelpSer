@@ -10,6 +10,9 @@ public class Constants {
 	public static final String DEVICE_ID = "deviceid";
 	public static final String SERVICE_ID = "serviceid";
 	public static final String ADMIN_ID = "adminid";
+	public static final String PROVIDER_NAME = "providername";
+	public static final String PROVIDER_LOC = "providerloc";
+	public static final String LOGGED_NAME = "name";
 	
 	//gmail services
 	public static final String EMAIL = "services.aturhelp@gmail.com";
@@ -26,4 +29,5 @@ public class Constants {
 	public static final String LOGOUT_SUCCESS = "You've been logged out successfully.";
 	public static final String ERROR = "error";
 	public static final String MSG = "msg";
+	public static final String SUPER_USER = "SU";
 }

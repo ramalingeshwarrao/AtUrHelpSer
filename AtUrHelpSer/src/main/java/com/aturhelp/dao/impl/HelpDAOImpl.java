@@ -6,18 +6,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.aturhelp.common.AdminInfo;
+import com.aturhelp.common.BootStrapData;
 import com.aturhelp.common.Help;
 import com.aturhelp.common.Location;
 import com.aturhelp.common.Services;
 import com.aturhelp.common.UserInfo;
+import com.aturhelp.constants.Constants;
 import com.aturhelp.dao.HelpDAO;
 import com.aturhelp.dao.util.SQLQuery;
 import com.aturhelp.services.impl.HelpServiceImpl;
@@ -227,6 +233,12 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 	@Override
 	public boolean updateTicket(final Help help) {
 		try {
+			Authentication authObj = SecurityContextHolder.getContext().getAuthentication();
+			if (authObj != null && authObj.isAuthenticated() && authObj.getPrincipal() instanceof UserDetails) {
+				UserDetails konyUserDetail = (UserDetails) authObj.getPrincipal();
+				System.out.println(konyUserDetail.getUsername());
+				System.out.println(konyUserDetail.getPassword());
+			}
 			this.jdbcTemplate.update(new PreparedStatementCreator() {
 				@Override
 				public PreparedStatement createPreparedStatement(Connection con)
@@ -340,6 +352,7 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 							help.setTicketNo(rs.getLong("ticket_id"));
 							help.setMobileNo(rs.getString("mobile_no"));
 							help.setMail(rs.getString("email"));
+							help.setArea(rs.getString("area"));
 							return help;
 						}
 					});
@@ -442,6 +455,74 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 			}
 		} catch (Exception e) {
 			LOG.error("Fail to get deviceid from ticket id", e);
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public BootStrapData getBootStrapData() {
+		final BootStrapData bsd = new BootStrapData();
+		Authentication authObj = SecurityContextHolder.getContext().getAuthentication();
+		if (authObj != null && authObj.getPrincipal() != null) {
+			String userName = authObj.getPrincipal().toString(); 
+			bsd.setUserName(userName);
+			
+			// get user details
+			try {
+				List<String> list = this.jdbcTemplate.query(
+						SQLQuery.GET_ADMIN_BOOT_STRAP_DETAILS,
+						new Object[] { userName }, new RowMapper<String>() {
+							@Override
+							public String mapRow(ResultSet rs, int rowNum)
+									throws SQLException {
+								bsd.setUserType(rs.getString("user_type"));
+								bsd.setProviderName(rs.getString("ser_id"));
+								return null;
+							}
+						});
+			} catch (Exception e) {
+				LOG.error("Fail to get deviceid from ticket id", e);
+				return null;
+			}
+		}
+		return bsd;
+		
+	}
+
+	//open tickets
+	@Override
+	public List<Help> getLogData(String providerName, String place, String name) {
+		try {
+			String query = null;
+			Object[] obj = null;
+			if (place.equals(Constants.SUPER_USER)) {
+				query = SQLQuery.GET_ADMIN_LOG_SUPER_USER;
+				obj = new Object[] { false, providerName, name };
+			} else {
+				query = SQLQuery.GET_ADMIN_LOG;
+				obj = new Object[] { false, providerName, place};
+			}
+			List<Help> list = this.jdbcTemplate.query(query, obj,
+					new RowMapper<Help>() {
+						@Override
+						public Help mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							Help help = new Help();
+							help.setHelpType(rs.getString("log_sub"));
+							help.setHelpDes(rs.getString("log_description"));
+							help.setTicketNo(rs.getLong("ticket_id"));
+							help.setMobileNo(rs.getString("mobile_no"));
+							help.setMail(rs.getString("email"));
+							help.setArea(rs.getString("l.area"));
+							return help;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get log data", e);
 			return null;
 		}
 		return null;

@@ -12,7 +12,7 @@
 		
 		var MainModule ;
 		
-		$ATURHELP.aturhelpRest = "/aturhelp/hr";
+		$ATURHELP.aturhelpRest = "/AtUrHelpSer/aturhelp/hr";
 		MainModule = angular.module('MainModule', ['ngRoute']);
 		
 		//Add config

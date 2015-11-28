@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.AdminInfo;
+import com.aturhelp.common.BootStrapData;
 import com.aturhelp.common.Help;
 import com.aturhelp.common.Location;
 import com.aturhelp.common.Services;
@@ -29,8 +30,10 @@ public interface HelpService {
 	public boolean updateAdminState(String value, String adminId, String deviceId);
 	public boolean activateAdmin(String adminId, String deviceId);
 	public List<Help> getLogData(String deviceId);
+	public List<Help> getLogData(String providerName, String area, String name);
 	public List<Help> getCustomerLogData(String deviceId);
 	public String getDeviceIdFromTicketId(String ticketNo);
 	public Boolean insertRegisterAdmin(AdminInfo adminInfo);
 	public String getPassword(String user);
+	public BootStrapData getBootStrapData();
 }

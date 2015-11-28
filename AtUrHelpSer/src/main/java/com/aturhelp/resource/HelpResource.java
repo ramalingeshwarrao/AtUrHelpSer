@@ -14,11 +14,13 @@ import javax.ws.rs.core.Response;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.AdminInfo;
+import com.aturhelp.common.BootStrapData;
 import com.aturhelp.common.Help;
 import com.aturhelp.common.Location;
 import com.aturhelp.common.Services;
@@ -187,5 +189,18 @@ public class HelpResource {
 		return adminInfoStat;
 	}
 	
+	@GET
+	@Path("bootstrapdata")
+	@Produces({MediaType.APPLICATION_JSON})
+	public BootStrapData getBootStrapData() {
+		return helpService.getBootStrapData();
+	}
 	
+	@GET
+	@Path("logdataadmin")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<Help> getLogData(@QueryParam(Constants.PROVIDER_NAME) String providerName, @QueryParam(Constants.PROVIDER_LOC) String providerLoc, @QueryParam(Constants.LOGGED_NAME) String name) {
+		return helpService.getLogData(providerName, providerLoc, name);
+	}
 }
