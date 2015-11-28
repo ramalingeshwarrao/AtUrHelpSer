@@ -234,11 +234,6 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 	public boolean updateTicket(final Help help) {
 		try {
 			Authentication authObj = SecurityContextHolder.getContext().getAuthentication();
-			if (authObj != null && authObj.isAuthenticated() && authObj.getPrincipal() instanceof UserDetails) {
-				UserDetails konyUserDetail = (UserDetails) authObj.getPrincipal();
-				System.out.println(konyUserDetail.getUsername());
-				System.out.println(konyUserDetail.getPassword());
-			}
 			this.jdbcTemplate.update(new PreparedStatementCreator() {
 				@Override
 				public PreparedStatement createPreparedStatement(Connection con)
