@@ -158,6 +158,7 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 					ps.setString(4, help.getHelpDes());
 					ps.setLong(5, help.getTicketNo());
 					ps.setBoolean(6, false);
+					ps.setString(7, help.getArea());
 					return ps;
 				}
 			});
