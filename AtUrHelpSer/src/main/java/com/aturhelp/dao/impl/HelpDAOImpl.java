@@ -488,16 +488,28 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 
 	//open tickets
 	@Override
-	public List<Help> getLogData(String providerName, String place, String name) {
+	public List<Help> getLogData(String providerName, String place, String name, String recordsPerPage, String fromRecord, final boolean isPagenated) {
 		try {
 			String query = null;
 			Object[] obj = null;
 			if (place.equals(Constants.SUPER_USER)) {
-				query = SQLQuery.GET_ADMIN_LOG_SUPER_USER;
-				obj = new Object[] { false, providerName, name };
+				if (isPagenated) {
+					query = SQLQuery.GET_ADMIN_LOG_SUPER_USER_PAGENATING;
+					obj = new Object[] { false, providerName, name, Integer.parseInt(fromRecord)+1, Integer.parseInt(recordsPerPage)};
+				} else {
+					query = SQLQuery.GET_ADMIN_LOG_SUPER_USER;
+					obj = new Object[] { false, providerName, name };
+				}
+				
 			} else {
-				query = SQLQuery.GET_ADMIN_LOG;
-				obj = new Object[] { false, providerName, place};
+				if (isPagenated) {
+					query = SQLQuery.GET_ADMIN_LOG_PAGENATING;
+					obj = new Object[] { false, providerName, place, Integer.parseInt(fromRecord), Integer.parseInt(recordsPerPage)};
+				} else {
+					query = SQLQuery.GET_ADMIN_LOG;
+					obj = new Object[] { false, providerName, place};
+				}
+				
 			}
 			List<Help> list = this.jdbcTemplate.query(query, obj,
 					new RowMapper<Help>() {
@@ -520,6 +532,31 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 		} catch (Exception e) {
 			LOG.error("Fail to get log data", e);
 			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public Integer getLogDataCount(String providerName, String place, String name) {
+		String query = null;
+		Object[] obj = null;
+		if (place.equals(Constants.SUPER_USER)) {
+			query = SQLQuery.GET_ADMIN_LOG_SUPER_USER_COUNT;
+			obj = new Object[] { false, providerName, name };
+		} else {
+			query = SQLQuery.GET_ADMIN_LOG_COUNT;
+			obj = new Object[] { false, providerName, place };
+		}
+		List<Integer> list = this.jdbcTemplate.query(query, obj,
+				new RowMapper<Integer>() {
+					@Override
+					public Integer mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						return rs.getInt(1);
+					}
+				});
+		if (list != null && list.size() > 0) {
+			return list.get(0);
 		}
 		return null;
 	}

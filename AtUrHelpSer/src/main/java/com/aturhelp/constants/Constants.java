@@ -13,6 +13,8 @@ public class Constants {
 	public static final String PROVIDER_NAME = "providername";
 	public static final String PROVIDER_LOC = "providerloc";
 	public static final String LOGGED_NAME = "name";
+	public static final String RECORDS_PAGE_SIZE = "rpp";
+	public static final String FROM_RECORD = "fr";
 	
 	//gmail services
 	public static final String EMAIL = "services.aturhelp@gmail.com";

@@ -24,7 +24,8 @@ public interface HelpDAO {
 	public AdminInfo getAdminInfoById(String id);
 	public boolean updateAdminState(String value, String adminId, String deviceid);
 	public List<Help> getLogData(String deviceId);
-	public List<Help> getLogData(String providerName, String area, String name);
+	public Integer getLogDataCount(String providerName, String area, String name);
+	public List<Help> getLogData(String providerName, String area, String name, String recordsPerPage, String fromRecord, boolean isPagenated);
 	public List<Help> getCustomerLogData(String deviceId);
 	public String getDeviceIdFromTicketId(String ticketNo);
 	public Boolean insertRegisterAdmin(AdminInfo adminInfo);

@@ -6,12 +6,14 @@
 	<meta name="keywords" content="aturhelp web page, aturhelp web page template" />
 	<meta name="description" content="This is aturhelp style web pag" />
 	
+	 
 	<link rel="stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>	
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
 	<script type="text/javascript" src="js/provider-main.js"></script>
 	<script type="text/javascript" src="js/provider-frame.js"></script>
 	<script type="text/javascript" src="js/provider-menu.js"></script>

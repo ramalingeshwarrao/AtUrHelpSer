@@ -13,7 +13,7 @@
 			var ProviderModule ;
 			
 			$PROVIDER.providerRest = "/AtUrHelpSer/aturhelp/hr";
-			ProviderModule = angular.module('ProviderModule', ['ngRoute']);
+			ProviderModule = angular.module('ProviderModule', ['ngRoute', 'ui.bootstrap']);
 			
 			//Add config
 			ProviderModule.config(['$routeProvider', function($routeProvider) {

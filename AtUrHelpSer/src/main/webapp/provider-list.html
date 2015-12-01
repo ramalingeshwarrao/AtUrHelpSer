@@ -27,5 +27,10 @@
     </tr>
   </tbody>
 </table>
-<div class="spinner" ng-show="loading"></div>
+<pagination 
+      ng-model="currentPage"
+      total-items="count"
+      max-size="maxSize"  
+      boundary-links="true">
+    </pagination>
 </div>

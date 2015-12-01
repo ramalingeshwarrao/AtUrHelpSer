@@ -3,6 +3,7 @@ package com.aturhelp.services.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -265,8 +266,18 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 	@Override
-	public List<Help> getLogData(String providerName, String area, String name) {
-		return helpDAO.getLogData(providerName, area, name);
+	public List<Help> getLogData(String providerName, String area, String name, String recordsPerPage, String fromRecord) {
+		boolean isPagenated = false;
+		if (StringUtils.isNotBlank(fromRecord) && StringUtils.isNotBlank(recordsPerPage)) {
+			isPagenated = true;
+		}
+		return helpDAO.getLogData(providerName, area, name, recordsPerPage, fromRecord, isPagenated);
+	}
+
+	@Override
+	public Integer getLogDataCount(String providerName, String area,
+			String name) {
+		return helpDAO.getLogDataCount(providerName, area, name);
 	}
 
 }
