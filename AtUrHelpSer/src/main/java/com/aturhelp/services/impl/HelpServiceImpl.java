@@ -266,18 +266,17 @@ public class HelpServiceImpl implements HelpService {
 	}
 
 	@Override
-	public List<Help> getLogData(String providerName, String area, String name, String recordsPerPage, String fromRecord) {
+	public List<Help> getLogData(String providerName, String area, String name, String recordsPerPage, String fromRecord, boolean ticketStatus) {
 		boolean isPagenated = false;
 		if (StringUtils.isNotBlank(fromRecord) && StringUtils.isNotBlank(recordsPerPage)) {
 			isPagenated = true;
 		}
-		return helpDAO.getLogData(providerName, area, name, recordsPerPage, fromRecord, isPagenated);
+		return helpDAO.getLogData(providerName, area, name, recordsPerPage, fromRecord, isPagenated, ticketStatus);
 	}
 
 	@Override
-	public Integer getLogDataCount(String providerName, String area,
-			String name) {
-		return helpDAO.getLogDataCount(providerName, area, name);
+	public Integer getLogDataCount(String providerName, String area, String name, boolean ticketStatus) {
+		return helpDAO.getLogDataCount(providerName, area, name, ticketStatus);
 	}
 
 }

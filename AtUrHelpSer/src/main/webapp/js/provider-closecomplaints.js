@@ -2,7 +2,7 @@
 	
 	'use stict';
 	
-	$PROVIDER.ProviderListController = ['$scope', '$http', function ($scope, $http) {
+	$PROVIDER.ProviderCloseComplaintController = ['$scope', '$http', function ($scope, $http) {
 		
 		
 		$scope.userName = "";
@@ -12,31 +12,6 @@
 		$scope.currentPage = 1;
 		$scope.numPerPage = 10;
 		$scope.maxSize = 5;
-		
-		$scope.editUser = function(ticketid) {
-			$scope.updateObj = {"ticketno":ticketid};
-			//update on server
-			$http (
-				 {
-					method : 'POST',
-					url : $PROVIDER.providerRest+'/updateticketid',
-					data : $scope.updateObj,
-					headers : {
-						'Content-Type' : 'application/json'
-					}
-				 }		
-			).success(function(data) {
-				if (data.status == 0) {
-					alert("succesfuly Updated");
-					//refresh page
-					//$scope.logdatacount($scope.providerName, $scope.userType, $scope.userName);
-					$scope.wat();
-				} else {
-					alert("fail to update record");
-				}
-			});
-		};
-		
 		
 		
 		//Get bootstrap data
@@ -64,7 +39,7 @@
 			$http(
 					{
 					method : 'GET',
-					url : $PROVIDER.providerRest+'/logdataadmincount?providername='+providerName+'&providerloc='+userType+'&name='+userName+'',
+					url : $PROVIDER.providerRest+'/closelogdataadmincount?providername='+providerName+'&providerloc='+userType+'&name='+userName+'',
 					headers : {
 						'Content-Type' : 'application/json'
 					}
@@ -72,7 +47,7 @@
 			).success(
 			function (data) {
 				if (data != "" && data != null) {
-						$scope.count = data;
+						$scope.count = data-1;
 						$scope.logdata($scope.providerName, $scope.userType, $scope.userName, recordsPerPage, fromPage);
 				} else {
 					$scope.count = 0;
@@ -86,7 +61,7 @@
 			$http(
 					{
 					method : 'GET',
-					url : $PROVIDER.providerRest+'/logdataadmin?providername='+providerName+'&providerloc='+userType+'&name='+userName+'&rpp='+recordsPerPage+'&fr='+fromPage+'',
+					url : $PROVIDER.providerRest+'/closelogdataadmin?providername='+providerName+'&providerloc='+userType+'&name='+userName+'&rpp='+recordsPerPage+'&fr='+fromPage+'',
 					headers : {
 						'Content-Type' : 'application/json'
 					}

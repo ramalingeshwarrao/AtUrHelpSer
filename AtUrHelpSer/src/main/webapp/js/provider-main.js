@@ -24,11 +24,14 @@
 				}).when('/providermenu', {
 					templateUrl : 'provider-menu.html',
 					controller : $PROVIDER.ProviderMenuController
-				}).when('/providerlist', {
-					templateUrl : 'provider-list.html',
-					controller : $PROVIDER.ProviderListController
+				}).when('/provideropencomplaints', {
+					templateUrl : 'provider-opencomplaints.html',
+					controller : $PROVIDER.ProviderOpenComplaintController
+				}).when('/providerclosecomplaints', {
+					templateUrl : 'provider-closecomplaints.html',
+					controller : $PROVIDER.ProviderCloseComplaintController
 				}).otherwise({
-					redirectTo : '/providerlist'
+					redirectTo : '/provideropencomplaints'
 				});
 				
 			}]);

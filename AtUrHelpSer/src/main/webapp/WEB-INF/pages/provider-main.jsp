@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en"  >
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>AtUrHelp.</title>
@@ -8,6 +9,7 @@
 	
 	 
 	<link rel="stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/menu.css" />
 	
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>	
@@ -17,12 +19,44 @@
 	<script type="text/javascript" src="js/provider-main.js"></script>
 	<script type="text/javascript" src="js/provider-frame.js"></script>
 	<script type="text/javascript" src="js/provider-menu.js"></script>
-	<script type="text/javascript" src="js/provider-list.js"></script>
+	<script type="text/javascript" src="js/provider-opencomplaints.js"></script>
+	<script type="text/javascript" src="js/provider-closecomplaints.js"></script>
 	
+	<script>
+		function formSubmit() {
+			document.getElementById("logoutForm").submit();
+		}
+	</script>
 
 </head>
 <body ng-app="ProviderModule" ng-conroller="ProviderController" >
-  <center>
+
+	<div id='cssmenu'>
+		<ul>
+			<li class='has-sub'><a href='#'><span>Complaints</span></a>
+				<ul>
+					<li><a href='#provideropencomplaints'><span>Open Complaints</span></a></li>
+					<li><a href='#providerclosecomplaints'><span>Close Complaints</span></a></li>
+				</ul></li>
+			<c:url value="/j_spring_security_logout" var="logoutUrl" />
+			<!-- csrt for log out-->
+			<form action="${logoutUrl}" method="post" id="logoutForm">
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+			</form>
+			<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<li style="float: right"><a href="javascript:formSubmit()"><span>Logout</span></a></li>
+			<li style="float: right"><a href='#'>Welcome : ${pageContext.request.userPrincipal.name} | </a></li>
+			</c:if>
+			<li class='has-sub' style="float: right"><a href='#'><span>Profile</span></a>
+				<ul>
+					<li><a href='#'><span>View Profile</span></a></li>
+					<li><a href='#'><span>Change Password</span></a></li>
+				</ul></li>
+		</ul>
+	</div>
+	
+	<center>
      <div ng-view>
      ..loading
      </div>

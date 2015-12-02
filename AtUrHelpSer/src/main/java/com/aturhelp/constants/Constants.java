@@ -2,7 +2,7 @@ package com.aturhelp.constants;
 
 public class Constants {
 
-	public static final String SERVER_KEY = "AIzaSyB8gClV5ii-xqVMQgyQbCn-igNe69IXpmw";
+	public static final String SERVER_KEY = "AIzaSyAmKtlccns3YzueqCdPKZDGp0ejuI_m4LA";
 	public static final String PROJECT_ID = "aturhelp-1054";
 	public static final String PROJECT_NUMBER = "84376433817";
 	public static final String ATURHELP = "AtUrHelp";

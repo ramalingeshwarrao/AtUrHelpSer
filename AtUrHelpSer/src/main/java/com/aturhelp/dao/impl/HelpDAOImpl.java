@@ -488,26 +488,26 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 
 	//open tickets
 	@Override
-	public List<Help> getLogData(String providerName, String place, String name, String recordsPerPage, String fromRecord, final boolean isPagenated) {
+	public List<Help> getLogData(String providerName, String place, String name, String recordsPerPage, String fromRecord, final boolean isPagenated, boolean ticketStatus) {
 		try {
 			String query = null;
 			Object[] obj = null;
 			if (place.equals(Constants.SUPER_USER)) {
 				if (isPagenated) {
 					query = SQLQuery.GET_ADMIN_LOG_SUPER_USER_PAGENATING;
-					obj = new Object[] { false, providerName, name, Integer.parseInt(fromRecord)+1, Integer.parseInt(recordsPerPage)};
+					obj = new Object[] { ticketStatus, providerName, name, Integer.parseInt(fromRecord)+1, Integer.parseInt(recordsPerPage)};
 				} else {
 					query = SQLQuery.GET_ADMIN_LOG_SUPER_USER;
-					obj = new Object[] { false, providerName, name };
+					obj = new Object[] { ticketStatus, providerName, name };
 				}
 				
 			} else {
 				if (isPagenated) {
 					query = SQLQuery.GET_ADMIN_LOG_PAGENATING;
-					obj = new Object[] { false, providerName, place, Integer.parseInt(fromRecord), Integer.parseInt(recordsPerPage)};
+					obj = new Object[] { ticketStatus, providerName, place, Integer.parseInt(fromRecord), Integer.parseInt(recordsPerPage)};
 				} else {
 					query = SQLQuery.GET_ADMIN_LOG;
-					obj = new Object[] { false, providerName, place};
+					obj = new Object[] { ticketStatus, providerName, place};
 				}
 				
 			}
@@ -537,15 +537,15 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 	}
 
 	@Override
-	public Integer getLogDataCount(String providerName, String place, String name) {
+	public Integer getLogDataCount(String providerName, String place, String name, boolean ticketStatus) {
 		String query = null;
 		Object[] obj = null;
 		if (place.equals(Constants.SUPER_USER)) {
 			query = SQLQuery.GET_ADMIN_LOG_SUPER_USER_COUNT;
-			obj = new Object[] { false, providerName, name };
+			obj = new Object[] { ticketStatus, providerName, name };
 		} else {
 			query = SQLQuery.GET_ADMIN_LOG_COUNT;
-			obj = new Object[] { false, providerName, place };
+			obj = new Object[] { ticketStatus, providerName, place };
 		}
 		List<Integer> list = this.jdbcTemplate.query(query, obj,
 				new RowMapper<Integer>() {

@@ -1,0 +1,30 @@
+<div class="container">
+
+<h3 style="text-align: left;">Closed Complaints :</h3>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Ticket No</th>
+      <th>Subject</th>
+      <th>Description</th>
+      <th ng-show="( userType == 'SU')">Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="log in log">
+      <td>{{ log.ticketno }}</td>
+      <td>{{ log.htype }}</td>
+      <td>{{ log.hdes }}</td>
+      <td ng-show="( userType == 'SU')">{{ log.area }}</td>
+    </tr>
+  </tbody>
+</table>
+<pagination 
+      ng-model="currentPage"
+      total-items="count"
+      max-size="maxSize"  
+      boundary-links="true">
+    </pagination>
+</div>

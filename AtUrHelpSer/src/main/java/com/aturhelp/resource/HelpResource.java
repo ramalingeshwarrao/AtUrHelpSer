@@ -201,14 +201,42 @@ public class HelpResource {
 	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<Help> getLogData(@QueryParam(Constants.PROVIDER_NAME) String providerName, @QueryParam(Constants.PROVIDER_LOC) String providerLoc, @QueryParam(Constants.LOGGED_NAME) String name, @QueryParam(Constants.RECORDS_PAGE_SIZE) String recordsPerPage, @QueryParam(Constants.FROM_RECORD) String fromRecord) {
-		return helpService.getLogData(providerName, providerLoc, name, recordsPerPage, fromRecord);
+		//false means open tickets
+		//true means closed tickets
+		return helpService.getLogData(providerName, providerLoc, name, recordsPerPage, fromRecord, false);
+	}
+	
+	@GET
+	@Path("closelogdataadmin")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<Help> getClosedLogData(@QueryParam(Constants.PROVIDER_NAME) String providerName, @QueryParam(Constants.PROVIDER_LOC) String providerLoc, @QueryParam(Constants.LOGGED_NAME) String name, @QueryParam(Constants.RECORDS_PAGE_SIZE) String recordsPerPage, @QueryParam(Constants.FROM_RECORD) String fromRecord) {
+		//false means open tickets
+		//true means closed tickets
+		return helpService.getLogData(providerName, providerLoc, name, recordsPerPage, fromRecord, true);
 	}
 	
 	@GET
 	@Path("logdataadmincount")
 	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
 	public String getLogDataCount(@QueryParam(Constants.PROVIDER_NAME) String providerName, @QueryParam(Constants.PROVIDER_LOC) String providerLoc, @QueryParam(Constants.LOGGED_NAME) String name) {
-		Integer count = helpService.getLogDataCount(providerName, providerLoc, name);
+		//false means open tickets
+		//true means closed tickets
+		Integer count = helpService.getLogDataCount(providerName, providerLoc, name, false);
+		if (count != null) {
+			return count+""; 
+		} else {
+			return "0";
+		}
+	}
+	
+	@GET
+	@Path("closelogdataadmincount")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	public String getClosedLogDataCount(@QueryParam(Constants.PROVIDER_NAME) String providerName, @QueryParam(Constants.PROVIDER_LOC) String providerLoc, @QueryParam(Constants.LOGGED_NAME) String name) {
+		//false means open tickets
+		//true means closed tickets
+		Integer count = helpService.getLogDataCount(providerName, providerLoc, name, true);
 		if (count != null) {
 			return count+""; 
 		} else {
