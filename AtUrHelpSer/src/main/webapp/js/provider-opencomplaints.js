@@ -14,6 +14,7 @@
 		$scope.maxSize = 5;
 		
 		$scope.editUser = function(ticketid) {
+			$scope.loading = true;
 			$scope.updateObj = {"ticketno":ticketid};
 			//update on server
 			$http (
@@ -32,6 +33,7 @@
 					//$scope.logdatacount($scope.providerName, $scope.userType, $scope.userName);
 					$scope.wat();
 				} else {
+					$scope.loading = false;
 					alert("fail to update record");
 				}
 			});
@@ -76,6 +78,7 @@
 						$scope.logdata($scope.providerName, $scope.userType, $scope.userName, recordsPerPage, fromPage);
 				} else {
 					$scope.count = 0;
+					$scope.loading = false;
 				}
 			}		
 			);
@@ -100,8 +103,10 @@
 					} else {
 						$scope.log = data.help;					
 					}
+					$scope.loading = false;
 				} else {
 					$scope.log = "";
+					$scope.loading = false;
 				}
 			}		
 			);
@@ -110,7 +115,7 @@
 		// End of get Log data
 		
 		$scope.wat = function() {
-		
+			 $scope.loading = true; 
 			//Pagenation
 			$scope.$watch('currentPage + numPerPage', function() {
 			    var begin = (($scope.currentPage - 1) * $scope.numPerPage)

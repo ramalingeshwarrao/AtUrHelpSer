@@ -51,6 +51,7 @@
 						$scope.logdata($scope.providerName, $scope.userType, $scope.userName, recordsPerPage, fromPage);
 				} else {
 					$scope.count = 0;
+					$scope.loading = false;
 				}
 			}		
 			);
@@ -75,8 +76,10 @@
 					} else {
 						$scope.log = data.help;					
 					}
+					$scope.loading = false;
 				} else {
 					$scope.log = "";
+					$scope.loading = false;
 				}
 			}		
 			);
@@ -86,6 +89,7 @@
 		
 		$scope.wat = function() {
 		
+			$scope.loading = true; 
 			//Pagenation
 			$scope.$watch('currentPage + numPerPage', function() {
 			    var begin = (($scope.currentPage - 1) * $scope.numPerPage)

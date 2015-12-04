@@ -3,7 +3,7 @@
 <h3 style="text-align: left;">Closed Complaints :</h3>
 
 
-<table class="table table-striped">
+<table class="table table-striped" ng-hide="loading">
   <thead>
     <tr>
       <th>Ticket No</th>
@@ -21,7 +21,10 @@
     </tr>
   </tbody>
 </table>
-<pagination 
+
+<img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+
+<pagination ng-hide="loading"
       ng-model="currentPage"
       total-items="count"
       max-size="maxSize"  

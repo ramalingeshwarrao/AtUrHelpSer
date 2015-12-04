@@ -2,8 +2,7 @@
 
 <h3 style="text-align: left;">Open Complaints :</h3>
 
-
-<table class="table table-striped">
+<table class="table table-striped" ng-hide="loading">
   <thead>
     <tr>
       <th>Ticket No</th>
@@ -20,14 +19,16 @@
       <td>{{ log.hdes }}</td>
       <td ng-show="( userType == 'SU')">{{ log.area }}</td>
       <td>
-        <button class="btn btn-info btn-lg" ng-click="editUser(log.ticketno)">
+        <button class="btn btn-info btn-primary" ng-click="editUser(log.ticketno)">
           <span class="glyphicon glyphicon-pencil"></span>Close
         </button>
       </td>
     </tr>
   </tbody>
 </table>
-<pagination 
+<img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+
+<pagination ng-hide="loading"
       ng-model="currentPage"
       total-items="count"
       max-size="maxSize"  
