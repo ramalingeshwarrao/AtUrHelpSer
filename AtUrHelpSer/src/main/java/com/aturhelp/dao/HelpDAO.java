@@ -31,5 +31,6 @@ public interface HelpDAO {
 	public Boolean insertRegisterAdmin(AdminInfo adminInfo);
 	public String getPassword(String userName);
 	public BootStrapData getBootStrapData();
+	public AdminInfo getAdminProfile(String userName);
 	
 }

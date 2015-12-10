@@ -279,4 +279,9 @@ public class HelpServiceImpl implements HelpService {
 		return helpDAO.getLogDataCount(providerName, area, name, ticketStatus);
 	}
 
+	@Override
+	public AdminInfo getAdminProfile(String userName) {
+		return helpDAO.getAdminProfile(userName);
+	}
+
 }

@@ -14,6 +14,10 @@ public class AdminInfo {
 	private String requestId;
 	private String isActive;
 	private Integer status;
+	private String area;
+	private String department;
+	private String place;
+	private String gender;
 	
 	
 	@XmlElement(name ="email")
@@ -78,6 +82,38 @@ public class AdminInfo {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	
+	@XmlElement(name ="area")
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
+	
+	@XmlElement(name ="department")
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	
+	@XmlElement(name ="place")
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
+	}
+	
+	@XmlElement(name ="gender")
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 }

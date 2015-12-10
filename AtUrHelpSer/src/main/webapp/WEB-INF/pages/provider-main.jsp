@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="js/provider-menu.js"></script>
 	<script type="text/javascript" src="js/provider-opencomplaints.js"></script>
 	<script type="text/javascript" src="js/provider-closecomplaints.js"></script>
+	<script type="text/javascript" src="js/provider-profile.js"></script>
 	
 	<script>
 		function formSubmit() {
@@ -50,8 +51,8 @@
 			</c:if>
 			<li class='has-sub' style="float: right"><a href='#'><span>Profile</span></a>
 				<ul>
-					<li><a href='#'><span>View Profile</span></a></li>
-					<li><a href='#'><span>Change Password</span></a></li>
+					<li><a href='#providerprofile'><span>View Profile</span></a></li>
+					<li><a href='#providerclosecomplaints'><span>Change Password</span></a></li>
 				</ul></li>
 		</ul>
 	</div>

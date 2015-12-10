@@ -30,6 +30,9 @@
 				}).when('/providerclosecomplaints', {
 					templateUrl : 'provider-closecomplaints.html',
 					controller : $PROVIDER.ProviderCloseComplaintController
+				}).when('/providerprofile', {
+					templateUrl : 'provider-profile.html',
+					controller : $PROVIDER.ProviderProfileController
 				}).otherwise({
 					redirectTo : '/provideropencomplaints'
 				});

@@ -37,4 +37,5 @@ public interface HelpService {
 	public Boolean insertRegisterAdmin(AdminInfo adminInfo);
 	public String getPassword(String user);
 	public BootStrapData getBootStrapData();
+	public AdminInfo getAdminProfile(String userName);
 }

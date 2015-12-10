@@ -561,4 +561,33 @@ public class HelpDAOImpl extends BaseDAO implements HelpDAO {
 		return null;
 	}
 
+	@Override
+	public AdminInfo getAdminProfile(String userName) {
+		try {
+			List<AdminInfo> list = this.jdbcTemplate.query(
+					SQLQuery.GET_ADMIN_PROFILE,
+					new Object[] { userName }, new RowMapper<AdminInfo>() {
+						@Override
+						public AdminInfo mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							AdminInfo adminInfo = new AdminInfo();
+							adminInfo.setMobileNo(rs.getString("mobile_no"));
+							adminInfo.setEmail(rs.getString("email"));
+							adminInfo.setPlace(rs.getString("place"));
+							adminInfo.setDepartment(rs.getString("department"));
+							adminInfo.setGender(rs.getString("gender"));
+							adminInfo.setName(rs.getString("name"));
+							return adminInfo;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return list.get(0);
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get deviceid from ticket id", e);
+			return null;
+		}
+		return null;
+	}
+
 }

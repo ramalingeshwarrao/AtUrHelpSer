@@ -15,8 +15,11 @@ import javax.ws.rs.core.Response;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.AdminInfo;
@@ -243,4 +246,21 @@ public class HelpResource {
 			return "0";
 		}
 	}
+	
+	@GET
+	@Path("adminprofile")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public AdminInfo getAdminInfoByUserName() {
+		Authentication authObj = SecurityContextHolder.getContext().getAuthentication();
+		String userName = null;
+		if (authObj != null && authObj.getPrincipal() != null) {
+			userName = authObj.getPrincipal().toString();
+			return helpService.getAdminProfile(userName);	
+		} else {
+			return null;
+		}
+		
+	}
+	
+	
 }
