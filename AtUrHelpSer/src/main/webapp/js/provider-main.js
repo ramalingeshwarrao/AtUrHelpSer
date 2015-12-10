@@ -33,8 +33,11 @@
 				}).when('/providerprofile', {
 					templateUrl : 'provider-profile.html',
 					controller : $PROVIDER.ProviderProfileController
+				}).when('/provider', {
+					templateUrl : 'provider.html',
+					controller : $PROVIDER.ProviderController
 				}).otherwise({
-					redirectTo : '/provideropencomplaints'
+					redirectTo : '/provider'
 				});
 				
 			}]);

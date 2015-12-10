@@ -22,7 +22,18 @@
 	<script type="text/javascript" src="js/provider-opencomplaints.js"></script>
 	<script type="text/javascript" src="js/provider-closecomplaints.js"></script>
 	<script type="text/javascript" src="js/provider-profile.js"></script>
+	<script type="text/javascript" src="js/provider.js"></script>
 	
+	<style>
+	.btn-xlarge {
+    padding: 38px 28px 38px 28px;
+    font-size: 22px; //change this to your desired size
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+	}
+	</style>
 	<script>
 		function formSubmit() {
 			document.getElementById("logoutForm").submit();
@@ -34,11 +45,7 @@
 
 	<div id='cssmenu'>
 		<ul>
-			<li class='has-sub'><a href='#'><span>Complaints</span></a>
-				<ul>
-					<li><a href='#provideropencomplaints'><span>Open Complaints</span></a></li>
-					<li><a href='#providerclosecomplaints'><span>Close Complaints</span></a></li>
-				</ul></li>
+			<li style="float: left"><a href="#provider"><span>Home</span></a></li>	
 			<c:url value="/j_spring_security_logout" var="logoutUrl" />
 			<!-- csrt for log out-->
 			<form action="${logoutUrl}" method="post" id="logoutForm">
