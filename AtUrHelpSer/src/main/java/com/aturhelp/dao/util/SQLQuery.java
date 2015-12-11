@@ -2,6 +2,7 @@ package com.aturhelp.dao.util;
 
 public class SQLQuery {
 
+	//Broad Band Queries And admin queries
 	public static final String INSERT_REGISTER = "INSERT INTO register (device_id, mobile_no, email, request_id, name) VALUES (?, ?, ?, ?, ?)";
 	public static final String INSERT_REGISTER_ADMIN = "INSERT INTO register_admins (fullname, email, mobileno, ticket_status) values (?, ?, ?, ?)";
 	public static final String UPDATE_REGISTER = "UPDATE register set mobile_no=?, email=?, name=? where device_id=?";
@@ -26,4 +27,13 @@ public class SQLQuery {
 	public static final String GET_ADMIN_LOG_COUNT = "SELECT count(1) from log l INNER JOIN admins ad where l.ser_id = ad.ser_id AND l.area = ad.user_type AND l.ticket_status=? AND ad.ser_id=? AND ad.user_type=?";
 	public static final String GET_ADMIN_LOG_PAGENATING = "SELECT log_sub, log_description, ticket_id, mobile_no, email, l.area from log l INNER JOIN admins ad where l.ser_id = ad.ser_id AND l.area = ad.user_type AND l.ticket_status=? AND ad.ser_id=? AND ad.user_type=? limit ?,?";
 	public static final String GET_ADMIN_PROFILE = "SELECT mobile_no, email, user_type, is_active, place, department,  gender, name FROM admins where name=?";
+	
+	//MilkQueries
+	public static final String INSERT_APPARTMENT = "INSERT INTO milk_appartment (sbuject, name) VALUES (?, ?)";
+	public static final String INSERT_FLAT_NO = "INSERT INTO milk_flat_no (roomid, route_id) VALUES (?, ?)";
+	public static final String INSERT_LOCATION = "INSERT INTO milk_location (subject, name) VALUES (?, ?)";
+	public static final String INSERT_MILK_PACKETS = "INSERT INTO milk_packats (subject, milkid, cost) VALUES (?, ?, ?)";
+	public static final String INSERT_ROOM_MILK = "INSERT INTO milk_room (room_id, milk_id) VALUES (?, ?)";
+	public static final String INSERT_ROUTE = "INSERT INTO milk_route (subject, route_id)";
+	
 }
