@@ -29,11 +29,20 @@ public class SQLQuery {
 	public static final String GET_ADMIN_PROFILE = "SELECT mobile_no, email, user_type, is_active, place, department,  gender, name FROM admins where name=?";
 	
 	//MilkQueries
-	public static final String INSERT_APPARTMENT = "INSERT INTO milk_appartment (subject, name) VALUES (?, ?)";
-	public static final String INSERT_FLAT_NO = "INSERT INTO milk_flat_no (roomid, route_id) VALUES (?, ?)";
+	
+	//Insert Queries
+	public static final String INSERT_APPARTMENT = "INSERT INTO milk_appartment (subject, name, route_id) VALUES (?, ?, ?)";
+	public static final String INSERT_FLAT_NO = "INSERT INTO milk_flat_no (room_id, app_id) VALUES (?, ?)";
 	public static final String INSERT_LOCATION = "INSERT INTO milk_location (subject, name) VALUES (?, ?)";
 	public static final String INSERT_MILK_PACKETS = "INSERT INTO milk_packats (subject, milkid, cost) VALUES (?, ?, ?)";
 	public static final String INSERT_ROOM_MILK = "INSERT INTO milk_room (room_id, milk_id, quantity) VALUES (?, ?, ?)";
 	public static final String INSERT_ROUTE = "INSERT INTO milk_route (subject, route_id) VALUES (?, ?)";
+	
+	//Select Qureries
+	public static final String GET_APPARTMENTS = "SELECT subject, name FROM milk_appartment";
+	public static final String GET_FALT_NOS_IN_APP = "SELECT ma.name, mfn.room_id, mr.route_id, mp.milkid, mp.cost, mroom.quantity FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id";
+	public static final String GET_LOCATIONS = "select subject, name FROM milk_location";
+	public static final String GET_ROUTES = "SELECT subject, route_id FROM milk_route";
+	public static final String GET_MILK_PACKETS = "SELECT subject, milkid, cost FROM milk_packats";
 	
 }

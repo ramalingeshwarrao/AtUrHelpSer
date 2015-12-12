@@ -8,7 +8,6 @@ public class FlatNo {
 
 	private int appId;
 	private String roomno;
-	private int routeNo;
 	private Integer status;
 	
 	@XmlElement(name ="appid")
@@ -25,14 +24,6 @@ public class FlatNo {
 	}
 	public void setRoomno(String roomno) {
 		this.roomno = roomno;
-	}
-	
-	@XmlElement(name ="routeno")
-	public int getRouteNo() {
-		return routeNo;
-	}
-	public void setRouteNo(int routeNo) {
-		this.routeNo = routeNo;
 	}
 	
 	@XmlElement(name ="status")

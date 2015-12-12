@@ -1,20 +1,28 @@
 package com.aturhelp.resource;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.aturhelp.common.UserInfo;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.FlatNo;
+import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
+import com.aturhelp.constants.Constants;
 import com.aturhelp.services.MilkService;
 
 @Component
@@ -144,5 +152,40 @@ public class MilkResource {
 			status.setStatus(1);
 			return status;
 		}
+	}
+	
+	@GET
+	@Path("milkdetails")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<MilkPackets> getMilkData() {
+		return milkService.getMilkPackets();
+	}
+	
+	@GET
+	@Path("flatdetails")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<GetFlatsData> getFlatDetails() {
+		return milkService.getFlatDetails();
+	}
+	
+	@GET
+	@Path("routedetails")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<Route> getRouteDetails() {
+		return milkService.getRoutes();
+	}
+	
+	@GET
+	@Path("locationdetails")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<Location> getLocationDetails() {
+		return milkService.getLocations();
+	}
+	
+	@GET
+	@Path("appartmentdetails")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<Appartment> getAppartmentDetails() {
+		return milkService.getAppartments();
 	}
 }

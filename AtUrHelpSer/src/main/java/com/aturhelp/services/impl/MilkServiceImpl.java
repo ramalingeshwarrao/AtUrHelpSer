@@ -1,11 +1,14 @@
 package com.aturhelp.services.impl;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.FlatNo;
+import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.RoomMilk;
@@ -49,6 +52,31 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public boolean createRoute(Route route) {
 		return milkDAO.createRoute(route);
+	}
+
+	@Override
+	public List<MilkPackets> getMilkPackets() {
+		return milkDAO.getMilkPackets();
+	}
+
+	@Override
+	public List<Appartment> getAppartments() {
+		return milkDAO.getAppartments();
+	}
+
+	@Override
+	public List<Location> getLocations() {
+		return milkDAO.getLocations();
+	}
+
+	@Override
+	public List<Route> getRoutes() {
+		return milkDAO.getRoutes();
+	}
+
+	@Override
+	public List<GetFlatsData> getFlatDetails() {
+		return milkDAO.getFlatDetails();
 	}
 
 }
