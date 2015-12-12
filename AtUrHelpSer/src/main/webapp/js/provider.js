@@ -1,6 +1,6 @@
 (function(){
 	
-	'use stict';
+	'use strict';
 	
 	$PROVIDER.ProviderController = ['$scope', '$http', '$location', function ($scope, $http, $location) {
 		

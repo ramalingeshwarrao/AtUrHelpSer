@@ -23,6 +23,10 @@
 	<script type="text/javascript" src="js/provider-closecomplaints.js"></script>
 	<script type="text/javascript" src="js/provider-profile.js"></script>
 	<script type="text/javascript" src="js/provider.js"></script>
+	<script type="text/javascript" src="js/milk-route.js"></script>
+	<script type="text/javascript" src="js/milk-location.js"></script>
+	<script type="text/javascript" src="js/milk-appartment.js"></script>
+	<script type="text/javascript" src="js/milk-packets.js"></script>
 	
 	<style>
 	.btn-xlarge {

@@ -8,6 +8,7 @@ public class Route {
 
 	private String subject;
 	private String routeId;
+	private int id;
 	private Integer status;
 	
 	@XmlElement(name ="status")
@@ -32,6 +33,14 @@ public class Route {
 	}
 	public void setRouteId(String routeId) {
 		this.routeId = routeId;
+	}
+	
+	@XmlElement(name ="id")
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

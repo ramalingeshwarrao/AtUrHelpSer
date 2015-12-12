@@ -1,6 +1,6 @@
 (function(){
 	
-	'use stict';
+	'use strict';
 	
 	$PROVIDER.ProviderProfileController = ['$scope', '$http', function ($scope, $http) {
 		

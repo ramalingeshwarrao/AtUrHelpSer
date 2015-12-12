@@ -42,7 +42,7 @@ public class SQLQuery {
 	public static final String GET_APPARTMENTS = "SELECT subject, name FROM milk_appartment";
 	public static final String GET_FALT_NOS_IN_APP = "SELECT ma.name, mfn.room_id, mr.route_id, mp.milkid, mp.cost, mroom.quantity FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id";
 	public static final String GET_LOCATIONS = "select subject, name FROM milk_location";
-	public static final String GET_ROUTES = "SELECT subject, route_id FROM milk_route";
+	public static final String GET_ROUTES = "SELECT id, subject, route_id FROM milk_route";
 	public static final String GET_MILK_PACKETS = "SELECT subject, milkid, cost FROM milk_packats";
 	
 }

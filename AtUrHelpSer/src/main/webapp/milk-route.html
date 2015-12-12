@@ -1,0 +1,43 @@
+<div ng-include src="'provider-milk-header.html'" >
+</div>
+
+<div class="container">
+	<form name="routeform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
+
+		<div class="row">
+			<div class="form-group col-lg-3">
+				<h3 class="text-primary" style="float: left">
+					Add Route
+					<h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-lg-3">
+				<label for="subject" style="float: left">Subject:</label>
+				<input type="text" class="form-control" name="subject" ng-model="subject" placeholder="Enter Subject" required>
+				<span style="color: red" ng-show="routeform.subject.$dirty && routeform.subject.$invalid">
+				<span ng-show="routeform.subject.$error.required">
+				Please Enter Route Subject
+				</span>
+				</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-lg-3">
+				<label for="routename" style="float: left">Route Name:</label>
+				 <input type="text" class="form-control" name="route" ng-model="route" placeholder="Enter Route Name" required>
+				 <span style="color: red" ng-show="routeform.route.$dirty && routeform.route.$invalid">
+				<span ng-show="routeform.route.$error.required">
+				Please Enter Route Id
+				</span>
+				</span>
+			</div>
+		</div>
+		<div class="form-group col-lg-3">
+			<button  class="btn btn-info btn-primary" ng-click="submit()"
+			ng-disabled="routeform.subject.$invalid || routeform.route.$invalid">
+			Submit</button>
+		</div>
+	</form>
+	<img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+</div>

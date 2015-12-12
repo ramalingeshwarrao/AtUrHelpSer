@@ -1,6 +1,6 @@
 (function(){
 	
-	'use stict';
+	'use strict';
 	
 	$PROVIDER.ProviderOpenComplaintController = ['$scope', '$http', function ($scope, $http) {
 		

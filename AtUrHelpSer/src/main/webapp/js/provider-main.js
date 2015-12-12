@@ -13,6 +13,7 @@
 			var ProviderModule ;
 			
 			$PROVIDER.providerRest = "/AtUrHelpSer/aturhelp/hr";
+			$PROVIDER.providerMilkRest = "/AtUrHelpSer/aturhelp/milk";
 			ProviderModule = angular.module('ProviderModule', ['ngRoute', 'ui.bootstrap']);
 			
 			//Add config
@@ -36,6 +37,18 @@
 				}).when('/provider', {
 					templateUrl : 'provider.html',
 					controller : $PROVIDER.ProviderController
+				}).when('/milkroute', {
+					templateUrl : 'milk-route.html',
+					controller : $PROVIDER.MilkRouteController
+				}).when('/milklocation', {
+					templateUrl : 'milk-location.html',
+					controller : $PROVIDER.MilkLocationController
+				}).when('/milkappartment', {
+					templateUrl : 'milk-appartment.html',
+					controller : $PROVIDER.MilkAppartmentController
+				}).when('/milkpacket', {
+					templateUrl : 'milk-packets.html',
+					controller : $PROVIDER.MilkPacketController
 				}).otherwise({
 					redirectTo : '/provider'
 				});

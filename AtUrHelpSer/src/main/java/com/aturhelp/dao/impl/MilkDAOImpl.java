@@ -242,6 +242,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 						public Route mapRow(ResultSet rs, int rowNum)
 								throws SQLException {
 							Route route = new Route();
+							route.setId(rs.getInt("id"));
 							route.setSubject(rs.getString("subject"));
 							route.setRouteId(rs.getString("route_id"));
 							return route;
