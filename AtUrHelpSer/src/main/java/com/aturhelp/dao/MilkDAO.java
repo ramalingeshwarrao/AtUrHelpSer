@@ -1,12 +1,15 @@
 package com.aturhelp.dao;
 
-import com.aturhelp.common.Location;
+import org.springframework.stereotype.Component;
+
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.FlatNo;
+import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
 
+@Component
 public interface MilkDAO {
 	
 	public boolean craetePackets(MilkPackets milkPackets);

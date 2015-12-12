@@ -9,9 +9,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.aturhelp.common.Location;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.FlatNo;
+import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
@@ -31,13 +31,19 @@ public class MilkResource {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Appartment createAppartment(Appartment appartment) {
 		Appartment status = new Appartment();
+		boolean insertStatus = false;
 		try {
-			milkService.createAppartment(appartment);
-			status.setStatus(0);
+			insertStatus = milkService.createAppartment(appartment);
 		} catch (Exception e) {
-			status.setStatus(1);
+			LOG.error("Fail to create appartment record", e);
 		}
-		return status;
+		if (insertStatus) {
+			status.setStatus(0);
+			return status;
+		} else {
+			status.setStatus(1);
+			return status;
+		}
 	}
 	
 	@POST
@@ -45,13 +51,19 @@ public class MilkResource {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public FlatNo createFlatNo(FlatNo flatNo) {
 		FlatNo status = new FlatNo();
+		boolean insertStatus = false;
 		try {
-			milkService.createFlatNo(flatNo);
-			status.setStatus(0);
+			insertStatus = milkService.createFlatNo(flatNo);
 		} catch (Exception e) {
-			status.setStatus(1);
+			LOG.error("Fail to create flatno record", e);
 		}
-		return status;
+		if (insertStatus) {
+			status.setStatus(0);
+			return status;
+		} else {
+			status.setStatus(1);
+			return status;
+		}
 	}
 	
 	@POST
@@ -59,13 +71,19 @@ public class MilkResource {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Location createLocation(Location location) {
 		Location status = new Location();
+		boolean insertStatus = false;
 		try {
-			milkService.createLocation(location);
-			status.setStatus(0);
+			insertStatus = milkService.createLocation(location);
 		} catch (Exception e) {
-			status.setStatus(1);
+			LOG.error("Fail to create milk location record", e);
 		}
-		return status;
+		if (insertStatus) {
+			status.setStatus(0);
+			return status;
+		} else {
+			status.setStatus(1);
+			return status;
+		}
 	}
 	
 	@POST
@@ -73,27 +91,39 @@ public class MilkResource {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public MilkPackets createMilkPackets(MilkPackets milkPackets) {
 		MilkPackets status = new MilkPackets();
+		boolean insertStatus = false;
 		try {
-			milkService.createPackets(milkPackets);
-			status.setStatus(0);
+			insertStatus = milkService.createPackets(milkPackets);
 		} catch (Exception e) {
-			status.setStatus(1);
+			LOG.error("Fail to create milkpackets record", e);
 		}
-		return status;
+		if (insertStatus) {
+			status.setStatus(0);
+			return status;
+		} else {
+			status.setStatus(1);
+			return status;
+		}
 	}
 	
 	@POST
 	@Path("insert/roommilk")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public MilkPackets createRoomMilk(RoomMilk roomMilk) {
-		MilkPackets status = new MilkPackets();
+	public RoomMilk createRoomMilk(RoomMilk roomMilk) {
+		RoomMilk status = new RoomMilk();
+		boolean insertStatus = false;
 		try {
-			milkService.createRoomMilk(roomMilk);
-			status.setStatus(0);
+			insertStatus = milkService.createRoomMilk(roomMilk);
 		} catch (Exception e) {
-			status.setStatus(1);
+			LOG.error("Fail to create Room milk record", e);
 		}
-		return status;
+		if (insertStatus) {
+			status.setStatus(0);
+			return status;
+		} else {
+			status.setStatus(1);
+			return status;
+		}
 	}
 	
 	@POST
@@ -101,12 +131,18 @@ public class MilkResource {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Route createRoute(Route route) {
 		Route status = new Route();
+		boolean insertStatus = false;
 		try {
-			milkService.createRoute(route);
-			status.setStatus(0);
+			insertStatus = milkService.createRoute(route);
 		} catch (Exception e) {
-			status.setStatus(1);
+			LOG.error("Fail to create route record", e);
 		}
-		return status;
+		if (insertStatus) {
+			status.setStatus(0);
+			return status;
+		} else {
+			status.setStatus(1);
+			return status;
+		}
 	}
 }

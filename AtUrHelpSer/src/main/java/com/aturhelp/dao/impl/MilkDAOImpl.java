@@ -6,16 +6,18 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.stereotype.Component;
 
-import com.aturhelp.common.Location;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.FlatNo;
+import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
 import com.aturhelp.dao.MilkDAO;
 import com.aturhelp.dao.util.SQLQuery;
 
+@Component
 public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	
 	final static Logger LOG = Logger.getLogger(MilkDAOImpl.class);
@@ -31,7 +33,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 							.prepareStatement(SQLQuery.INSERT_MILK_PACKETS);
 					ps.setString(1, milkPackets.getSubject());
 					ps.setString(2, milkPackets.getMilkName());
-					ps.setFloat(2, milkPackets.getCost());
+					ps.setFloat(3, milkPackets.getCost());
 					return ps;
 				}
 			});
@@ -93,8 +95,8 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 						throws SQLException {
 					PreparedStatement ps = con
 							.prepareStatement(SQLQuery.INSERT_LOCATION);
-					ps.setString(1, location.getLocName());
-					ps.setString(2, location.getLocId());
+					ps.setString(1, location.getSubject());
+					ps.setString(2, location.getName());
 					return ps;
 				}
 			});
@@ -116,6 +118,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 							.prepareStatement(SQLQuery.INSERT_ROOM_MILK);
 					ps.setInt(1, roomMilk.getRoomId());
 					ps.setInt(2, roomMilk.getMilkId());
+					ps.setInt(3, roomMilk.getQuantity());
 					return ps;
 				}
 			});

@@ -2,16 +2,18 @@ package com.aturhelp.services.impl;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.aturhelp.common.Location;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.FlatNo;
+import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
 import com.aturhelp.dao.MilkDAO;
 import com.aturhelp.services.MilkService;
 
+@Component
 public class MilkServiceImpl implements MilkService{
 
 final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);

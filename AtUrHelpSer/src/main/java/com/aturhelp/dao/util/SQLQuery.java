@@ -29,11 +29,11 @@ public class SQLQuery {
 	public static final String GET_ADMIN_PROFILE = "SELECT mobile_no, email, user_type, is_active, place, department,  gender, name FROM admins where name=?";
 	
 	//MilkQueries
-	public static final String INSERT_APPARTMENT = "INSERT INTO milk_appartment (sbuject, name) VALUES (?, ?)";
+	public static final String INSERT_APPARTMENT = "INSERT INTO milk_appartment (subject, name) VALUES (?, ?)";
 	public static final String INSERT_FLAT_NO = "INSERT INTO milk_flat_no (roomid, route_id) VALUES (?, ?)";
 	public static final String INSERT_LOCATION = "INSERT INTO milk_location (subject, name) VALUES (?, ?)";
 	public static final String INSERT_MILK_PACKETS = "INSERT INTO milk_packats (subject, milkid, cost) VALUES (?, ?, ?)";
-	public static final String INSERT_ROOM_MILK = "INSERT INTO milk_room (room_id, milk_id) VALUES (?, ?)";
-	public static final String INSERT_ROUTE = "INSERT INTO milk_route (subject, route_id)";
+	public static final String INSERT_ROOM_MILK = "INSERT INTO milk_room (room_id, milk_id, quantity) VALUES (?, ?, ?)";
+	public static final String INSERT_ROUTE = "INSERT INTO milk_route (subject, route_id) VALUES (?, ?)";
 	
 }
