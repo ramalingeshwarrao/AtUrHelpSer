@@ -10,6 +10,7 @@ public class MilkPackets {
 	private String milkName;
 	private float cost;
 	private Integer status;
+	private int id;
 	
 	@XmlElement(name ="subject")
 	public String getSubject() {
@@ -41,6 +42,14 @@ public class MilkPackets {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	
+	@XmlElement(name ="id")
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

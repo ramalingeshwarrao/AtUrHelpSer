@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -159,6 +160,10 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<MilkPackets> getMilkPackets() {
 		try {
+			MilkPackets milkP = new MilkPackets();
+			milkP.setId(0);
+			milkP.setMilkName("SELECT");
+			milkP.setSubject("SELECT");
 			List<MilkPackets> list = this.jdbcTemplate.query(
 					SQLQuery.GET_MILK_PACKETS, new Object[] {},
 					new RowMapper<MilkPackets>() {
@@ -169,10 +174,12 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 							milkPackets.setSubject(rs.getString("subject"));
 							milkPackets.setMilkName(rs.getString("milkid"));
 							milkPackets.setCost(rs.getFloat("cost"));
+							milkPackets.setId(rs.getInt("id"));
 							return milkPackets;
 						}
 					});
 			if (list != null && list.size() > 0) {
+				list.add(0, milkP);
 				return	list;
 			}
 		} catch (Exception e) {
@@ -183,10 +190,24 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	}
 
 	@Override
-	public List<Appartment> getAppartments() {
+	public List<Appartment> getAppartments(String rotueId) {
 		try {
+			Appartment selectApp = new Appartment();
+			selectApp.setId(0);
+			selectApp.setAppName("SELECT");
+			selectApp.setAppSubject("SELECT");
+			
+			String query = "";
+			Object[] obj = null;
+			if (StringUtils.isNotBlank(rotueId)) {
+				query = SQLQuery.GET_APPARTMENTS_BY_ID;
+				obj = new Object[]{rotueId};
+			} else {
+				query = SQLQuery.GET_APPARTMENTS;
+				obj = new Object[]{};
+			}
 			List<Appartment> list = this.jdbcTemplate.query(
-					SQLQuery.GET_APPARTMENTS, new Object[] {},
+					query, obj,
 					new RowMapper<Appartment>() {
 						@Override
 						public Appartment mapRow(ResultSet rs, int rowNum)
@@ -194,10 +215,12 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 							Appartment appartment = new Appartment();
 							appartment.setAppName(rs.getString("name"));
 							appartment.setAppSubject(rs.getString("subject"));
+							appartment.setId(rs.getInt("id"));
 							return appartment;
 						}
 					});
 			if (list != null && list.size() > 0) {
+				list.add(0, selectApp);
 				return	list;
 			}
 		} catch (Exception e) {
@@ -235,6 +258,11 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<Route> getRoutes() {
 		try {
+			Route selectRoute = new Route();
+			selectRoute.setId(0);
+			selectRoute.setSubject("SELECT");
+			selectRoute.setRouteId("SELECT");
+			
 			List<Route> list = this.jdbcTemplate.query(
 					SQLQuery.GET_ROUTES, new Object[] {},
 					new RowMapper<Route>() {
@@ -249,6 +277,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 						}
 					});
 			if (list != null && list.size() > 0) {
+				list.add(0, selectRoute);
 				return	list;
 			}
 		} catch (Exception e) {
@@ -282,6 +311,41 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			}
 		} catch (Exception e) {
 			LOG.error("Fail to get flat details", e);
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public List<FlatNo> getFlatNoDetails(String flatNoId) {
+		try {
+			String query = "";
+			Object[] obj = null;
+			if (StringUtils.isNotBlank(flatNoId)) {
+				query = SQLQuery.GET_FLAT_N0_BY_AP_ID;
+				obj = new Object[]{flatNoId};
+			} else {
+				query = SQLQuery.GET_FLAT_NO;
+				obj = new Object[]{};
+			}
+			List<FlatNo> list = this.jdbcTemplate.query(
+					query, obj,
+					new RowMapper<FlatNo>() {
+						@Override
+						public FlatNo mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							FlatNo flatNo = new FlatNo();
+							flatNo.setRoomno(rs.getString("room_id"));
+							flatNo.setAppId(rs.getInt("app_id"));
+							flatNo.setId(rs.getInt("id"));
+							return flatNo;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return	list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get appartment details", e);
 			return null;
 		}
 		return null;

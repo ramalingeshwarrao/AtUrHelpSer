@@ -1,0 +1,62 @@
+<div ng-include src="'provider-milk-header.html'" >
+</div>
+
+<div class="container">
+	<form name="flatform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
+
+		<div class="row">
+			<div class="form-group col-lg-3">
+				<h3 class="text-primary" style="float: left">
+					Add Falt No Vs Milk
+					<h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-lg-3">
+				<label for="flatform" style="float: left">Route:</label>
+				<select ng-model="routesel.type" ng-options="r.id as r.routeid for r in routedetails" class="form-control" ng-change="changeRoute(routesel.type)">
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-lg-3">
+				<label for="flatform" style="float: left">Apartment Name:</label>
+				<select ng-model="apartmentsel.type" ng-options="a.id as a.appname for a in apartmentdetails" class="form-control" ng-change="changeApp(apartmentsel.type)">
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-lg-3">
+				<label for="flatform" style="float: left">Flat No:</label>
+				<select ng-model="flatNosel.type" ng-options="f.id as f.roomno for f in flatNodetails" class="form-control">
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-lg-3">
+				<label for="flatform" style="float: left">Select Milk Packets:</label>
+			</div>
+		</div>
+		<div class="form-inline" >
+			<fieldset  data-ng-repeat="choice in choices" >
+				<select  ng-model="choice.type" ng-options="f.id as f.milkname for f in milkdetails" class="form-control" style="float: left;margin-right:10px;margin-top:10px" >
+				</select>
+				<input type="number"  ng-model="choice.mquant" name="" placeholder="Enter Quantity" style="float: left;margin-top:10px">
+				<button class="remove" ng-show="$last" ng-click="removeChoice()" style="float: left;margin-left:10px;margin-top:10px">-</button>
+			</fieldset>
+		</div>
+		<div class="row" style="margin-top: 10px">
+			<div class="form-group col-lg-3">
+				<button class="btn btn-info btn-primary" ng-click="addNewChoice()" style="float: left" >Add fields</button>
+			</div>
+		</div>
+		<div class="form-group col-lg-3">
+			<button  class="btn btn-info btn-primary" ng-click="submit()" >
+			Submit</button>
+		</div>
+		 <div id="choicesDisplay">
+      {{ choices }}
+   </div>
+	</form>
+	<img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+</div>

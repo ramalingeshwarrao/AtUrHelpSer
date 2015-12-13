@@ -60,8 +60,8 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	}
 
 	@Override
-	public List<Appartment> getAppartments() {
-		return milkDAO.getAppartments();
+	public List<Appartment> getAppartments(String id) {
+		return milkDAO.getAppartments(id);
 	}
 
 	@Override
@@ -77,6 +77,11 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public List<GetFlatsData> getFlatDetails() {
 		return milkDAO.getFlatDetails();
+	}
+
+	@Override
+	public List<FlatNo> getFlatNoDetails(String appId) {
+		return milkDAO.getFlatNoDetails(appId);
 	}
 
 }

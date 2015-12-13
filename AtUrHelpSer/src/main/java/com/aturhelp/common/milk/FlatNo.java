@@ -9,6 +9,7 @@ public class FlatNo {
 	private int appId;
 	private String roomno;
 	private Integer status;
+	private int id;
 	
 	@XmlElement(name ="appid")
 	public int getAppId() {
@@ -32,6 +33,14 @@ public class FlatNo {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	
+	@XmlElement(name ="id")
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

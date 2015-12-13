@@ -13,11 +13,13 @@ import javax.ws.rs.core.MediaType;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.aturhelp.common.UserInfo;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
+import com.aturhelp.common.milk.ListRoomMilk;
 import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.RoomMilk;
@@ -117,11 +119,14 @@ public class MilkResource {
 	@POST
 	@Path("insert/roommilk")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public RoomMilk createRoomMilk(RoomMilk roomMilk) {
+	public RoomMilk createRoomMilk(@RequestBody ListRoomMilk listRoomMilk) {
 		RoomMilk status = new RoomMilk();
 		boolean insertStatus = false;
 		try {
-			insertStatus = milkService.createRoomMilk(roomMilk);
+			List<RoomMilk> roomMilks = listRoomMilk.getMilks();
+			for (RoomMilk rM : roomMilks) {
+				insertStatus = milkService.createRoomMilk(rM);				
+			}
 		} catch (Exception e) {
 			LOG.error("Fail to create Room milk record", e);
 		}
@@ -184,8 +189,17 @@ public class MilkResource {
 	
 	@GET
 	@Path("appartmentdetails")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
 	@Produces({ MediaType.APPLICATION_JSON })
-	public List<Appartment> getAppartmentDetails() {
-		return milkService.getAppartments();
+	public List<Appartment> getAppartmentDetails(@QueryParam(Constants.ROUTE_ID) String id) {
+		return milkService.getAppartments(id);
+	}
+	
+	@GET
+	@Path("getflatnodetails")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<FlatNo> getFlatNoDetails(@QueryParam(Constants.APP_ID) String app_id) {
+		return milkService.getFlatNoDetails(app_id);
 	}
 }

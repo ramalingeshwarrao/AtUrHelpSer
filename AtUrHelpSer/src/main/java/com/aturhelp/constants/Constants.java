@@ -32,4 +32,9 @@ public class Constants {
 	public static final String ERROR = "error";
 	public static final String MSG = "msg";
 	public static final String SUPER_USER = "SU";
+	
+	//milk
+	public static final String ID = "id";
+	public static final String ROUTE_ID = "route_id";
+	public static final String APP_ID = "app_id";
 }

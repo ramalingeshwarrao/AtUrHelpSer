@@ -10,6 +10,7 @@ public class Appartment {
 	private String appSubject;
 	private int routeId;
 	private Integer status;
+	private int id;
 	
 	@XmlElement(name ="appname")
 	public String getAppName() {
@@ -43,4 +44,11 @@ public class Appartment {
 		this.routeId = routeId;
 	}
 	
+	@XmlElement(name ="id")
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 }

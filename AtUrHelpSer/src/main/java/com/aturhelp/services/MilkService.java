@@ -25,9 +25,10 @@ public interface MilkService {
 	
 	//select queries
 	public List<MilkPackets> getMilkPackets();
-	public List<Appartment> getAppartments();
+	public List<Appartment> getAppartments(String id);
 	public List<Location> getLocations();
 	public List<Route> getRoutes();
 	public List<GetFlatsData> getFlatDetails();
+	public List<FlatNo> getFlatNoDetails(String appId);
 
 }
