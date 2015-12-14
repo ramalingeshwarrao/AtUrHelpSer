@@ -28,7 +28,8 @@ public interface MilkService {
 	public List<Appartment> getAppartments(String id);
 	public List<Location> getLocations();
 	public List<Route> getRoutes();
-	public List<GetFlatsData> getFlatDetails();
+	public List<GetFlatsData> getFlatDetails(String recordsPerPage, String fromRecord);
 	public List<FlatNo> getFlatNoDetails(String appId);
+	public Integer getMilkCount();
 
 }

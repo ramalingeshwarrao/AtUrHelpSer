@@ -6,33 +6,29 @@
 			$PROVIDER.MilkFlatNoVsMilkController = ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
 				$scope.choices = [{id: 'choice1'}, {id: 'choice2'}];
-				
+				$scope.listroommilk = {};
 				$scope.submit = function() {
 
 					$scope.loading = true;
 					$scope.flatNoId = $scope.flatNosel.type;
-					$scope.milks = [];
+					$scope.roommilks = [];
 					for (var i = 0; i < $scope.choices.length; i++) {
 						$scope.milk = {
 								"roomid" : $scope.flatNoId,
 								"milkid" : $scope.choices[i].type,
 								"quantity":$scope.choices[i].mquant
 							};
-						$scope.milks.push($scope.milk);
+						$scope.roommilks.push($scope.milk);
 					}
 					
-//					$scope.flatnotdata = {
-//						"roomid" : $scope.flatNoId,
-//						"milkid" : $scope.choices[i].type,
-//						"quantity":$scope.choices[i].mquant
-//					};
+					$scope.listroommilk = {"roommilks":$scope.roommilks};
 					
 					// create http post request
 					$http(
 							{
 								method : 'POST',
 								url : $PROVIDER.providerMilkRest+'/insert/roommilk',
-								data : $scope.milks,
+								data : $scope.listroommilk,
 								headers : {
 									'Content-Type' : 'application/json'
 								}

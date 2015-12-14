@@ -75,13 +75,18 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	}
 
 	@Override
-	public List<GetFlatsData> getFlatDetails() {
-		return milkDAO.getFlatDetails();
+	public List<GetFlatsData> getFlatDetails(String recordsPerPage, String fromRecord) {
+		return milkDAO.getFlatDetails(recordsPerPage, fromRecord);
 	}
 
 	@Override
 	public List<FlatNo> getFlatNoDetails(String appId) {
 		return milkDAO.getFlatNoDetails(appId);
+	}
+
+	@Override
+	public Integer getMilkCount() {
+		return milkDAO.getMilkCount();
 	}
 
 }

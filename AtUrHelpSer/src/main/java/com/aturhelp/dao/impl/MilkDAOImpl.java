@@ -20,6 +20,7 @@ import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
+import com.aturhelp.constants.Constants;
 import com.aturhelp.dao.MilkDAO;
 import com.aturhelp.dao.util.SQLQuery;
 
@@ -288,10 +289,10 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	}
 
 	@Override
-	public List<GetFlatsData> getFlatDetails() {
+	public List<GetFlatsData> getFlatDetails(String recordsPerPage, String fromRecord) {
 		try {
 			List<GetFlatsData> list = this.jdbcTemplate.query(
-					SQLQuery.GET_FALT_NOS_IN_APP, new Object[] {},
+					SQLQuery.GET_FALT_NOS_IN_APP, new Object[] { Integer.parseInt(fromRecord), Integer.parseInt(recordsPerPage)},
 					new RowMapper<GetFlatsData>() {
 						@Override
 						public GetFlatsData mapRow(ResultSet rs, int rowNum)
@@ -347,6 +348,26 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		} catch (Exception e) {
 			LOG.error("Fail to get appartment details", e);
 			return null;
+		}
+		return null;
+	}
+	
+	@Override
+	public Integer getMilkCount() {
+		String query = null;
+		Object[] obj = null;
+		query = SQLQuery.GET_COUNT_MILK_DATA;
+		obj = new Object[] { };
+		List<Integer> list = this.jdbcTemplate.query(query, obj,
+				new RowMapper<Integer>() {
+					@Override
+					public Integer mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						return rs.getInt(1);
+					}
+				});
+		if (list != null && list.size() > 0) {
+			return list.get(0);
 		}
 		return null;
 	}

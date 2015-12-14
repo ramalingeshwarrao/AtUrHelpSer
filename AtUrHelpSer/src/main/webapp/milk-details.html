@@ -1,0 +1,38 @@
+<div ng-include src="'provider-milk-header.html'" />
+<div class="container">
+
+<h3 style="text-align: left;">Falt No Vs Milk Details</h3>
+
+
+<table class="table table-striped" ng-hide="loading">
+  <thead>
+    <tr>
+      <th>Route</th>
+      <th>Apartment Name</th>
+      <th>Flat No</th>
+      <th>Milk</th>
+      <th>Quantity</th>
+      <th>Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="milkdata in getflatdata">
+      <td>{{ milkdata.routename }}</td>
+      <td>{{ milkdata.appname }}</td>
+      <td>{{ milkdata.roomid }}</td>
+      <td>{{ milkdata.milkid }}</td>
+      <td>{{ milkdata.quantity }}</td>
+      <td>{{ milkdata.cost }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+
+<pagination ng-hide="loading"
+      ng-model="currentPage"
+      total-items="count"
+      max-size="maxSize"  
+      boundary-links="true">
+    </pagination>
+</div>

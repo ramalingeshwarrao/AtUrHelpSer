@@ -29,6 +29,7 @@
 	<script type="text/javascript" src="js/milk-packets.js"></script>
 	<script type="text/javascript" src="js/milk-flatno.js"></script>
 	<script type="text/javascript" src="js/milk-flatnoVSMilk.js"></script>
+	<script type="text/javascript" src="js/milk-details.js"></script>
 	
 	<style>
 	.btn-xlarge {

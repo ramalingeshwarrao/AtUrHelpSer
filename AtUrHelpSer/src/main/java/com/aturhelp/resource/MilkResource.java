@@ -125,7 +125,9 @@ public class MilkResource {
 		try {
 			List<RoomMilk> roomMilks = listRoomMilk.getMilks();
 			for (RoomMilk rM : roomMilks) {
-				insertStatus = milkService.createRoomMilk(rM);				
+				if (rM.getMilkId() != 0 && rM.getQuantity() != 0) {
+					insertStatus = milkService.createRoomMilk(rM);					
+				}
 			}
 		} catch (Exception e) {
 			LOG.error("Fail to create Room milk record", e);
@@ -168,9 +170,10 @@ public class MilkResource {
 	
 	@GET
 	@Path("flatdetails")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
 	@Produces({ MediaType.APPLICATION_JSON })
-	public List<GetFlatsData> getFlatDetails() {
-		return milkService.getFlatDetails();
+	public List<GetFlatsData> getFlatDetails(@QueryParam(Constants.RECORDS_PAGE_SIZE) String recordsPerPage, @QueryParam(Constants.FROM_RECORD) String fromRecord) {
+		return milkService.getFlatDetails(recordsPerPage, fromRecord);
 	}
 	
 	@GET
@@ -201,5 +204,19 @@ public class MilkResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<FlatNo> getFlatNoDetails(@QueryParam(Constants.APP_ID) String app_id) {
 		return milkService.getFlatNoDetails(app_id);
+	}
+	
+	@GET
+	@Path("milkcount")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	public String getMilkDataCount() {
+		//false means open tickets
+		//true means closed tickets
+		Integer count = milkService.getMilkCount();
+		if (count != null) {
+			return count+""; 
+		} else {
+			return "0";
+		}
 	}
 }

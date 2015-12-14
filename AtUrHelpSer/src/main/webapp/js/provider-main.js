@@ -55,6 +55,9 @@
 				}).when('/milkflatnovsmilk', {
 					templateUrl : 'milk-flatnoVSMilk.html',
 					controller : $PROVIDER.MilkFlatNoVsMilkController
+				}).when('/milkdetails', {
+					templateUrl : 'milk-details.html',
+					controller : $PROVIDER.MilkDetailsController
 				}).otherwise({
 					redirectTo : '/provider'
 				});

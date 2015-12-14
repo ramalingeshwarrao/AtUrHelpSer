@@ -29,7 +29,8 @@ public interface MilkDAO {
 	public List<Appartment> getAppartments(String id);
 	public List<Location> getLocations();
 	public List<Route> getRoutes();
-	public List<GetFlatsData> getFlatDetails();
+	public List<GetFlatsData> getFlatDetails(String recordsPerPage, String fromRecord);
 	public List<FlatNo> getFlatNoDetails(String apartmentId);
+	public Integer getMilkCount();
 
 }
