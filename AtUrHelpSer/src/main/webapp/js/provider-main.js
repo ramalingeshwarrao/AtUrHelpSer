@@ -14,7 +14,16 @@
 			
 			$PROVIDER.providerRest = "/AtUrHelpSer/aturhelp/hr";
 			$PROVIDER.providerMilkRest = "/AtUrHelpSer/aturhelp/milk";
-			ProviderModule = angular.module('ProviderModule', ['ngRoute', 'ui.bootstrap']);
+			ProviderModule = angular.module('ProviderModule', ['ngRoute', 'ui.bootstrap','ngMaterial']);
+			
+			/*
+			//Date picker config
+			ProviderModule.config(function($mdDateLocaleProvider) {
+			    $mdDateLocaleProvider.formatDate = function(date) {
+			       return moment(date).format('YYYY-MM-DD');
+			    };
+			});
+			*/
 			
 			//Add config
 			ProviderModule.config(['$routeProvider', function($routeProvider) {
@@ -58,7 +67,11 @@
 				}).when('/milkdetails', {
 					templateUrl : 'milk-details.html',
 					controller : $PROVIDER.MilkDetailsController
-				}).otherwise({
+				}).when('/nomilk', {
+					templateUrl : 'no-milk.html',
+					controller : $PROVIDER.NoMilkController
+				})
+				.otherwise({
 					redirectTo : '/provider'
 				});
 				

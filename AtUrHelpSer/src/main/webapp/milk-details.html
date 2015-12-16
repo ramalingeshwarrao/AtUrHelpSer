@@ -3,6 +3,7 @@
 
 <h3 style="text-align: left;">Falt No Vs Milk Details</h3>
 
+ <input type="text" class="form-control " placeholder="Search" ng-model="searchApart">
 
 <table class="table table-striped" ng-hide="loading">
   <thead>
@@ -16,7 +17,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="milkdata in getflatdata">
+    <tr ng-repeat="milkdata in getflatdata | filter:searchApart">
       <td>{{ milkdata.routename }}</td>
       <td>{{ milkdata.appname }}</td>
       <td>{{ milkdata.roomid }}</td>

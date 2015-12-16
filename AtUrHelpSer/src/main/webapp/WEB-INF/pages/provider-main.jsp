@@ -30,6 +30,15 @@
 	<script type="text/javascript" src="js/milk-flatno.js"></script>
 	<script type="text/javascript" src="js/milk-flatnoVSMilk.js"></script>
 	<script type="text/javascript" src="js/milk-details.js"></script>
+	<script type="text/javascript" src="js/no-milk.js"></script>
+	
+	<script type="text/javascript" src="js/moment.js"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-aria.min.js"></script>
+    <script src="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js"></script>
+    
+     <link rel="stylesheet" href="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.css">
 	
 	<style>
 	.btn-xlarge {
@@ -74,7 +83,6 @@
 	    padding:5px;
 	}
 	//End of fieldset
-	
 	
 	</style>
 	<script>

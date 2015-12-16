@@ -47,7 +47,7 @@
 			).success(
 			function (data) {
 				if (data != "" && data != null) {
-						$scope.count = data-1;
+						$scope.count = data;
 						$scope.milkdata($scope.providerName, $scope.userType, $scope.userName, recordsPerPage, fromPage);
 				} else {
 					$scope.count = 0;
