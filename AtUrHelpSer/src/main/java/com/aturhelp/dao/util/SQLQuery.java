@@ -37,6 +37,7 @@ public class SQLQuery {
 	public static final String INSERT_MILK_PACKETS = "INSERT INTO milk_packats (subject, milkid, cost) VALUES (?, ?, ?)";
 	public static final String INSERT_ROOM_MILK = "INSERT INTO milk_room (room_id, milk_id, quantity) VALUES (?, ?, ?)";
 	public static final String INSERT_ROUTE = "INSERT INTO milk_route (subject, route_id) VALUES (?, ?)";
+	public static final String INSERT_NO_MILK = "INSERT INTO milk_nomilk (fromdate, todate, isUpdated, rid) values (?, ?, ?, ?)";
 	
 	//Select Qureries
 	public static final String GET_APPARTMENTS = "SELECT subject, name, id FROM milk_appartment";
@@ -48,5 +49,6 @@ public class SQLQuery {
 	public static final String GET_FLAT_NO = "SELECT id, room_id, app_id FROM milk_flat_no";
 	public static final String GET_FLAT_N0_BY_AP_ID = "SELECT id, room_id, app_id FROM milk_flat_no WHERE app_id=?";
 	public static final String GET_COUNT_MILK_DATA = "SELECT count(1) from milk_room"; 
+	public static final String GET_STATUS_ROOM_MILK = "SELECT isUpdated FROM milk_nomilk WHERE rid=?";
 	
 }

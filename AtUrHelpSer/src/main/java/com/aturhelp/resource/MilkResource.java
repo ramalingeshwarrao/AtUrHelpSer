@@ -22,6 +22,7 @@ import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.ListRoomMilk;
 import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
+import com.aturhelp.common.milk.NoMilk;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
 import com.aturhelp.constants.Constants;
@@ -149,6 +150,26 @@ public class MilkResource {
 		boolean insertStatus = false;
 		try {
 			insertStatus = milkService.createRoute(route);
+		} catch (Exception e) {
+			LOG.error("Fail to create route record", e);
+		}
+		if (insertStatus) {
+			status.setStatus(0);
+			return status;
+		} else {
+			status.setStatus(1);
+			return status;
+		}
+	}
+	
+	@POST
+	@Path("insert/nomilk")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public NoMilk createNoMilk(NoMilk noMilk  ) {
+		NoMilk status = new NoMilk();
+		boolean insertStatus = false;
+		try {
+			insertStatus = milkService.craeteNoMilk(noMilk);
 		} catch (Exception e) {
 			LOG.error("Fail to create route record", e);
 		}

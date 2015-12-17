@@ -1,11 +1,18 @@
 package com.aturhelp.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
+import org.joda.time.DateTimeZone;
+
 import com.aturhelp.common.AdminInfo;
 import com.aturhelp.common.Help;
 import com.aturhelp.common.UserInfo;
 
 public class AtUrHelpUtils {
 
+	private static final String pattern = "MM/dd/yyyy";
 	public static String generateMailBody(Help help, AdminInfo info,
 			UserInfo userInfo) {
 
@@ -44,4 +51,22 @@ public class AtUrHelpUtils {
 				+ thanksAndRegards + newLine + regardsName + newLine
 				+ aturhelpSite;
 	}
+	
+	/*
+	public static Date getUTCDate(String strDate) throws Exception{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date formatedDate = dateFormat.parse(strDate);
+		long zoneTime = formatedDate.getTime();
+		DateTimeZone jodaTimezone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("UTC"));
+		long utcTime = jodaTimezone.convertLocalToUTC(zoneTime, false);
+		Date utcDate = new Date(utcTime);
+		return utcDate;
+	}
+	*/
+	public static Date getDate(String strDate) throws Exception {
+		SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+		Date formatedDate = dateFormat.parse(strDate);
+		return formatedDate;
+	}
+	
 }

@@ -19,10 +19,47 @@
 				  
 				  //Submit function
 				  $scope.submit = function() {
-					  var fDate = moment($scope.fromDate).format('YYYY-MM-DD')
-					alert(fDate);
-					alert($scope.toDate)
-				  };
+
+						$scope.loading = true;
+						var fromDate = $scope.fromDate;
+						var toDate = $scope.toDate;
+						if (fromDate == undefined) {
+							alert("Please select from From Date");
+							return;
+						}
+						var fDate = moment($scope.fromDate).format('MM/DD/YYYY');
+						if (toDate == undefined) {
+							toDate = new Date( $scope.fromDate.getFullYear()+2,
+									$scope.fromDate.getMonth() ,
+									$scope.fromDate.getDate());
+						}
+						toDate = moment(toDate).format('MM/DD/YYYY');
+						
+						$scope.nomilk = {
+							"fromdate" : fDate,
+							"todate" : toDate,
+							"rid" : $scope.flatNosel.type
+						};
+						
+						// create http post request
+						$http(
+								{
+									method : 'POST',
+									url : $PROVIDER.providerMilkRest+'/insert/nomilk',
+									data : $scope.nomilk,
+									headers : {
+										'Content-Type' : 'application/json'
+									}
+								}).success(function(data) {
+									$scope.loading = false;
+							if (data.status == 0) {
+								alert("succesfuly inserted");
+							} else {
+								alert("fail to insert record");
+							}
+						});
+
+					};
 				  //End of submit function
 				  
 				//Get apartment details

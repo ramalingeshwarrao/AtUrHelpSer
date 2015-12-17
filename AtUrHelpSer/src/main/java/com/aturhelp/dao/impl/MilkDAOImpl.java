@@ -18,11 +18,13 @@ import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
+import com.aturhelp.common.milk.NoMilk;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
 import com.aturhelp.constants.Constants;
 import com.aturhelp.dao.MilkDAO;
 import com.aturhelp.dao.util.SQLQuery;
+import com.aturhelp.utils.AtUrHelpUtils;
 
 @Component
 public class MilkDAOImpl extends BaseDAO implements MilkDAO{
@@ -364,6 +366,54 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 					public Integer mapRow(ResultSet rs, int rowNum)
 							throws SQLException {
 						return rs.getInt(1);
+					}
+				});
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public boolean craeteNoMilk(final NoMilk noMilk) {
+		try {
+			this.jdbcTemplate.update(new PreparedStatementCreator() {
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con)
+						throws SQLException {
+					try {
+						PreparedStatement ps = con
+								.prepareStatement(SQLQuery.INSERT_NO_MILK);
+						ps.setDate(1, new java.sql.Date(AtUrHelpUtils.getDate(noMilk.getFormDate()).getTime()));
+						ps.setDate(2, new java.sql.Date(AtUrHelpUtils.getDate(noMilk.getToDate()).getTime()));
+						ps.setBoolean(3, false);
+						ps.setInt(4, noMilk.getRid());
+						return ps;	
+					} catch (Exception e) {
+						throw new SQLException("Fail to insert record");
+					}
+					
+				}
+			});
+		} catch (Exception e) {
+			LOG.error("Fail to create route", e);
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public Boolean getMilkStatusByRid(int roomId) {
+		String query = null;
+		Object[] obj = null;
+		query = SQLQuery.GET_STATUS_ROOM_MILK;
+		obj = new Object[] {roomId };
+		List<Boolean> list = this.jdbcTemplate.query(query, obj,
+				new RowMapper<Boolean>() {
+					@Override
+					public Boolean mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						return rs.getBoolean("isUpdated");
 					}
 				});
 		if (list != null && list.size() > 0) {

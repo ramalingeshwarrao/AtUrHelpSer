@@ -11,6 +11,7 @@ import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
+import com.aturhelp.common.milk.NoMilk;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
 import com.aturhelp.dao.MilkDAO;
@@ -87,6 +88,23 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public Integer getMilkCount() {
 		return milkDAO.getMilkCount();
+	}
+
+	@Override
+	public boolean craeteNoMilk(NoMilk noMilk) {
+		//First we need to validate whether record already exist or not.
+		Boolean isRecordExist = getMilkStatusByRid(noMilk.getRid()) ;
+		if (isRecordExist == null || isRecordExist) {
+			return milkDAO.craeteNoMilk(noMilk);	
+		} else {
+			return false;
+		}
+		
+	}
+
+	@Override
+	public Boolean getMilkStatusByRid(int roomId) {
+		return milkDAO.getMilkStatusByRid(roomId);
 	}
 
 }
