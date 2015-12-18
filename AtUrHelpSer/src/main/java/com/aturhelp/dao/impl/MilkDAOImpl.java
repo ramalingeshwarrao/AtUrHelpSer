@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -418,6 +419,35 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 				});
 		if (list != null && list.size() > 0) {
 			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public List<GetFlatsData> getMilkDetailsByRouteId(int routeId, String strDate) {
+		try {
+			List<GetFlatsData> list = this.jdbcTemplate.query(
+					SQLQuery.GET_DAY_MILK_BY_ROUTE_ID, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), false, routeId},
+					new RowMapper<GetFlatsData>() {
+						@Override
+						public GetFlatsData mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							GetFlatsData flatsData = new GetFlatsData();
+							flatsData.setAppartmentName(rs.getString("name"));
+							flatsData.setRoomId(rs.getString("room_id"));
+							flatsData.setRouteName(rs.getString("route_id"));
+							flatsData.setMilkId(rs.getString("milkid"));
+							flatsData.setCost(rs.getFloat("cost"));
+							flatsData.setQuantity(rs.getInt("quantity"));
+							return flatsData;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return	list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get flat details", e);
+			return null;
 		}
 		return null;
 	}

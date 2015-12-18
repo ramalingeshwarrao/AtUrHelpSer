@@ -107,4 +107,9 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 		return milkDAO.getMilkStatusByRid(roomId);
 	}
 
+	@Override
+	public List<GetFlatsData> getMilkDetailsByRouteId(int routeId, String date) {
+		return milkDAO.getMilkDetailsByRouteId(routeId, date);
+	}
+
 }

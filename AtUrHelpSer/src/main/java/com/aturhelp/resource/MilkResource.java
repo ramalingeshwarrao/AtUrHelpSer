@@ -240,4 +240,12 @@ public class MilkResource {
 			return "0";
 		}
 	}
+	
+	@GET
+	@Path("dailymilkdetails")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<GetFlatsData> getMilkDetails(@QueryParam(Constants.ROUTE_ID) int routeId,  @QueryParam(Constants.DATE) String date) {
+		return milkService.getMilkDetailsByRouteId(routeId, date);
+	}
 }

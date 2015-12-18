@@ -57,7 +57,7 @@
 			);
 		};
 		
-		//Get Log data
+		//Get milk data
 		$scope.milkdata = function (providerName, userType, userName, recordsPerPage, fromPage) {
 			$http(
 					{
@@ -85,7 +85,7 @@
 			);
 		};
 		$scope.bootstrap();
-		// End of get Log data
+		// End of get milk data
 		
 		$scope.wat = function() {
 		

@@ -35,5 +35,6 @@ public interface MilkDAO {
 	public Integer getMilkCount();
 	public boolean craeteNoMilk(NoMilk noMilk);
 	public Boolean getMilkStatusByRid(int roomId);
+	public List<GetFlatsData> getMilkDetailsByRouteId(int routeId, String date);
 
 }

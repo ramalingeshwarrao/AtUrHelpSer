@@ -69,4 +69,9 @@ public class AtUrHelpUtils {
 		return formatedDate;
 	}
 	
+	public static String getCurrentDate() throws Exception{
+		SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+		return dateFormat.format(new Date());
+	}
+	
 }

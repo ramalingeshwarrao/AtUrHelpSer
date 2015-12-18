@@ -37,4 +37,5 @@ public class Constants {
 	public static final String ID = "id";
 	public static final String ROUTE_ID = "route_id";
 	public static final String APP_ID = "app_id";
+	public static final String DATE = "date"; 
 }

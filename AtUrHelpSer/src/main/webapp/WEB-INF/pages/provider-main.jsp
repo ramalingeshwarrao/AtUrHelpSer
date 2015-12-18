@@ -31,6 +31,7 @@
 	<script type="text/javascript" src="js/milk-flatnoVSMilk.js"></script>
 	<script type="text/javascript" src="js/milk-details.js"></script>
 	<script type="text/javascript" src="js/no-milk.js"></script>
+	<script type="text/javascript" src="js/milk-dailymilk.js"></script>
 	
 	<script type="text/javascript" src="js/moment.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>

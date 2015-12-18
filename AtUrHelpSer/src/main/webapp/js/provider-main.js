@@ -70,6 +70,9 @@
 				}).when('/nomilk', {
 					templateUrl : 'no-milk.html',
 					controller : $PROVIDER.NoMilkController
+				}).when('/dailymilk', {
+					templateUrl : 'milk-dailymilk.html',
+					controller : $PROVIDER.DailyMilkController
 				})
 				.otherwise({
 					redirectTo : '/provider'

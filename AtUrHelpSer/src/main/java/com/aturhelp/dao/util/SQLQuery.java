@@ -50,5 +50,6 @@ public class SQLQuery {
 	public static final String GET_FLAT_N0_BY_AP_ID = "SELECT id, room_id, app_id FROM milk_flat_no WHERE app_id=?";
 	public static final String GET_COUNT_MILK_DATA = "SELECT count(1) from milk_room"; 
 	public static final String GET_STATUS_ROOM_MILK = "SELECT isUpdated FROM milk_nomilk WHERE rid=?";
+	public static final String GET_DAY_MILK_BY_ROUTE_ID = "SELECT ma.name, mfn.room_id, mr.route_id, mp.milkid, mp.cost, mroom.quantity FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id WHERE mfn.id NOT IN (select rid from milk_nomilk where  ? >= fromdate   and isUpdated=?) AND ma.route_id=? order by ma.name, mfn.room_id";
 	
 }

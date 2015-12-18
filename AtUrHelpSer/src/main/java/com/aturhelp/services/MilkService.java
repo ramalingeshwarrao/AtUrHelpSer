@@ -34,5 +34,6 @@ public interface MilkService {
 	public List<FlatNo> getFlatNoDetails(String appId);
 	public Integer getMilkCount();
 	public Boolean getMilkStatusByRid(int roomId);
+	public List<GetFlatsData> getMilkDetailsByRouteId(int routeId, String date);
 
 }
