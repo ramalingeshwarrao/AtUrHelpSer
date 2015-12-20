@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.aturhelp.common.Help;
 import com.aturhelp.common.UserInfo;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.FlatNo;
@@ -247,5 +248,28 @@ public class MilkResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<GetFlatsData> getMilkDetails(@QueryParam(Constants.ROUTE_ID) int routeId,  @QueryParam(Constants.DATE) String date) {
 		return milkService.getMilkDetailsByRouteId(routeId, date);
+	}
+	
+	@GET
+	@Path("getnomilkdetails")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public GetFlatsData getNoMilkDetails(@QueryParam(Constants.ROOM_ID) int roomId,  @QueryParam(Constants.APP_ID) int appId) {
+		return milkService.getNoMilkDetails(roomId, appId);
+	}
+	
+	@POST
+	@Path("updatenomilktogetmilk")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public NoMilk updateTicket(NoMilk noMilk) {
+		NoMilk sNoMilk = new NoMilk();
+		boolean isUpdated = milkService.updateNoMilkToGetMilk(noMilk.getRid(), noMilk.getToDate());
+		if (isUpdated) {
+			sNoMilk.setStatus(0);
+		} else {
+			sNoMilk.setStatus(1);
+		}
+		return sNoMilk;
 	}
 }

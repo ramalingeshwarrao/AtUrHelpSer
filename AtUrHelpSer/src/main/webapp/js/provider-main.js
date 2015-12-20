@@ -15,6 +15,32 @@
 			$PROVIDER.providerRest = "/AtUrHelpSer/aturhelp/hr";
 			$PROVIDER.providerMilkRest = "/AtUrHelpSer/aturhelp/milk";
 			ProviderModule = angular.module('ProviderModule', ['ngRoute', 'ui.bootstrap','ngMaterial']);
+			$PROVIDER.providerModule = ProviderModule;
+			
+			ProviderModule.factory('printitems', function() {
+				var headerItems = [];
+				var bodyItems = [];
+				var itemsService = {};
+				
+				itemsService.addHeaderItems = function(items) {
+					headerItems = items;
+				};
+				
+				itemsService.addBodyItems = function(items) {
+					bodyItems = items;
+				};
+				
+				itemsService.getHeaderItems = function() {
+					return headerItems;
+				};
+				
+				itemsService.getBodyItems = function() {
+					return bodyItems;
+				};
+				
+				return itemsService;
+			});
+			
 			
 			/*
 			//Date picker config
@@ -73,6 +99,12 @@
 				}).when('/dailymilk', {
 					templateUrl : 'milk-dailymilk.html',
 					controller : $PROVIDER.DailyMilkController
+				}).when('/milkprint', {
+					templateUrl : 'milk-print.html',
+					controller : $PROVIDER.MilkPrintController
+				}).when('/milkrequired', {
+					templateUrl : 'milk-required.html',
+					controller : $PROVIDER.MilkRequiredController
 				})
 				.otherwise({
 					redirectTo : '/provider'

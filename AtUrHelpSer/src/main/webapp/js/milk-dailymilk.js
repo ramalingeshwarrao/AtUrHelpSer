@@ -2,13 +2,22 @@
 	
 	'use strict';
 	
-	$PROVIDER.DailyMilkController = ['$scope', '$http', function ($scope, $http) {
+	$PROVIDER.DailyMilkController = ['$scope', '$http', '$location', 'printitems',  function ($scope, $http, $location, printitems) {
 		
 		$scope.printshow = false;
-		
 		//print
 		$scope.print = function() {
-			window.print();
+			var headerItems = [];
+			headerItems.push('Route');
+			headerItems.push('Apartment Name');
+			headerItems.push('Flat No');
+			headerItems.push('Milk');
+			headerItems.push('Quantity');
+			headerItems.push('Cost');
+			printitems.addHeaderItems(headerItems);
+			printitems.addBodyItems($scope.getflatdata);
+			
+			$location.path( '/milkprint' );
 		};
 		//end of print
 		//Get route details

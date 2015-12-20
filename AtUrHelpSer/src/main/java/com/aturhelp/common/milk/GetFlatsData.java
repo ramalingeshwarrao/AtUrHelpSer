@@ -14,6 +14,7 @@ public class GetFlatsData {
 	private float cost;
 	private Integer quantity;
 	private String milkId;
+	private String date;
 	
 	
 	@XmlElement(name ="appsubject")
@@ -78,5 +79,13 @@ public class GetFlatsData {
 	}
 	public void setMilkId(String milkId) {
 		this.milkId = milkId;
+	}
+	
+	@XmlElement(name ="date")
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 }

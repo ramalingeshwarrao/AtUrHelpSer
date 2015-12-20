@@ -112,4 +112,14 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 		return milkDAO.getMilkDetailsByRouteId(routeId, date);
 	}
 
+	@Override
+	public GetFlatsData getNoMilkDetails(int roomId, int appId) {
+		return milkDAO.getNoMilkDetails(roomId, appId);
+	}
+
+	@Override
+	public boolean updateNoMilkToGetMilk(int roomId, String toDate) {
+		return milkDAO.updateNoMilkToGetMilk(roomId, toDate);
+	}
+
 }

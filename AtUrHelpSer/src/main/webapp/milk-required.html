@@ -1,0 +1,63 @@
+<div ng-include src="'provider-milk-header.html'" >
+</div>
+
+
+	<div class="container">
+		<form name="flatform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
+		
+	<div class="row">
+		<div class="form-group col-lg-3">
+			<h3 class="text-primary" style="float: left">
+				Milk Required
+			</h3>
+		</div>
+	</div>	
+	<div class="row">
+			<div class="form-group col-lg-3">
+				<label for="flatform" style="float: left">Apartment Name:</label>
+			<select ng-model="apartmentsel.type" ng-options="a.id as a.appname for a in apartmentdetails" class="form-control" ng-change="changeApp(apartmentsel.type)">
+			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-lg-3">
+			<label for="flatform" style="float: left">Flat No:</label>
+			<select ng-model="flatNosel.type" ng-options="f.id as f.roomno for f in flatNodetails" class="form-control" ng-change="changeroom(flatNosel.type)">
+			</select>
+		</div>
+	</div>
+	<div class="row" ng-show="isShow">
+		<div class="form-group col-lg-3">
+			<label  style="float: left">Appartment Name : {{appName}}</label>
+		</div>
+	</div>
+	<div class="row" ng-show="isShow">
+		<div class="form-group col-lg-3">
+			<label  style="float: left">Roo No : {{roomId }}</label>
+		</div>
+	</div>
+	<div class="row" ng-show="isShow">
+		<div class="form-group col-lg-3">
+			<label  style="float: left">From Date : {{date}}</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-lg-3">
+			<label for="flatform" style="float: left">Date:</label>
+		</div>
+	</div>
+	<div class="form-inline datepickerdemoBasicUsage" >
+			<fieldset >
+			<md-content>
+    		<md-datepicker style="float: left" ng-model="toDate" md-placeholder="Date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+			</md-content>
+			</fieldset>
+	</div>
+	<div class="form-group col-lg-3">
+			<button  style="margin-top:30px" class="btn btn-info btn-primary" ng-click="submit()" >
+			Submit</button>
+	</div>
+ </form>
+ <img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+</div>
+

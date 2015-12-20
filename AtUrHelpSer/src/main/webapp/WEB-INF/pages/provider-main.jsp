@@ -1,6 +1,6 @@
 <!doctype html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html lang="en">
+<html lang="en"  moznomarginboxes mozdisallowselectionprint>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>AtUrHelp.</title>
@@ -32,6 +32,8 @@
 	<script type="text/javascript" src="js/milk-details.js"></script>
 	<script type="text/javascript" src="js/no-milk.js"></script>
 	<script type="text/javascript" src="js/milk-dailymilk.js"></script>
+	<script type="text/javascript" src="js/milk-print.js"></script>
+	<script type="text/javascript" src="js/milk-required.js"></script>
 	
 	<script type="text/javascript" src="js/moment.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
@@ -39,9 +41,18 @@
     <script src="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js"></script>
     
-     <link rel="stylesheet" href="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.css">
+	<link rel="stylesheet" href="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.css">
 	
-	<style>
+	
+	
+<style>
+	
+	@page 
+    {
+        size: auto;   /* auto is the initial value */
+        margin: 0mm;  /* this affects the margin in the printer settings */
+    }
+	
 	.btn-xlarge {
     padding: 38px 28px 38px 28px;
     font-size: 22px; //change this to your desired size

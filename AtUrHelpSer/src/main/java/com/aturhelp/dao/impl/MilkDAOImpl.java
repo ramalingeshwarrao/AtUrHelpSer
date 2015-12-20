@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.UserInfo;
@@ -323,6 +325,9 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<FlatNo> getFlatNoDetails(String flatNoId) {
 		try {
+			FlatNo selectFaltData = new FlatNo();
+			selectFaltData.setRoomno("SELECT");
+			
 			String query = "";
 			Object[] obj = null;
 			if (StringUtils.isNotBlank(flatNoId)) {
@@ -346,6 +351,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 						}
 					});
 			if (list != null && list.size() > 0) {
+				list.add(0, selectFaltData);
 				return	list;
 			}
 		} catch (Exception e) {
@@ -450,6 +456,60 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			return null;
 		}
 		return null;
+	}
+
+	@Override
+	public GetFlatsData getNoMilkDetails(int roomid, int appId) {
+		try {
+			List<GetFlatsData> list = this.jdbcTemplate.query(
+					SQLQuery.GET_NO_MILK_BY_ROOM_ID_APP_ID, new Object[] {false, appId, roomid},
+					new RowMapper<GetFlatsData>() {
+						@Override
+						public GetFlatsData mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							GetFlatsData flatsData = new GetFlatsData();
+							flatsData.setAppartmentName(rs.getString("ma.name"));
+							flatsData.setRoomId(rs.getString("mfn.room_id"));
+							flatsData.setDate(rs.getString("mn.fromdate"));
+							return flatsData;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return	list.get(0);
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get flat details", e);
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean updateNoMilkToGetMilk(final int roomId, final String toDate) {
+		try {
+			this.jdbcTemplate.update(new PreparedStatementCreator() {
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con)
+						throws SQLException {
+					try {
+						PreparedStatement ps = con
+								.prepareStatement(SQLQuery.UPDATE_NO_MILK_TO_GET_MILK);
+						ps.setBoolean(1, true);
+						ps.setDate(2, new java.sql.Date(AtUrHelpUtils.getDate(toDate).getTime()));
+						ps.setInt(3, roomId);
+						return ps;						
+					} catch (Exception e) {
+						throw new SQLException("Fail to update record");
+					}
+					
+				}
+			});
+		} catch (Exception e) {
+			LOG.error("Fail to update ticket", e);
+			return false;
+		}
+
+		return true;
 	}
 
 }
