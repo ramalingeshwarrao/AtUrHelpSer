@@ -92,7 +92,19 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 
 	@Override
 	public boolean craeteNoMilk(NoMilk noMilk) {
-		//First we need to validate whether record already exist or not.
+		//Need to validate whether record already exist or not
+		//First Case : Fromdate is already available and todate is not given
+		//Second Case : FromDate & todate both are available 
+		//Validate first case
+		boolean isFirstCase = noMilkFirstCase(noMilk);
+		if (isFirstCase) {
+			return false;
+		}
+		//Need to validate second case
+		boolean isSecondCase = noMilkSecondCase(noMilk);
+		if (isSecondCase) {
+			return false;
+		}
 		Boolean isRecordExist = getMilkStatusByRid(noMilk.getRid()) ;
 		if (isRecordExist == null || isRecordExist) {
 			return milkDAO.craeteNoMilk(noMilk);	
@@ -120,6 +132,16 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public boolean updateNoMilkToGetMilk(int roomId, String toDate) {
 		return milkDAO.updateNoMilkToGetMilk(roomId, toDate);
+	}
+
+	@Override
+	public boolean noMilkFirstCase(NoMilk nomilk) {
+		return milkDAO.noMilkFirstCase(nomilk);
+	}
+
+	@Override
+	public boolean noMilkSecondCase(NoMilk nomilk) {
+		return milkDAO.noMilkSecondCase(nomilk);
 	}
 
 }

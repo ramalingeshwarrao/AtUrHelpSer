@@ -37,5 +37,7 @@ public interface MilkService {
 	public List<GetFlatsData> getMilkDetailsByRouteId(int routeId, String date);
 	public GetFlatsData getNoMilkDetails(int roomId, int appId);
 	public boolean updateNoMilkToGetMilk(int roomId, String toDate);
+	public boolean noMilkFirstCase(NoMilk nomilk);
+	public boolean noMilkSecondCase(NoMilk nomilk);
 
 }

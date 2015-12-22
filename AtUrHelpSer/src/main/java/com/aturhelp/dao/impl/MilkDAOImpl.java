@@ -389,12 +389,20 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 				public PreparedStatement createPreparedStatement(Connection con)
 						throws SQLException {
 					try {
+						String query = SQLQuery.INSERT_NO_MILK_NO_TODATE;
+						if (StringUtils.isNotBlank(noMilk.getToDate())) {
+							query = SQLQuery.INSERT_NO_MILK;
+						}
 						PreparedStatement ps = con
-								.prepareStatement(SQLQuery.INSERT_NO_MILK);
+								.prepareStatement(query);
 						ps.setDate(1, new java.sql.Date(AtUrHelpUtils.getDate(noMilk.getFormDate()).getTime()));
-						ps.setDate(2, new java.sql.Date(AtUrHelpUtils.getDate(noMilk.getToDate()).getTime()));
-						ps.setBoolean(3, false);
-						ps.setInt(4, noMilk.getRid());
+						ps.setInt(2, noMilk.getRid());
+						if (StringUtils.isNotBlank(noMilk.getToDate())) {
+							ps.setBoolean(3, true);
+							ps.setDate(4, new java.sql.Date(AtUrHelpUtils.getDate(noMilk.getToDate()).getTime()));	
+						} else {
+							ps.setBoolean(3, false);
+						}
 						return ps;	
 					} catch (Exception e) {
 						throw new SQLException("Fail to insert record");
@@ -510,6 +518,58 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		}
 
 		return true;
+	}
+
+	@Override
+	public boolean noMilkFirstCase(NoMilk nomilk) {
+		try {
+		String query = null;
+		Object[] obj = null;
+		query = SQLQuery.NO_MILK_FIRST_CASE;
+		obj = new Object[] {nomilk.getRid(),  new java.sql.Date(AtUrHelpUtils.getDate(nomilk.getFormDate()).getTime()), false};
+		List<Boolean> list = this.jdbcTemplate.query(query, obj,
+				new RowMapper<Boolean>() {
+					@Override
+					public Boolean mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						int returnVal = rs.getInt(1);
+						return (returnVal == 0) ? false : true;
+					}
+				});
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return false; //Means no records
+		} catch (Exception e) {
+			LOG.error("Fail to get firstcase ", e);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean noMilkSecondCase(NoMilk nomilk) {
+		try {
+		String query = null;
+		Object[] obj = null;
+		query = SQLQuery.NO_MILK_SECOND_CASE;
+		obj = new Object[] {nomilk.getRid(),  new java.sql.Date(AtUrHelpUtils.getDate(nomilk.getFormDate()).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(nomilk.getFormDate()).getTime()), true};
+		List<Boolean> list = this.jdbcTemplate.query(query, obj,
+				new RowMapper<Boolean>() {
+					@Override
+					public Boolean mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						int returnVal = rs.getInt(1);
+						return (returnVal == 0) ? false : true;
+					}
+				});
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return false; //Means no records
+		} catch(Exception e) {
+			LOG.error("Fail to get second case ", e);
+			return false;
+		}
 	}
 
 }

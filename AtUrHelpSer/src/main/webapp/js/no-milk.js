@@ -29,11 +29,10 @@
 						}
 						var fDate = moment($scope.fromDate).format('MM/DD/YYYY');
 						if (toDate == undefined) {
-							toDate = new Date( $scope.fromDate.getFullYear()+2,
-									$scope.fromDate.getMonth() ,
-									$scope.fromDate.getDate());
+							toDate = "";
+						} else {
+							toDate = moment(toDate).format('MM/DD/YYYY');							
 						}
-						toDate = moment(toDate).format('MM/DD/YYYY');
 						
 						$scope.nomilk = {
 							"fromdate" : fDate,

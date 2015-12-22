@@ -37,7 +37,8 @@ public class SQLQuery {
 	public static final String INSERT_MILK_PACKETS = "INSERT INTO milk_packats (subject, milkid, cost) VALUES (?, ?, ?)";
 	public static final String INSERT_ROOM_MILK = "INSERT INTO milk_room (room_id, milk_id, quantity) VALUES (?, ?, ?)";
 	public static final String INSERT_ROUTE = "INSERT INTO milk_route (subject, route_id) VALUES (?, ?)";
-	public static final String INSERT_NO_MILK = "INSERT INTO milk_nomilk (fromdate, todate, isUpdated, rid) values (?, ?, ?, ?)";
+	public static final String INSERT_NO_MILK = "INSERT INTO milk_nomilk (fromdate, rid, isUpdated, todate) values (?, ?, ?, ?)";
+	public static final String INSERT_NO_MILK_NO_TODATE = "INSERT INTO milk_nomilk (fromdate, rid, isUpdated) values (?, ?, ?)";
 	
 	//Select Qureries
 	public static final String GET_APPARTMENTS = "SELECT subject, name, id FROM milk_appartment";
@@ -53,5 +54,7 @@ public class SQLQuery {
 	public static final String GET_DAY_MILK_BY_ROUTE_ID = "SELECT ma.name, mfn.room_id, mr.route_id, mp.milkid, mp.cost, mroom.quantity FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id WHERE mfn.id NOT IN (select rid from milk_nomilk where  ? >= fromdate   and isUpdated=?) AND ma.route_id=? order by ma.name, mfn.room_id";
 	public static final String GET_NO_MILK_BY_ROOM_ID_APP_ID = "select ma.name, mfn.room_id, mn.fromdate from milk_nomilk mn INNER JOIN milk_flat_no mfn ON mn.rid = mfn.id INNER JOIN milk_appartment ma ON ma.id = mfn.app_id WHERE isUpdated=? AND ma.id=? AND mfn.id=?;";
 	public static final String UPDATE_NO_MILK_TO_GET_MILK = "update milk_nomilk set isUpdated=?,todate=? WHERE rid=?";
+	public static final String NO_MILK_FIRST_CASE = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate <=? AND isUpdated=?";
+	public static final String NO_MILK_SECOND_CASE = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate <=? AND todate >= ? AND isUpdated=?";
 	
 }
