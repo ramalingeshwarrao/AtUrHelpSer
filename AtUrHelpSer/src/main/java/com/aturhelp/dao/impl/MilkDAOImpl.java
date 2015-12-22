@@ -441,7 +441,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	public List<GetFlatsData> getMilkDetailsByRouteId(int routeId, String strDate) {
 		try {
 			List<GetFlatsData> list = this.jdbcTemplate.query(
-					SQLQuery.GET_DAY_MILK_BY_ROUTE_ID, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), false, routeId},
+					SQLQuery.GET_DAY_MILK_BY_ROUTE_ID, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()),routeId},
 					new RowMapper<GetFlatsData>() {
 						@Override
 						public GetFlatsData mapRow(ResultSet rs, int rowNum)
