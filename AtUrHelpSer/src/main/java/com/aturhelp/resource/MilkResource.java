@@ -272,4 +272,12 @@ public class MilkResource {
 		}
 		return sNoMilk;
 	}
+	
+	@GET
+	@Path("getallnomilkdetails")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<GetFlatsData> getAllNoMilkDetails(@QueryParam(Constants.ROOM_ID) int roomId,  @QueryParam(Constants.APP_ID) int appId) {
+		return milkService.getAllNoMilkDetails(roomId, appId);
+	}
 }

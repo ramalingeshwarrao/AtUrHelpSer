@@ -14,7 +14,7 @@
 			
 			$PROVIDER.providerRest = "/AtUrHelpSer/aturhelp/hr";
 			$PROVIDER.providerMilkRest = "/AtUrHelpSer/aturhelp/milk";
-			ProviderModule = angular.module('ProviderModule', ['ngRoute', 'ui.bootstrap','ngMaterial']);
+			ProviderModule = angular.module('ProviderModule', ['ngRoute', 'ui.bootstrap', 'ngMaterial', 'ui.calendar']);
 			$PROVIDER.providerModule = ProviderModule;
 			
 			ProviderModule.factory('printitems', function() {
@@ -105,6 +105,9 @@
 				}).when('/milkrequired', {
 					templateUrl : 'milk-required.html',
 					controller : $PROVIDER.MilkRequiredController
+				}).when('/milkroomstatus', {
+					templateUrl : 'milk-room-status.html',
+					controller : $PROVIDER.MilkRoomStatusController
 				})
 				.otherwise({
 					redirectTo : '/provider'

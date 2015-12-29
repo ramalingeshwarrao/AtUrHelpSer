@@ -144,4 +144,9 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 		return milkDAO.noMilkSecondCase(nomilk);
 	}
 
+	@Override
+	public List<GetFlatsData> getAllNoMilkDetails(int roomId, int appId) {
+		return milkDAO.getAllNoMilkDetails(roomId, appId);
+	}
+
 }

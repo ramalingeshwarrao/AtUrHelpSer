@@ -10,11 +10,16 @@
 	 
 	<link rel="stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css" />
-	
+	<link rel="stylesheet" type="text/css" href="css/fullcalendar.min.css" />
+
+	<script type="text/javascript" src="js/moment.js"></script>	
 	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/fullcalendar.min.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/calendar.js"></script>
 	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
 	<script type="text/javascript" src="js/provider-main.js"></script>
 	<script type="text/javascript" src="js/provider-frame.js"></script>
@@ -34,19 +39,24 @@
 	<script type="text/javascript" src="js/milk-dailymilk.js"></script>
 	<script type="text/javascript" src="js/milk-print.js"></script>
 	<script type="text/javascript" src="js/milk-required.js"></script>
+	<script type="text/javascript" src="js/milk-room-status.js"></script>
 	
-	<script type="text/javascript" src="js/moment.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-aria.min.js"></script>
     <script src="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js"></script>
+    
     
 	<link rel="stylesheet" href="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.css">
 	
 	
 	
 <style>
-	
+
+	.fc-time {
+    display:none;
+	}
+
 	@page 
     {
         size: auto;   /* auto is the initial value */
@@ -96,6 +106,11 @@
 	}
 	//End of fieldset
 	
+	
+	.highPriority{
+    background-color: red;
+    color: red;
+}
 	</style>
 	<script>
 		function formSubmit() {

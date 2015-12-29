@@ -572,4 +572,31 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		}
 	}
 
+	@Override
+	public List<GetFlatsData> getAllNoMilkDetails(int roomId, int appId) {
+		try {
+			List<GetFlatsData> list = this.jdbcTemplate.query(
+					SQLQuery.GET_ALL_NO_MILK_BY_ROOM_ID_APP_ID, new Object[] {appId, roomId},
+					new RowMapper<GetFlatsData>() {
+						@Override
+						public GetFlatsData mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							GetFlatsData flatsData = new GetFlatsData();
+							flatsData.setAppartmentName(rs.getString("ma.name"));
+							flatsData.setRoomId(rs.getString("mfn.room_id"));
+							flatsData.setDate(rs.getString("mn.fromdate"));
+							flatsData.setTodate(rs.getString("mn.todate"));
+							return flatsData;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return	list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get flat details", e);
+			return null;
+		}
+		return null;
+	}
+
 }

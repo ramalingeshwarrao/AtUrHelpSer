@@ -56,5 +56,6 @@ public class SQLQuery {
 	public static final String UPDATE_NO_MILK_TO_GET_MILK = "update milk_nomilk set isUpdated=?,todate=? WHERE rid=?";
 	public static final String NO_MILK_FIRST_CASE = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate <=? AND isUpdated=?";
 	public static final String NO_MILK_SECOND_CASE = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate <=? AND todate >= ? AND isUpdated=?";
+	public static final String GET_ALL_NO_MILK_BY_ROOM_ID_APP_ID = "select ma.name, mfn.room_id, mn.fromdate, mn.todate from milk_nomilk mn INNER JOIN milk_flat_no mfn ON mn.rid = mfn.id INNER JOIN milk_appartment ma ON ma.id = mfn.app_id WHERE ma.id=? AND mfn.id=?;";
 	
 }
