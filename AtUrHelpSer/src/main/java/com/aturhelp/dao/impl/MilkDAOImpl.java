@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -22,6 +24,7 @@ import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.NoMilk;
+import com.aturhelp.common.milk.NoMilkCost;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
 import com.aturhelp.constants.Constants;
@@ -594,6 +597,82 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			}
 		} catch (Exception e) {
 			LOG.error("Fail to get flat details", e);
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public List<NoMilkCost> getMilkCostForAllFlatByApp(int appId) {
+		try {
+			List<NoMilkCost> list = this.jdbcTemplate.query(
+					SQLQuery.GET_MILK_COST_BY_APP_ID, new Object[] {appId},
+					new RowMapper<NoMilkCost>() {
+						@Override
+						public NoMilkCost mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							NoMilkCost nMC = new NoMilkCost();
+							nMC.setId(rs.getInt("mfn.id"));
+							nMC.setRoomId(rs.getString("mfn.room_id"));
+							nMC.setCost(rs.getInt("cost"));
+							nMC.setQuantity(rs.getInt("quantity"));
+							return nMC;
+						}
+					});
+			if (list.size() > 0) {
+				return	list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get milk cost details", e);
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public List<NoMilk> getNoMilkDetailsById(NoMilk noMilk) {
+		try {
+			List<NoMilk> list = this.jdbcTemplate.query(
+					SQLQuery.GET_NO_MILK_FOR_COST_BY_RID, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(noMilk.getFormDate()).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(noMilk.getToDate()).getTime()), noMilk.getRid()},
+					new RowMapper<NoMilk>() {
+						@Override
+						public NoMilk mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							NoMilk noMilk = new NoMilk();
+							noMilk.setFormDate(rs.getString("fromdate"));
+							noMilk.setToDate(rs.getString("todate"));
+							return noMilk;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return	list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get nomilk details by id details", e);
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public NoMilk getNoMilkDetailsByIdForNull(NoMilk noMilk) {
+		try {
+			List<NoMilk> list = this.jdbcTemplate.query(
+					SQLQuery.GET_NO_MILK_FOR_COST_BY_RID_NULL, new Object[] {noMilk.getRid()},
+					new RowMapper<NoMilk>() {
+						@Override
+						public NoMilk mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							NoMilk noMilk = new NoMilk();
+							noMilk.setFormDate(rs.getString("fromdate"));
+							return noMilk;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return	list.get(0); //Only one record will be there
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get nomilk details by id details", e);
 			return null;
 		}
 		return null;

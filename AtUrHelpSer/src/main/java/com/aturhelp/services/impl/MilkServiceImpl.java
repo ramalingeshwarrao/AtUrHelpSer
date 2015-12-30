@@ -1,7 +1,13 @@
 package com.aturhelp.services.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,10 +18,13 @@ import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.NoMilk;
+import com.aturhelp.common.milk.NoMilkCost;
+import com.aturhelp.common.milk.RoomBill;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
 import com.aturhelp.dao.MilkDAO;
 import com.aturhelp.services.MilkService;
+import com.aturhelp.utils.AtUrHelpUtils;
 
 @Component
 public class MilkServiceImpl implements MilkService{
@@ -147,6 +156,86 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public List<GetFlatsData> getAllNoMilkDetails(int roomId, int appId) {
 		return milkDAO.getAllNoMilkDetails(roomId, appId);
+	}
+
+	@Override
+	public List<NoMilkCost> getMilkCostForAllFlatByApp(int appId) {
+		return milkDAO.getMilkCostForAllFlatByApp(appId);
+	}
+
+	@Override
+	public List<NoMilk> getNoMilkDetailsById(NoMilk noMilk) {
+		return milkDAO.getNoMilkDetailsById(noMilk);
+	}
+
+	@Override
+	public NoMilk getNoMilkDetailsByIdForNull(NoMilk noMilk) {
+		return milkDAO.getNoMilkDetailsByIdForNull(noMilk);
+	}
+	
+	
+	public List<RoomBill> getFinalCostForRoomByAppId(int appId, String fromDate, String toDate) throws Exception{
+		// Get No of Days
+		int totalDays = AtUrHelpUtils.getNoOfDaysInRange(fromDate, toDate, null);
+		// Get All data
+		List<NoMilkCost> milkCostDetails = getMilkCostForAllFlatByApp(appId);
+		List<RoomBill> roomBillList = new ArrayList<RoomBill>();
+		for (NoMilkCost noMilkCost : milkCostDetails) {
+			RoomBill rB = new RoomBill();
+			Integer id = noMilkCost.getId();
+			Integer cost = noMilkCost.getCost();
+			Integer totalCost = totalDays * cost;
+			String roomNo = noMilkCost.getRoomId();
+			Integer quantity = noMilkCost.getQuantity();
+			rB.setRoomId(roomNo);
+			rB.setQuantity(quantity);
+			NoMilk noMilk = new NoMilk();
+			noMilk.setFormDate(fromDate);
+			noMilk.setToDate(toDate);
+			noMilk.setRid(id);
+			// Validate any time milk was not taken
+			List<NoMilk> getNoMilkDetails = getNoMilkDetailsById(noMilk);
+			// If getNomilk details are empty it means that milk was taken or no
+			// milk was taken
+			if (getNoMilkDetails != null && getNoMilkDetails.size() > 0) {
+				for (NoMilk noMil : getNoMilkDetails) {
+					String fDate = null;
+					if (StringUtils.isNotBlank(noMil.getFormDate())) 
+						fDate =	AtUrHelpUtils.convertDateFormat(noMil.getFormDate(), AtUrHelpUtils.pattern_1, AtUrHelpUtils.pattern);
+					
+					String tDate = null; 
+					if (StringUtils.isNotBlank(noMil.getToDate()))
+					   tDate = AtUrHelpUtils.convertDateFormat(noMil.getToDate(), AtUrHelpUtils.pattern_1, AtUrHelpUtils.pattern);
+					
+					// if tDate is not null it means that nomilk is in that
+					// range
+					if (StringUtils.isBlank(tDate)) {
+						Integer noMilkRange = AtUrHelpUtils.getNoOfDaysInRange(
+								fDate, toDate, null);
+						totalCost = totalCost - noMilkRange * cost;
+					} else {
+						String fCDate = fDate;
+						String tCDate = tDate;
+						boolean isTDateValid = AtUrHelpUtils.compareDates(tDate, toDate, AtUrHelpUtils.pattern);
+						if (!isTDateValid) {
+							tCDate = toDate;
+						}
+						Integer noMilkRange = AtUrHelpUtils.getNoOfDaysInRange(
+								fCDate, tCDate, null);
+						totalCost = totalCost - noMilkRange * cost;
+					}
+				}
+			} else {
+				NoMilk getNullMilk = getNoMilkDetailsByIdForNull(noMilk);
+				if (getNullMilk != null) {
+					// It means record exist set totalcost = 0
+					totalCost = 0;
+				}
+			}
+			rB.setCost(totalCost);
+			roomBillList.add(rB);
+		}
+		return roomBillList;
 	}
 
 }

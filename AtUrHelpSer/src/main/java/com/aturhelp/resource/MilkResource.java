@@ -24,6 +24,7 @@ import com.aturhelp.common.milk.ListRoomMilk;
 import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.NoMilk;
+import com.aturhelp.common.milk.RoomBill;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
 import com.aturhelp.constants.Constants;
@@ -279,5 +280,18 @@ public class MilkResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<GetFlatsData> getAllNoMilkDetails(@QueryParam(Constants.ROOM_ID) int roomId,  @QueryParam(Constants.APP_ID) int appId) {
 		return milkService.getAllNoMilkDetails(roomId, appId);
+	}
+	
+	@GET
+	@Path("getbill")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<RoomBill> getBill(@QueryParam(Constants.FROM_DATE) String fromDate, @QueryParam(Constants.TO_DATE) String toDate,  @QueryParam(Constants.APP_ID) int appId) {
+		try {
+			return milkService.getFinalCostForRoomByAppId(appId, fromDate, toDate);
+		} catch(Exception e) {
+			LOG.error("Fail to generate bill", e);
+		}
+		return null;
 	}
 }

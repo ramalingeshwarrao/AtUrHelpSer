@@ -1,0 +1,55 @@
+<div ng-include src="'provider-milk-header.html'" >
+</div>
+
+
+	<div class="container">
+		<form name="flatform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
+		
+	<div class="row">
+		<div class="form-group col-lg-3">
+			<h3 class="text-primary" style="float: left">
+				Milk Bill
+			</h3>
+		</div>
+	</div>	
+	<div class="row">
+		<div class="form-group col-lg-3">
+			<label for="flatform" style="float: left">Range:</label>
+		</div>
+	</div>
+	<div class="form-inline datepickerdemoBasicUsage" >
+			<fieldset >
+			<md-content>
+    		<md-datepicker style="float: left" ng-model="fromDate" md-placeholder="From Date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+    		<md-datepicker style="float: left" ng-model="toDate" md-placeholder="TO Date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+			</md-content>
+			</fieldset>
+	</div>
+	<div class="row">
+			<div class="form-group col-lg-3">
+				<label for="flatform" style="float: left;margin-top: 40px">Apartment Name:</label>
+			<select ng-model="apartmentsel.type" ng-options="a.id as a.appname for a in apartmentdetails" class="form-control" ng-change="changeApp(apartmentsel.type)">
+			</select>
+		</div>
+	</div>
+	<table class="table table-striped" ng-hide="loading">
+		<thead>
+			<tr>
+				<th>Room NO</th>
+				<th>Quantity</th>
+				<th>Cost</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="bill in roombill ">
+				<td>{{ bill.roomid }}</td>
+				<td>{{ bill.quantity }}</td>
+				<td>{{ bill.cost }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+ </form>
+ <img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+</div>
+

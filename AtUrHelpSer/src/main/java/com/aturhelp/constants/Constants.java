@@ -38,5 +38,7 @@ public class Constants {
 	public static final String ROUTE_ID = "route_id";
 	public static final String APP_ID = "app_id";
 	public static final String ROOM_ID = "room_id";
-	public static final String DATE = "date"; 
+	public static final String DATE = "date";
+	public static final String FROM_DATE = "fromdate";
+	public static final String TO_DATE = "todate";
 }

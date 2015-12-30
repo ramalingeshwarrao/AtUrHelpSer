@@ -108,6 +108,9 @@
 				}).when('/milkroomstatus', {
 					templateUrl : 'milk-room-status.html',
 					controller : $PROVIDER.MilkRoomStatusController
+				}).when('/milkbill', {
+					templateUrl : 'milk-bill.html',
+					controller : $PROVIDER.MilkBillController
 				})
 				.otherwise({
 					redirectTo : '/provider'
