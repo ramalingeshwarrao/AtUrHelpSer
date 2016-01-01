@@ -42,8 +42,12 @@ public interface MilkDAO {
 	public List<GetFlatsData> getAllNoMilkDetails(int roomId, int appId);
 	public boolean updateNoMilkToGetMilk(int roomId, String toDate);
 	public boolean noMilkFirstCase(NoMilk nomilk);
+	public boolean noMilkFirstCaseIfTODateNull(NoMilk nomilk);
 	public boolean noMilkSecondCase(NoMilk nomilk);
+	public boolean noMilkValidateFDGreaterGivenTD(NoMilk nomilk);
 	public List<NoMilkCost> getMilkCostForAllFlatByApp(int appId);
+	public boolean validateDateInRange(String date, int rid);
+	public boolean validateRangeInRange(int rid, String fromDate, String toDate);
 	
 	/**
 	 * Get data like how many days the user did not take milk

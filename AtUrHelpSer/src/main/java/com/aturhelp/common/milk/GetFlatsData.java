@@ -16,7 +16,16 @@ public class GetFlatsData {
 	private String milkId;
 	private String date;
 	private String todate;
+	private int noMilkId;
 	
+	
+	@XmlElement(name ="nomilkid")
+	public int getNoMilkId() {
+		return noMilkId;
+	}
+	public void setNoMilkId(int noMilkId) {
+		this.noMilkId = noMilkId;
+	}
 	
 	@XmlElement(name ="appsubject")
 	public String getAppartmentSubject() {

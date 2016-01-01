@@ -101,25 +101,77 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 
 	@Override
 	public boolean craeteNoMilk(NoMilk noMilk) {
+		
+		
 		//Need to validate whether record already exist or not
-		//First Case : Fromdate is already available and todate is not given
-		//Second Case : FromDate & todate both are available 
-		//Validate first case
-		boolean isFirstCase = noMilkFirstCase(noMilk);
-		if (isFirstCase) {
+		if (noMilk != null && StringUtils.isBlank(noMilk.getToDate())) {
+			
+			boolean isFirstCaseIfToDateNull = noMilkFirstCaseIfTODateNull(noMilk);
+			if (isFirstCaseIfToDateNull) {
+				return false;
+			}
+			
+			//First Case : Fromdate is already available and todate is not given
+			boolean isFirstCase = noMilkFirstCase(noMilk);
+			if (isFirstCase) {
+				return false;
+			}
+		}
+		
+		boolean isFromDateValid = validateDateInRange(noMilk.getFormDate(), noMilk.getRid());
+		if (isFromDateValid) {
 			return false;
 		}
-		//Need to validate second case
-		boolean isSecondCase = noMilkSecondCase(noMilk);
-		if (isSecondCase) {
-			return false;
+		
+		if (noMilk != null && !StringUtils.isBlank(noMilk.getToDate())) {
+			boolean isToDateValid = validateDateInRange(noMilk.getToDate(), noMilk.getRid());
+			if (isToDateValid) {
+				return false;
+			}
+			
+			//Validate range in range
+			boolean isRangeValidate = validateRangeInRange(noMilk.getRid(), noMilk.getFormDate(), noMilk.getToDate());
+			if (isRangeValidate) {
+				return false;
+			}
 		}
-		Boolean isRecordExist = getMilkStatusByRid(noMilk.getRid()) ;
-		if (isRecordExist == null || isRecordExist) {
+		
+		
+		
+//		//If toDate is null, we need to validate whether date before from date is exist or not
+//		//Ex : Record : 10-01-2016 to NULL, if user tries to insert 09-01-2016 to NULL than we need to thorw error like 10-01-2016 record exist
+//		if (noMilk != null && StringUtils.isBlank(noMilk.getToDate())) {
+//			
+//			boolean isFDateGtThanGiveToDate = noMilkValidateFDGreaterGivenTD(noMilk);
+//			if (isFDateGtThanGiveToDate) {
+//				return false;
+//			}
+//			boolean isFirstCaseIfToDateNull = noMilkFirstCaseIfTODateNull(noMilk);
+//			if (isFirstCaseIfToDateNull) {
+//				return false;
+//			}
+//			
+//		}
+//		
+//		//Need to validate whether record already exist or not
+//		//First Case : Fromdate is already available and todate is not given
+//		//Second Case : FromDate & todate both are available 
+//		//Validate first case
+//		boolean isFirstCase = noMilkFirstCase(noMilk);
+//		if (isFirstCase) {
+//			return false;
+//		}
+//		//Need to validate second case
+//		boolean isSecondCase = noMilkSecondCase(noMilk);
+//		if (isSecondCase) {
+//			return false;
+//		}
+		//Boolean isRecordExist = getMilkStatusByRid(noMilk.getRid()) ;
+		//if (isRecordExist == null || isRecordExist) {
 			return milkDAO.craeteNoMilk(noMilk);	
-		} else {
-			return false;
-		}
+		//} else {
+			//return false;
+		//}
 		
 	}
 
@@ -146,6 +198,11 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public boolean noMilkFirstCase(NoMilk nomilk) {
 		return milkDAO.noMilkFirstCase(nomilk);
+	}
+	
+	@Override
+	public boolean noMilkFirstCaseIfTODateNull(NoMilk nomilk) {
+		return milkDAO.noMilkFirstCaseIfTODateNull(nomilk);
 	}
 
 	@Override
@@ -237,5 +294,21 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 		}
 		return roomBillList;
 	}
+
+	@Override
+	public boolean noMilkValidateFDGreaterGivenTD(NoMilk nomilk) {
+		return milkDAO.noMilkValidateFDGreaterGivenTD(nomilk);
+	}
+
+	@Override
+	public boolean validateDateInRange(String date, int rid) {
+		return milkDAO.validateDateInRange(date, rid);
+	}
+
+	@Override
+	public boolean validateRangeInRange(int rid, String fromDate, String toDate) {
+		return milkDAO.validateRangeInRange(rid, fromDate, toDate);
+	}
+
 
 }

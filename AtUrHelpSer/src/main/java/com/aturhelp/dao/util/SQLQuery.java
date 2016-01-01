@@ -52,9 +52,13 @@ public class SQLQuery {
 	public static final String GET_COUNT_MILK_DATA = "SELECT count(1) from milk_room"; 
 	public static final String GET_STATUS_ROOM_MILK = "SELECT isUpdated FROM milk_nomilk WHERE rid=?";
 	public static final String GET_DAY_MILK_BY_ROUTE_ID = "SELECT ma.name, mfn.room_id, mr.route_id, mp.milkid, mp.cost, mroom.quantity FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id WHERE mfn.id NOT IN (select rid from milk_nomilk where fromdate <= ? AND isUpdated=0  OR fromdate <= ? AND todate >= ?) AND ma.route_id=? order by ma.name, mfn.room_id";
-	public static final String GET_NO_MILK_BY_ROOM_ID_APP_ID = "select ma.name, mfn.room_id, mn.fromdate from milk_nomilk mn INNER JOIN milk_flat_no mfn ON mn.rid = mfn.id INNER JOIN milk_appartment ma ON ma.id = mfn.app_id WHERE isUpdated=? AND ma.id=? AND mfn.id=?;";
-	public static final String UPDATE_NO_MILK_TO_GET_MILK = "update milk_nomilk set isUpdated=?,todate=? WHERE rid=?";
+	public static final String GET_NO_MILK_BY_ROOM_ID_APP_ID = "select mn.id, ma.name, mfn.room_id, mn.fromdate from milk_nomilk mn INNER JOIN milk_flat_no mfn ON mn.rid = mfn.id INNER JOIN milk_appartment ma ON ma.id = mfn.app_id WHERE isUpdated=? AND ma.id=? AND mfn.id=?";
+	public static final String UPDATE_NO_MILK_TO_GET_MILK = "update milk_nomilk set isUpdated=?,todate=? WHERE rid=? AND isUpdated=0";
 	public static final String NO_MILK_FIRST_CASE = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate <=? AND isUpdated=?";
+	public static final String NO_MILK_VALIDATE_FD_GD_GIVEN_TD = "select count(1) FROM milk_nomilk WHERE rid=? AND fromdate >=?";
+	public static final String VALIDATE_DATE_IN_RANGE = "SELECT count(1) FROM milk_nomilk where rid = ?  AND fromdate <= ? AND todate >= ? ";
+	public static final String VALIDATE_RANGE_IN_RANGE = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate >= ? AND todate <= ? AND isUpdated=1";
+	public static final String NO_MILK_FIRST_CASE_IF_TO_DATE_NULL = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate >=? ";
 	public static final String NO_MILK_SECOND_CASE = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate <=? AND todate >= ? AND isUpdated=?";
 	public static final String GET_ALL_NO_MILK_BY_ROOM_ID_APP_ID = "select ma.name, mfn.room_id, mn.fromdate, mn.todate from milk_nomilk mn INNER JOIN milk_flat_no mfn ON mn.rid = mfn.id INNER JOIN milk_appartment ma ON ma.id = mfn.app_id WHERE ma.id=? AND mfn.id=?;";
 	public static final String GET_MILK_COST_BY_APP_ID = "select mfn.id, mfn.room_id, sum(cost) as cost, count(1) as quantity from milk_flat_no mfn inner join milk_room mr on mfn.id = mr.room_id inner join milk_packats mp on mp.id = mr.milk_id inner join milk_appartment ma on ma.id = mfn.app_id where app_id=? group by mfn.room_id order by mfn.room_id";

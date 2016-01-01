@@ -479,6 +479,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 						public GetFlatsData mapRow(ResultSet rs, int rowNum)
 								throws SQLException {
 							GetFlatsData flatsData = new GetFlatsData();
+							flatsData.setNoMilkId(rs.getInt("mn.id"));
 							flatsData.setAppartmentName(rs.getString("ma.name"));
 							flatsData.setRoomId(rs.getString("mfn.room_id"));
 							flatsData.setDate(rs.getString("mn.fromdate"));
@@ -676,6 +677,110 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			return null;
 		}
 		return null;
+	}
+
+	@Override
+	public boolean noMilkFirstCaseIfTODateNull(NoMilk nomilk) {
+		try {
+		String query = null;
+		Object[] obj = null;
+		query = SQLQuery.NO_MILK_FIRST_CASE_IF_TO_DATE_NULL;
+		obj = new Object[] {nomilk.getRid(),  new java.sql.Date(AtUrHelpUtils.getDate(nomilk.getFormDate()).getTime())};
+		List<Boolean> list = this.jdbcTemplate.query(query, obj,
+				new RowMapper<Boolean>() {
+					@Override
+					public Boolean mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						int returnVal = rs.getInt(1);
+						return (returnVal == 0) ? false : true;
+					}
+				});
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return false; //Means no records
+		} catch (Exception e) {
+			LOG.error("Fail to get firstcase ", e);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean noMilkValidateFDGreaterGivenTD(NoMilk nomilk) {
+		try {
+		String query = null;
+		Object[] obj = null;
+		query = SQLQuery.NO_MILK_VALIDATE_FD_GD_GIVEN_TD;
+		obj = new Object[] {nomilk.getRid(),  new java.sql.Date(AtUrHelpUtils.getDate(nomilk.getToDate()).getTime())};
+		List<Boolean> list = this.jdbcTemplate.query(query, obj,
+				new RowMapper<Boolean>() {
+					@Override
+					public Boolean mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						int returnVal = rs.getInt(1);
+						return (returnVal == 0) ? false : true;
+					}
+				});
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return false; //Means no records
+		} catch (Exception e) {
+			LOG.error("Fail to get firstcase ", e);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean validateDateInRange(String date, int rid) {
+		try {
+		String query = null;
+		Object[] obj = null;
+		query = SQLQuery.VALIDATE_DATE_IN_RANGE;
+		obj = new Object[] {rid,  new java.sql.Date(AtUrHelpUtils.getDate(date).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(date).getTime())};
+		List<Boolean> list = this.jdbcTemplate.query(query, obj,
+				new RowMapper<Boolean>() {
+					@Override
+					public Boolean mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						int returnVal = rs.getInt(1);
+						return (returnVal == 0) ? false : true;
+					}
+				});
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return false; //Means no records
+		} catch (Exception e) {
+			LOG.error("Fail to get firstcase ", e);
+			return false;
+		}
+	}
+
+	@Override
+	public boolean validateRangeInRange(int rid, String fromDate, String toDate) {
+		try {
+		String query = null;
+		Object[] obj = null;
+		query = SQLQuery.VALIDATE_RANGE_IN_RANGE;
+		obj = new Object[] {rid,  new java.sql.Date(AtUrHelpUtils.getDate(fromDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(toDate).getTime())};
+		List<Boolean> list = this.jdbcTemplate.query(query, obj,
+				new RowMapper<Boolean>() {
+					@Override
+					public Boolean mapRow(ResultSet rs, int rowNum)
+							throws SQLException {
+						int returnVal = rs.getInt(1);
+						return (returnVal == 0) ? false : true;
+					}
+				});
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return false; //Means no records
+		} catch (Exception e) {
+			LOG.error("Fail to get firstcase ", e);
+			return false;
+		}
 	}
 
 }
