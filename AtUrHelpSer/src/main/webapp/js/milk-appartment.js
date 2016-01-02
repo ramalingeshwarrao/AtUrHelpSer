@@ -7,6 +7,11 @@
 				
 				$scope.submit = function() {
 
+					if ($scope.routesel.type == undefined || $scope.routesel.type == "0") {
+						alert("Please select route");
+						return;
+					}
+					
 					$scope.loading = true;
 					$scope.apartmentdata = {
 						"appsubject" : $scope.subject,
@@ -27,6 +32,9 @@
 								$scope.loading = false;
 						if (data.status == 0) {
 							alert("succesfuly inserted");
+							$scope.subject = "";
+							$scope.appname = "";
+							$scope.routesel.type = "0";
 						} else {
 							alert("fail to insert record");
 						}

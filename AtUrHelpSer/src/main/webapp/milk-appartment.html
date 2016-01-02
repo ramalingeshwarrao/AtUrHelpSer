@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="form-group col-lg-3">
 				<label for="subject" style="float: left">Subject:</label>
-				<input type="text" class="form-control" name="subject" ng-model="subject" placeholder="Enter Subject" required>
+				<input type="text" class="form-control" name="subject" maxlength="50" ng-model="subject" placeholder="Enter Subject" required>
 				<span style="color: red" ng-show="appnameform.subject.$dirty && appnameform.subject.$invalid">
 				<span ng-show="appnameform.subject.$error.required">
 				Please Enter appname Subject
@@ -25,7 +25,10 @@
 		<div class="row">
 			<div class="form-group col-lg-3">
 				<label for="appnamename" style="float: left">Apartment Name:</label>
-				 <input type="text" class="form-control" name="appname" ng-model="appname" placeholder="Enter Apartment Name" required>
+				 <input type="text" class="form-control" name="appname" ng-model="appname" ng-pattern="/^[a-zA-Z0-9]*$/" maxlength="50" placeholder="Enter Apartment Name" required>
+				 <span style="color: red" ng-show="appnameform.appname.$error.pattern">
+				 Please use numbers letters only
+				 </span>
 				 <span style="color: red" ng-show="appnameform.appname.$dirty && appnameform.appname.$invalid">
 				<span ng-show="appnameform.appname.$error.required">
 				Please Enter appname Id

@@ -25,7 +25,10 @@
 		<div class="row">
 			<div class="form-group col-lg-3">
 				<label for="milk" style="float: left">Milk Id:</label>
-				 <input type="text" class="form-control" name="milkid" ng-model="milkid" placeholder="Enter Milk Id" required>
+				 <input type="text" class="form-control" name="milkid" ng-pattern="/^[a-zA-Z0-9-]*$/" ng-model="milkid" placeholder="Enter Milk Id" required>
+				 <span style="color: red" ng-show="milkeform.milkid.$error.pattern">
+				 Dont Use space
+				 </span>
 				 <span style="color: red" ng-show="milkeform.milkid.$dirty && milkeform.milkid.$invalid">
 				<span ng-show="milkeform.milkid.$error.required">
 				Please Enter Milk Id
@@ -36,7 +39,7 @@
 		<div class="row">
 			<div class="form-group col-lg-3">
 				<label for="milk" style="float: left">Cost:</label>
-				 <input type="text" class="form-control" name="cost" ng-model="cost" placeholder="Enter Cost" required>
+				 <input type="number" class="form-control" name="cost" ng-model="cost" placeholder="Enter Cost" required>
 				 <span style="color: red" ng-show="milkeform.cost.$dirty && milkeform.cost.$invalid">
 				<span ng-show="milkeform.cost.$error.required">
 				Please Enter Cost

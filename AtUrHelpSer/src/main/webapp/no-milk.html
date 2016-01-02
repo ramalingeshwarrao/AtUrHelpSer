@@ -22,7 +22,7 @@
 	<div class="row">
 		<div class="form-group col-lg-3">
 			<label for="flatform" style="float: left">Flat No:</label>
-			<select ng-model="flatNosel.type" ng-options="f.id as f.roomno for f in flatNodetails" class="form-control">
+			<select ng-model="flatNosel.type" ng-options="f.id as f.roomno for f in flatNodetails" class="form-control" ng-change="flatchange()">
 			</select>
 		</div>
 	</div>

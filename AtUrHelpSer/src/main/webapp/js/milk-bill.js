@@ -63,6 +63,12 @@
 							alert("Please select from To Date");
 							return;
 						}
+						
+						if (fromDate > toDate) {
+							alert("From Date must be less than To Date");
+							return;
+						}
+						
 						var fDate = moment($scope.fromDate).format('MM/DD/YYYY');
 						var tDate = moment($scope.toDate).format('MM/DD/YYYY');
 						
@@ -78,7 +84,7 @@
 										 if (data.roombill.length == undefined) {
 											 $scope.roombillArray = [];
 											 $scope.roombillArray[0] = data.roombill;
-											 $scope.roombilldetails = $scope.roombillArray;
+											 $scope.roombill = $scope.roombillArray;
 										 } else  {
 											 $scope.roombill = data.roombill;
 										 }	 
@@ -91,6 +97,11 @@
 								 });
 						};
 					//End of change app
+						
+					$scope.changeDate = function() {
+						$scope.apartmentsel.type = "0";
+						$scope.roombill = [];
+					};	
 			}];
 		}
 )();

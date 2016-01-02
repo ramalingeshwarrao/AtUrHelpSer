@@ -20,8 +20,8 @@
 	<div class="form-inline datepickerdemoBasicUsage" >
 			<fieldset >
 			<md-content>
-    		<md-datepicker style="float: left" ng-model="fromDate" md-placeholder="From Date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
-    		<md-datepicker style="float: left" ng-model="toDate" md-placeholder="TO Date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+    		<md-datepicker style="float: left" ng-model="fromDate" md-placeholder="From Date" md-min-date="minDate" md-max-date="maxDate" ng-change="changeDate()"></md-datepicker>
+    		<md-datepicker style="float: left" ng-model="toDate" md-placeholder="TO Date" md-min-date="minDate" md-max-date="maxDate" ng-change="changeDate()"></md-datepicker>
 			</md-content>
 			</fieldset>
 	</div>

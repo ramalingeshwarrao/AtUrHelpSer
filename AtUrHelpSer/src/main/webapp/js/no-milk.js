@@ -19,27 +19,36 @@
 				  
 				  //Submit function
 				  $scope.submit = function() {
+					  
+					  if ($scope.flatNosel == undefined || $scope.flatNosel.type == undefined || $scope.flatNosel.type == "0" || $scope.apartmentsel.type == undefined || $scope.apartmentsel.type == "0") {
+							alert("Please select FlatNo");
+							return;
+						}
 
-						$scope.loading = true;
+						
 						var fromDate = $scope.fromDate;
 						var toDate = $scope.toDate;
-						if (fromDate == undefined) {
+						if (fromDate == undefined || fromDate == "") {
 							alert("Please select from From Date");
 							return;
 						}
-						var fDate = moment($scope.fromDate).format('MM/DD/YYYY');
-						if (toDate == undefined) {
-							toDate = "";
+						var fDate = moment(fromDate).format('MM/DD/YYYY');
+						var tDate = "";
+						if (toDate == undefined || toDate == "") {
+							tDate = "";
 						} else {
-							toDate = moment(toDate).format('MM/DD/YYYY');							
+							tDate = moment(toDate).format('MM/DD/YYYY');							
 						}
-						
+						if (toDate != "" && fromDate > toDate) {
+							alert("From Date must be less than To Date");
+							return;
+						}
 						$scope.nomilk = {
 							"fromdate" : fDate,
-							"todate" : toDate,
+							"todate" : tDate,
 							"rid" : $scope.flatNosel.type
 						};
-						
+						$scope.loading = true;
 						// create http post request
 						$http(
 								{
@@ -53,6 +62,9 @@
 									$scope.loading = false;
 							if (data.status == 0) {
 								alert("succesfuly inserted");
+								$scope.fromDate = "";
+								$scope.toDate = "";
+								
 							} else {
 								alert("fail to insert record");
 							}
@@ -130,6 +142,13 @@
 						$scope.flatnodetailsFun(id);
 					};
 					//End of change app
+					
+					//change of flatno
+					$scope.flatchange = function() {
+						$scope.fromDate = "";
+						$scope.toDate = "";
+					};
+					//change of flatno
 			}];
 		}
 )();

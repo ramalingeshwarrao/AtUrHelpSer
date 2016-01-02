@@ -26,6 +26,9 @@
 								$scope.loading = false;
 						if (data.status == 0) {
 							alert("succesfuly inserted");
+							//After succesful insertion empty the fields
+							$scope.subject = "";
+							$scope.route = "";
 						} else {
 							alert("fail to insert record");
 						}

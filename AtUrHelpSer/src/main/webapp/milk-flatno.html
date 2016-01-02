@@ -21,7 +21,10 @@
 		<div class="row">
 			<div class="form-group col-lg-3">
 				<label for="appnamename" style="float: left">Flat No:</label>
-				 <input type="text" class="form-control" name="faltno" ng-model="faltno" placeholder="Enter Flat No" required>
+				 <input type="text" class="form-control" name="faltno" ng-pattern="/^[a-zA-Z0-9]*$/" ng-model="faltno" placeholder="Enter Flat No" required>
+				 <span style="color: red" ng-show="flatform.faltno.$error.pattern">
+				 Please use numbers letters only
+				 </span>
 				 <span style="color: red" ng-show="flatform.faltno.$dirty && flatform.faltno.$invalid">
 				<span ng-show="flatform.faltno.$error.required">
 				Please Enter FlatNo

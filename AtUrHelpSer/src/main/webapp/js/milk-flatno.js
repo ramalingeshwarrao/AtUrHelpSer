@@ -26,6 +26,8 @@
 								$scope.loading = false;
 						if (data.status == 0) {
 							alert("succesfuly inserted");
+							$scope.faltno = "";
+							$scope.apartmentsel.type = "0";
 						} else {
 							alert("fail to insert record");
 						}

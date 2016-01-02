@@ -27,6 +27,9 @@
 								$scope.loading = false;
 						if (data.status == 0) {
 							alert("succesfuly inserted");
+							$scope.subject = "";
+							$scope.milkid = "";
+							$scope.cost = "";
 						} else {
 							alert("fail to insert record");
 						}

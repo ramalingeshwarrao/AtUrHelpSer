@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="form-group col-lg-3">
 				<label for="subject" style="float: left">Subject:</label>
-				<input type="text" class="form-control" name="subject" ng-model="subject" placeholder="Enter Subject" required>
+				<input type="text" class="form-control" name="subject" ng-model="subject" maxlength="200" placeholder="Enter Subject" required >
 				<span style="color: red" ng-show="routeform.subject.$dirty && routeform.subject.$invalid">
 				<span ng-show="routeform.subject.$error.required">
 				Please Enter Route Subject
@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="form-group col-lg-3">
 				<label for="routename" style="float: left">Route Name:</label>
-				 <input type="text" class="form-control" name="route" ng-model="route" placeholder="Enter Route Name" required>
+				 <input type="text" class="form-control" name="route" ng-model="route" maxlength="10" placeholder="Enter Route Name" required>
 				 <span style="color: red" ng-show="routeform.route.$dirty && routeform.route.$invalid">
 				<span ng-show="routeform.route.$error.required">
 				Please Enter Route Id

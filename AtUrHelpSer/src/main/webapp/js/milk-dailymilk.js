@@ -89,6 +89,11 @@
 		};
 		// End of get milk data
 		
+		$scope.changeDate = function() {
+			 $scope.routesel.type = "0";
+			 $scope.getflatdata = "";
+		};
+		
 	}];
 
 })();
