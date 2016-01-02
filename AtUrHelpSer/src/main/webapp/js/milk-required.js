@@ -47,6 +47,11 @@
 									$scope.loading = false;
 							if (data.status == 0) {
 								alert("succesfuly Update");
+								 $scope.isShow = false;
+								 $scope.apartmentsel.type = "0";
+								 $scope.flatNosel.type = "0";
+								 $scope.toDate = "";
+								
 							} else {
 								alert("fail to update record");
 							}
@@ -147,6 +152,9 @@
 								 } else {
 									 $scope.isShow = false;
 									 alert("No Record Found");
+									 $scope.apartmentsel.type = "0";
+									 $scope.flatNosel.type = "0";
+									 
 								 }
 							 }).error(function(data, status, headers, config) {
 							 	alert("Fail to get route details, contact administrator for support");

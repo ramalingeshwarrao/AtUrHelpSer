@@ -114,8 +114,13 @@
 					$scope.events.length = 0;
 					for (var i=0 ; i < eventObj.length ; i++) {
 						var fromDateObj =  moment(eventObj[i].date, "YYYY-MM-DD").toDate();
-						var toDateObj =  moment(eventObj[i].todate, "YYYY-MM-DD").toDate();
-						toDateObj = new Date(toDateObj.getFullYear(), toDateObj.getMonth(), toDateObj.getDate()+1);
+						var toDateObj =  "";
+						if (eventObj[i].todate == undefined) {
+							toDateObj = new Date(fromDateObj.getFullYear()+2, fromDateObj.getMonth(), fromDateObj.getDate()+1);  
+						} else {
+							toDateObj =  moment(eventObj[i].todate, "YYYY-MM-DD").toDate();
+							toDateObj = new Date(toDateObj.getFullYear(), toDateObj.getMonth(), toDateObj.getDate()+1);
+						}
 						$scope.events.push({
 							title: 'No Milk',
 							start: fromDateObj,

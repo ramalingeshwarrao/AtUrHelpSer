@@ -60,7 +60,7 @@ public class SQLQuery {
 	public static final String VALIDATE_RANGE_IN_RANGE = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate >= ? AND todate <= ? AND isUpdated=1";
 	public static final String NO_MILK_FIRST_CASE_IF_TO_DATE_NULL = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate >=? ";
 	public static final String NO_MILK_SECOND_CASE = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate <=? AND todate >= ? AND isUpdated=?";
-	public static final String GET_ALL_NO_MILK_BY_ROOM_ID_APP_ID = "select ma.name, mfn.room_id, mn.fromdate, mn.todate from milk_nomilk mn INNER JOIN milk_flat_no mfn ON mn.rid = mfn.id INNER JOIN milk_appartment ma ON ma.id = mfn.app_id WHERE ma.id=? AND mfn.id=?;";
+	public static final String GET_ALL_NO_MILK_BY_ROOM_ID_APP_ID = "select ma.name, mfn.room_id, mn.fromdate, mn.todate from milk_nomilk mn INNER JOIN milk_flat_no mfn ON mn.rid = mfn.id INNER JOIN milk_appartment ma ON ma.id = mfn.app_id WHERE ma.id=? AND mfn.id=?";
 	public static final String GET_MILK_COST_BY_APP_ID = "select mfn.id, mfn.room_id, sum(cost) as cost, count(1) as quantity from milk_flat_no mfn inner join milk_room mr on mfn.id = mr.room_id inner join milk_packats mp on mp.id = mr.milk_id inner join milk_appartment ma on ma.id = mfn.app_id where app_id=? group by mfn.room_id order by mfn.room_id";
 	public static final String GET_NO_MILK_FOR_COST_BY_RID = "select fromdate, todate from milk_nomilk where fromdate >= ? and fromdate <= ? and rid=?";
 	public static final String GET_NO_MILK_FOR_COST_BY_RID_NULL = "select * from milk_nomilk where todate is null and rid=?";

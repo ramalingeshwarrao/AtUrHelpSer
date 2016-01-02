@@ -135,7 +135,7 @@
 			<li style="float: right"><a href="javascript:formSubmit()"><span>Logout</span></a></li>
 			<li style="float: right"><a href='#'>Welcome : ${pageContext.request.userPrincipal.name} | </a></li>
 			</c:if>
-			<li class='has-sub' style="float: right"><a href='#'><span>Profile</span></a>
+			<li class='has-sub' style="float: right"><a href='#' onclick="return false;"><span>Profile</span></a>
 				<ul>
 					<li><a href='#providerprofile'><span>View Profile</span></a></li>
 					<li><a href='#providerclosecomplaints'><span>Change Password</span></a></li>
