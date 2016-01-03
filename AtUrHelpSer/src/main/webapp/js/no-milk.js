@@ -5,17 +5,6 @@
 			
 			$PROVIDER.NoMilkController = ['$scope', '$http', function ($scope, $http) {
 				
-				$scope.myDate = new Date();
-
-				  $scope.minDate = new Date(
-				      $scope.myDate.getFullYear(),
-				      $scope.myDate.getMonth(),
-				      $scope.myDate.getDate());
-
-				  $scope.maxDate = new Date(
-				      $scope.myDate.getFullYear()+2,
-				      $scope.myDate.getMonth() ,
-				      $scope.myDate.getDate());
 				  
 				  //Submit function
 				  $scope.submit = function() {

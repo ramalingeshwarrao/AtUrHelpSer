@@ -13,7 +13,6 @@
 			headerItems.push('Flat No');
 			headerItems.push('Milk');
 			headerItems.push('Quantity');
-			headerItems.push('Cost');
 			printitems.addHeaderItems(headerItems);
 			printitems.addBodyItems($scope.getflatdata);
 			

@@ -27,9 +27,11 @@
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 	
+	<!-- 
 	<listener>
 		<listener-class>com.aturhelp.listener.AtUrHelpContextListener</listener-class>    
 	</listener>
+	 -->
 	 
 	<!-- jersey webapplication -->
 	<servlet>
