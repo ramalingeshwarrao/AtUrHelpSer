@@ -306,6 +306,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 						public GetFlatsData mapRow(ResultSet rs, int rowNum)
 								throws SQLException {
 							GetFlatsData flatsData = new GetFlatsData();
+							flatsData.setAppartmentSubject(rs.getString("appsubject"));
 							flatsData.setAppartmentName(rs.getString("name"));
 							flatsData.setRoomId(rs.getString("room_id"));
 							flatsData.setRouteName(rs.getString("route_id"));
@@ -450,6 +451,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 						public GetFlatsData mapRow(ResultSet rs, int rowNum)
 								throws SQLException {
 							GetFlatsData flatsData = new GetFlatsData();
+							flatsData.setAppartmentSubject(rs.getString("appsubject"));
 							flatsData.setAppartmentName(rs.getString("name"));
 							flatsData.setRoomId(rs.getString("room_id"));
 							flatsData.setRouteName(rs.getString("route_id"));

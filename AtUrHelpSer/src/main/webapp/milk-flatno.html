@@ -13,8 +13,15 @@
 		</div>
 		<div class="row">
 			<div class="form-group col-lg-3">
+				<label for="flatform" style="float: left">Route:</label>
+				<select ng-model="routesel.type" ng-options="r.id as r.routeid for r in routedetails" class="form-control" ng-change="changeRoute(routesel.type)">
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-lg-3">
 				<label for="appnamename" style="float: left">Apartment Name:</label>
-				<select ng-model="apartmentsel.type" ng-options="a.id as a.appname for a in apartmentdetails" class="form-control">
+				<select ng-model="apartmentsel.type" ng-options="a.id as a.appsubject for a in apartmentdetails" class="form-control">
 				</select>
 			</div>
 		</div>

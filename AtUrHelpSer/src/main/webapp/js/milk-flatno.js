@@ -35,12 +35,12 @@
 
 				};
 				
-				//Get route details
-				$scope.apartmentdetails = function() {
+				//Get apartment details
+				$scope.apartmentdetailsFun = function(id) {
 					$http (
 						 {
 							 method :  'GET',
-							 url : $PROVIDER.providerMilkRest+'/appartmentdetails',
+							 url : $PROVIDER.providerMilkRest+'/appartmentdetails?route_id='+id+'',
 							 headers : {
 									'Content-Type' : 'application/json'
 								}
@@ -64,8 +64,49 @@
 						 	alert("Fail to get route details, contact administrator for support");
 						 });
 				};
+				// End of apartment details
+				
+				//Change Route
+				$scope.changeRoute = function(id) {
+					$scope.apartmentdetailsFun(id);
+				};
+				//End of change route
+				
+				//Get route details
+				$scope.routedetails = function() {
+					$http (
+						 {
+							 method :  'GET',
+							 url : $PROVIDER.providerMilkRest+'/routedetails',
+							 headers : {
+									'Content-Type' : 'application/json'
+								}
+						 }).success(function(data) {
+							 if (data != "") {
+								 if (data.route.length == undefined) {
+									 $scope.routedetailsArray = [];
+									 $scope.routedetailsArray[0] = data.route;
+									 $scope.routedetails = $scope.routedetailsArray;
+									 $scope.routesel = {type : $scope.routedetailsArray[0].id};
+								 } else  {
+									 $scope.routedetails = data.route;
+									 $scope.routesel = {type : $scope.routedetails[0].id};
+								 }	 
+							 } else {
+								 $scope.routedetails = "";
+								 alert("No routes found please create a route and continue");
+								 $location.path( '/milkroute' );
+							 }
+						 }).error(function(data, status, headers, config) {
+						 	alert("Fail to get route details, contact administrator for support");
+						 });
+				};
 				// End of route details
-				$scope.apartmentdetails();
+				$scope.routedetails();
+				
+				
+				
+				
 			}];
 		}
 )();
