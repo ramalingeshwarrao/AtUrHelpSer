@@ -10,6 +10,7 @@
 					  
 				//Get apartment details
 				$scope.apartmentdetailsFun = function() {
+					$scope.loading = true;
 					$http (
 						 {
 							 method :  'GET',
@@ -18,6 +19,7 @@
 									'Content-Type' : 'application/json'
 								}
 						 }).success(function(data) {
+							 $scope.loading = false;
 							 if (data != "") {
 								 if (data.appartment.length == undefined) {
 									 $scope.apartmentdetailsArray = [];
@@ -29,6 +31,7 @@
 									 $scope.apartmentsel = {type : $scope.apartmentdetails[0].id};
 								 }	 
 							 } else {
+								 $scope.loading = false;
 								 $scope.apartmentdetails = "";
 								 alert("No Apartments found please create a Apartment and continue");
 								 $location.path( '/milkappartment' );
@@ -42,6 +45,7 @@
 				
 				//Get flatno details
 				$scope.flatnodetailsFun = function(id) {
+					$scope.loading = true;
 					$http (
 						 {
 							 method :  'GET',
@@ -50,6 +54,7 @@
 									'Content-Type' : 'application/json'
 								}
 						 }).success(function(data) {
+							 $scope.loading = false;
 							 if (data != "") {
 								 if (data.flat.length == undefined) {
 									 $scope.flatNodetailsArray = [];
@@ -66,6 +71,7 @@
 								 $location.path( '/milkflatno' );
 							 }
 						 }).error(function(data, status, headers, config) {
+							 $scope.loading = false;
 						 	alert("Fail to get route details, contact administrator for support");
 						 });
 				};

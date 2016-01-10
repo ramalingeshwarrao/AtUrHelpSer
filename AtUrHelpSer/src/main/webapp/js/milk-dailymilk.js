@@ -21,6 +21,7 @@
 		//end of print
 		//Get route details
 		$scope.routedetails = function() {
+			$scope.loading = true;
 			$http (
 				 {
 					 method :  'GET',
@@ -29,6 +30,7 @@
 							'Content-Type' : 'application/json'
 						}
 				 }).success(function(data) {
+					 $scope.loading = false;
 					 if (data != "") {
 						 if (data.route.length == undefined) {
 							 $scope.routedetailsArray = [];
@@ -45,6 +47,7 @@
 						 $location.path( '/milkroute' );
 					 }
 				 }).error(function(data, status, headers, config) {
+					$scope.loading = false;
 				 	alert("Fail to get route details, contact administrator for support");
 				 });
 		};
@@ -53,6 +56,7 @@
 		
 		//Get milk data
 		$scope.dailymilkdata = function (rid) {
+			$scope.loading = true;
 			
 			var fromDate = $scope.supplyDate;
 			if (fromDate == undefined) {

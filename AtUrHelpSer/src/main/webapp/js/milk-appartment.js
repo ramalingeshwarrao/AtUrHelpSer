@@ -36,6 +36,7 @@
 							$scope.appname = "";
 							$scope.routesel.type = "0";
 						} else {
+							$scope.loading = false;
 							alert("fail to insert record");
 						}
 					});
@@ -44,6 +45,7 @@
 				
 				//Get route details
 				$scope.routedetails = function() {
+					$scope.loading = true;
 					$http (
 						 {
 							 method :  'GET',
@@ -52,6 +54,7 @@
 									'Content-Type' : 'application/json'
 								}
 						 }).success(function(data) {
+							 $scope.loading = false;
 							 if (data != "") {
 								 if (data.route.length == undefined) {
 									 $scope.routedetailsArray = [];
@@ -68,6 +71,7 @@
 								 $location.path( '/milkroute' );
 							 }
 						 }).error(function(data, status, headers, config) {
+							$scope.loading = false;
 						 	alert("Fail to get route details, contact administrator for support");
 						 });
 				};

@@ -8,6 +8,7 @@
 				  
 				//Get apartment details
 					$scope.apartmentdetailsFun = function() {
+						$scope.loading = true;
 						$http (
 							 {
 								 method :  'GET',
@@ -16,6 +17,7 @@
 										'Content-Type' : 'application/json'
 									}
 							 }).success(function(data) {
+								 $scope.loading = false;
 								 if (data != "") {
 									 if (data.appartment.length == undefined) {
 										 $scope.apartmentdetailsArray = [];
@@ -32,6 +34,7 @@
 									 $location.path( '/milkappartment' );
 								 }
 							 }).error(function(data, status, headers, config) {
+								$scope.loading = false;
 							 	alert("Fail to get route details, contact administrator for support");
 							 });
 					};
@@ -58,6 +61,8 @@
 							return;
 						}
 						
+						$scope.loading = true;
+						
 						var fDate = moment($scope.fromDate).format('MM/DD/YYYY');
 						var tDate = moment($scope.toDate).format('MM/DD/YYYY');
 						
@@ -69,6 +74,7 @@
 											'Content-Type' : 'application/json'
 										}
 								 }).success(function(data) {
+									 $scope.loading = false;
 									 if (data != "") {
 										 if (data.roombill.length == undefined) {
 											 $scope.roombillArray = [];
@@ -82,6 +88,7 @@
 										 alert("No records found please create a Apartment and continue");
 									 }
 								 }).error(function(data, status, headers, config) {
+									$scope.loading = false;
 								 	alert("Fail to get bill details, contact administrator for support");
 								 });
 						};

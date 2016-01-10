@@ -237,6 +237,7 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 		// Get All data
 		List<NoMilkCost> milkCostDetails = getMilkCostForAllFlatByApp(appId);
 		List<RoomBill> roomBillList = new ArrayList<RoomBill>();
+		if (milkCostDetails != null) {
 		for (NoMilkCost noMilkCost : milkCostDetails) {
 			RoomBill rB = new RoomBill();
 			Integer id = noMilkCost.getId();
@@ -291,6 +292,7 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 			}
 			rB.setCost(totalCost);
 			roomBillList.add(rB);
+		}
 		}
 		return roomBillList;
 	}

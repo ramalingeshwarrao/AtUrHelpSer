@@ -76,6 +76,7 @@
 				
 				//Get apartment details
 				$scope.apartmentdetailsFun = function(id) {
+					$scope.loading = true;
 					$http (
 						 {
 							 method :  'GET',
@@ -85,6 +86,7 @@
 								}
 						 }).success(function(data) {
 							 if (data != "") {
+								 $scope.loading = false;
 								 if (data.appartment.length == undefined) {
 									 $scope.apartmentdetailsArray = [];
 									 $scope.apartmentdetailsArray[0] = data.appartment;
@@ -95,6 +97,7 @@
 									 $scope.apartmentsel = {type : $scope.apartmentdetails[0].id};
 								 }	 
 							 } else {
+								 $scope.loading = false;
 								 $scope.apartmentdetails = "";
 								 alert("No Apartments found please create a Apartment and continue");
 								 $location.path( '/milkappartment' );
@@ -119,6 +122,7 @@
 				
 				//Get route details
 				$scope.routedetails = function() {
+					$scope.loading = true;
 					$http (
 						 {
 							 method :  'GET',
@@ -127,6 +131,7 @@
 									'Content-Type' : 'application/json'
 								}
 						 }).success(function(data) {
+							 $scope.loading = false;
 							 if (data != "") {
 								 if (data.route.length == undefined) {
 									 $scope.routedetailsArray = [];
@@ -138,6 +143,7 @@
 									 $scope.routesel = {type : $scope.routedetails[0].id};
 								 }	 
 							 } else {
+								 $scope.loading = false;
 								 $scope.routedetails = "";
 								 alert("No routes found please create a route and continue");
 								 $location.path( '/milkroute' );
