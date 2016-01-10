@@ -10,7 +10,7 @@
 				  $scope.submit = function() {
 					  
 					  if ($scope.flatNosel == undefined || $scope.flatNosel.type == undefined || $scope.flatNosel.type == "0" || $scope.apartmentsel.type == undefined || $scope.apartmentsel.type == "0") {
-							alert("Please select FlatNo");
+						  BootstrapDialog.alert("Please select FlatNo");
 							return;
 						}
 
@@ -18,7 +18,7 @@
 						var fromDate = $scope.fromDate;
 						var toDate = $scope.toDate;
 						if (fromDate == undefined || fromDate == "") {
-							alert("Please select from From Date");
+							BootstrapDialog.alert("Please select from From Date");
 							return;
 						}
 						var fDate = moment(fromDate).format('MM/DD/YYYY');
@@ -29,7 +29,7 @@
 							tDate = moment(toDate).format('MM/DD/YYYY');							
 						}
 						if (toDate != "" && fromDate > toDate) {
-							alert("From Date must be less than To Date");
+							BootstrapDialog.alert("From Date must be less than To Date");
 							return;
 						}
 						$scope.nomilk = {
@@ -50,12 +50,12 @@
 								}).success(function(data) {
 									$scope.loading = false;
 							if (data.status == 0) {
-								alert("succesfuly inserted");
+								BootstrapDialog.alert("succesfuly inserted");
 								$scope.fromDate = "";
 								$scope.toDate = "";
 								
 							} else {
-								alert("fail to insert record");
+								BootstrapDialog.alert("fail to insert record");
 							}
 						});
 
@@ -86,12 +86,12 @@
 									 }	 
 								 } else {
 									 $scope.apartmentdetails = "";
-									 alert("No Apartments found please create a Apartment and continue");
+									 BootstrapDialog.alert("No Apartments found please create a Apartment and continue");
 									 $location.path( '/milkappartment' );
 								 }
 							 }).error(function(data, status, headers, config) {
 								$scope.loading = false;
-							 	alert("Fail to get route details, contact administrator for support");
+								BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 							 });
 					};
 				  // End of apartment details
@@ -120,11 +120,11 @@
 									 }	 
 								 } else {
 									 $scope.apartmentdetails = "";
-									 alert("No Flats found please create a Flat and continue");
+									 BootstrapDialog.alert("No Flats found please create a Flat and continue");
 									 $location.path( '/milkflatno' );
 								 }
 							 }).error(function(data, status, headers, config) {
-							 	alert("Fail to get route details, contact administrator for support");
+								 BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 							 });
 					};
 					// End of flat details

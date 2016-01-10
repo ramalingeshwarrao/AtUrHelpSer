@@ -12,7 +12,7 @@
 						$scope.loading = true;
 						var toDate = $scope.toDate;
 						if (toDate == undefined) {
-							alert("Please select from To Date");
+							BootstrapDialog.alert("Please select from To Date");
 							return;
 						}
 						toDate = moment(toDate).format('MM/DD/YYYY');
@@ -34,14 +34,14 @@
 								}).success(function(data) {
 									$scope.loading = false;
 							if (data.status == 0) {
-								alert("succesfuly Update");
+								BootstrapDialog.alert("succesfuly Update");
 								 $scope.isShow = false;
 								 $scope.apartmentsel.type = "0";
 								 $scope.flatNosel.type = "0";
 								 $scope.toDate = "";
 								
 							} else {
-								alert("fail to update record");
+								BootstrapDialog.alert("fail to update record");
 							}
 						});
 
@@ -72,12 +72,12 @@
 									 }	 
 								 } else {
 									 $scope.apartmentdetails = "";
-									 alert("No Apartments found please create a Apartment and continue");
+									 BootstrapDialog.alert("No Apartments found please create a Apartment and continue");
 									 $location.path( '/milkappartment' );
 								 }
 							 }).error(function(data, status, headers, config) {
 								$scope.loading = false;
-							 	alert("Fail to get route details, contact administrator for support");
+								BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 							 });
 					};
 				  // End of apartment details
@@ -108,12 +108,12 @@
 									 }	 
 								 } else {
 									 $scope.apartmentdetails = "";
-									 alert("No Flats found please create a Flat and continue");
+									 BootstrapDialog.alert("No Flats found please create a Flat and continue");
 									 $location.path( '/milkflatno' );
 								 }
 							 }).error(function(data, status, headers, config) {
 								$scope.loading = false;
-							 	alert("Fail to get route details, contact administrator for support");
+								BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 							 });
 					};
 					// End of flat details
@@ -145,13 +145,13 @@
 									 $scope.date = data.date;
 								 } else {
 									 $scope.isShow = false;
-									 alert("No Record Found");
+									 BootstrapDialog.alert("No Record Found");
 									 $scope.apartmentsel.type = "0";
 									 $scope.flatNosel.type = "0";
 									 
 								 }
 							 }).error(function(data, status, headers, config) {
-							 	alert("Fail to get route details, contact administrator for support");
+								 BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 							 });
 					
 						

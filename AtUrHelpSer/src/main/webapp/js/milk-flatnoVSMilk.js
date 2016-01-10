@@ -35,9 +35,9 @@
 							}).success(function(data) {
 								$scope.loading = false;
 						if (data.status == 0) {
-							alert("succesfuly inserted");
+							BootstrapDialog.alert("succesfuly inserted");
 						} else {
-							alert("fail to insert record");
+							BootstrapDialog.alert("fail to insert record");
 						}
 					});
 
@@ -65,11 +65,11 @@
 								 }	 
 							 } else {
 								 $scope.apartmentdetails = "";
-								 alert("No Flats found please create a Flat and continue");
+								 BootstrapDialog.alert("No Flats found please create a Flat and continue");
 								 $location.path( '/milkflatno' );
 							 }
 						 }).error(function(data, status, headers, config) {
-						 	alert("Fail to get route details, contact administrator for support");
+							 BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 						 });
 				};
 				// End of flat details
@@ -99,11 +99,11 @@
 							 } else {
 								 $scope.loading = false;
 								 $scope.apartmentdetails = "";
-								 alert("No Apartments found please create a Apartment and continue");
+								 BootstrapDialog.alert("No Apartments found please create a Apartment and continue");
 								 $location.path( '/milkappartment' );
 							 }
 						 }).error(function(data, status, headers, config) {
-						 	alert("Fail to get route details, contact administrator for support");
+							 BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 						 });
 				};
 				// End of apartment details
@@ -145,11 +145,11 @@
 							 } else {
 								 $scope.loading = false;
 								 $scope.routedetails = "";
-								 alert("No routes found please create a route and continue");
+								 BootstrapDialog.alert("No routes found please create a route and continue");
 								 $location.path( '/milkroute' );
 							 }
 						 }).error(function(data, status, headers, config) {
-						 	alert("Fail to get route details, contact administrator for support");
+							 BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 						 });
 				};
 				// End of route details
@@ -177,11 +177,11 @@
 								 }	 
 							 } else {
 								 $scope.milkdetails = "";
-								 alert("No milk packets found please create a milk packets and continue");
+								 BootstrapDialog.alert("No milk packets found please create a milk packets and continue");
 								 $location.path( '/milkroute' );
 							 }
 						 }).error(function(data, status, headers, config) {
-						 	alert("Fail to get route details, contact administrator for support");
+							 BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 						 });
 				};
 				//End of Packet details

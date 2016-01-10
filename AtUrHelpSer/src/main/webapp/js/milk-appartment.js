@@ -8,7 +8,7 @@
 				$scope.submit = function() {
 
 					if ($scope.routesel.type == undefined || $scope.routesel.type == "0") {
-						alert("Please select route");
+						BootstrapDialog.alert("Please select route");
 						return;
 					}
 					
@@ -31,13 +31,13 @@
 							}).success(function(data) {
 								$scope.loading = false;
 						if (data.status == 0) {
-							alert("succesfuly inserted");
+							 BootstrapDialog.alert("succesfuly inserted");
 							$scope.subject = "";
 							$scope.appname = "";
 							$scope.routesel.type = "0";
 						} else {
 							$scope.loading = false;
-							alert("fail to insert record");
+							BootstrapDialog.alert("fail to insert record");
 						}
 					});
 
@@ -67,12 +67,12 @@
 								 }	 
 							 } else {
 								 $scope.routedetails = "";
-								 alert("No routes found please create a route and continue");
+								 BootstrapDialog.alert("No routes found please create a route and continue");
 								 $location.path( '/milkroute' );
 							 }
 						 }).error(function(data, status, headers, config) {
 							$scope.loading = false;
-						 	alert("Fail to get route details, contact administrator for support");
+							BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 						 });
 				};
 				// End of route details

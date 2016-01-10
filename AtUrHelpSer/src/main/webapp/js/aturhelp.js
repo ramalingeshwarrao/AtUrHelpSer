@@ -7,7 +7,7 @@
 				$scope.username = "";
 				$scope.pass = "";
 				$scope.login = function() {
-					alert("inside the login method 1234345");
+					BootstrapDialog.alert("inside the login method 1234345");
 				};
 			}];
 		}

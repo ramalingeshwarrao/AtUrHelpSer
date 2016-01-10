@@ -30,12 +30,12 @@
 									 }	 
 								 } else {
 									 $scope.apartmentdetails = "";
-									 alert("No Apartments found please create a Apartment and continue");
+									 BootstrapDialog.alert("No Apartments found please create a Apartment and continue");
 									 $location.path( '/milkappartment' );
 								 }
 							 }).error(function(data, status, headers, config) {
 								$scope.loading = false;
-							 	alert("Fail to get route details, contact administrator for support");
+								BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 							 });
 					};
 				  // End of apartment details
@@ -48,16 +48,16 @@
 						var fromDate = $scope.fromDate;
 						var toDate = $scope.toDate;
 						if (fromDate == undefined) {
-							alert("Please select from From Date");
+							BootstrapDialog.alert("Please select from From Date");
 							return;
 						}
 						if (toDate == undefined) {
-							alert("Please select from To Date");
+							BootstrapDialog.alert("Please select from To Date");
 							return;
 						}
 						
 						if (fromDate > toDate) {
-							alert("From Date must be less than To Date");
+							BootstrapDialog.alert("From Date must be less than To Date");
 							return;
 						}
 						
@@ -85,11 +85,11 @@
 										 }	 
 									 } else {
 										 $scope.roombill = "";
-										 alert("No records found please create a Apartment and continue");
+										 BootstrapDialog.alert("No records found please create a Apartment and continue");
 									 }
 								 }).error(function(data, status, headers, config) {
 									$scope.loading = false;
-								 	alert("Fail to get bill details, contact administrator for support");
+									BootstrapDialog.alert("Fail to get bill details, contact administrator for support");
 								 });
 						};
 					//End of change app

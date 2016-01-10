@@ -26,12 +26,12 @@
 							}).success(function(data) {
 								$scope.loading = false;
 						if (data.status == 0) {
-							alert("succesfuly inserted");
+							BootstrapDialog.alert("succesfuly inserted");
 							$scope.subject = "";
 							$scope.milkid = "";
 							$scope.cost = "";
 						} else {
-							alert("fail to insert record");
+							BootstrapDialog.alert("fail to insert record");
 						}
 					});
 

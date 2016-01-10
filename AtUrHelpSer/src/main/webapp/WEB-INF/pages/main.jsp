@@ -7,7 +7,9 @@
 <meta name="description" content="This is aturhelp style web pag" />
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
 <link rel="stylesheet" type="text/css" href="css/aturhelp.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
 <script type="text/javascript" src="js/angular.min.js"></script>
 <script type="text/javascript" src="js/angular-route.min.js"></script>
@@ -25,14 +27,13 @@
 
 </head>
 <body ng-app="MainModule">
-  <center>
+<div class="main">
      <div ng-include="'header.html'"></div> 
      <div ng-view>
      ..loading
      </div>
-     </div>
      
      <div ng-include="'footer.html'"></div> 
-  </center>
+</div>
 </body>
 </html>

@@ -43,12 +43,12 @@
 						 }	 
 					 } else {
 						 $scope.routedetails = "";
-						 alert("No routes found please create a route and continue");
+						 BootstrapDialog.alert("No routes found please create a route and continue");
 						 $location.path( '/milkroute' );
 					 }
 				 }).error(function(data, status, headers, config) {
 					$scope.loading = false;
-				 	alert("Fail to get route details, contact administrator for support");
+					BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 				 });
 		};
 		// End of route details
@@ -60,7 +60,7 @@
 			
 			var fromDate = $scope.supplyDate;
 			if (fromDate == undefined) {
-				alert("Please select from From Date");
+				BootstrapDialog.alert("Please select from From Date");
 				return;
 			}
 			var fDate = moment($scope.supplyDate).format('MM/DD/YYYY');

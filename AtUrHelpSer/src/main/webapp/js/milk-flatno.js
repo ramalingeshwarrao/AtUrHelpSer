@@ -25,11 +25,11 @@
 							}).success(function(data) {
 								$scope.loading = false;
 						if (data.status == 0) {
-							alert("succesfuly inserted");
+							BootstrapDialog.alert("succesfuly inserted");
 							$scope.faltno = "";
 							$scope.apartmentsel.type = "0";
 						} else {
-							alert("fail to insert record");
+							BootstrapDialog.alert("fail to insert record");
 						}
 					});
 
@@ -60,11 +60,11 @@
 							 } else {
 								 $scope.loading = false;
 								 $scope.apartmentdetails = "";
-								 alert("No Apartments found please create a Apartment and continue");
+								 BootstrapDialog.alert("No Apartments found please create a Apartment and continue");
 								 $location.path( '/milkappartment' );
 							 }
 						 }).error(function(data, status, headers, config) {
-						 	alert("Fail to get route details, contact administrator for support");
+							 BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 						 });
 				};
 				// End of apartment details
@@ -97,11 +97,11 @@
 								 }	 
 							 } else {
 								 $scope.routedetails = "";
-								 alert("No routes found please create a route and continue");
+								 BootstrapDialog.alert("No routes found please create a route and continue");
 								 $location.path( '/milkroute' );
 							 }
 						 }).error(function(data, status, headers, config) {
-						 	alert("Fail to get route details, contact administrator for support");
+							 BootstrapDialog.alert("Fail to get route details, contact administrator for support");
 						 });
 				};
 				// End of route details

@@ -28,13 +28,13 @@
 				 }		
 			).success(function(data) {
 				if (data.status == 0) {
-					alert("succesfuly Updated");
+					BootstrapDialog.alert("succesfuly Updated");
 					//refresh page
 					//$scope.logdatacount($scope.providerName, $scope.userType, $scope.userName);
 					$scope.wat();
 				} else {
 					$scope.loading = false;
-					alert("fail to update record");
+					BootstrapDialog.alert("fail to update record");
 				}
 			});
 		};
