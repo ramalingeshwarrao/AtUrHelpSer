@@ -13,6 +13,8 @@ import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.aturhelp.common.AdminInfo;
 import com.aturhelp.common.Help;
@@ -127,6 +129,12 @@ public class AtUrHelpUtils {
 		Date actualDate = actualDateFormat.parse(date);
 		String formattedDate = newDateFormat.format(actualDate);
 		return formattedDate;
+	}
+	
+	public static String getLoggedUserName() {
+		Authentication authObj = SecurityContextHolder.getContext().getAuthentication();
+		String providerName = authObj.getName();
+		return providerName;
 	}
 	
 	public static void main(String[] args) {

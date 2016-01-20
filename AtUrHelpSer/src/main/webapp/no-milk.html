@@ -11,6 +11,13 @@
 				No Milk
 			</h3>
 		</div>
+	</div>
+	<div class="row">
+			<div class="form-group col-lg-3">
+				<label for="appnamename" style="float: left">Route:</label>
+				<select ng-model="routesel.type" ng-options="r.id as r.routeid for r in routedetails" class="form-control" ng-change="changeRoute(routesel.type)">
+				</select>
+			</div>
 	</div>	
 	<div class="row">
 			<div class="form-group col-lg-3">

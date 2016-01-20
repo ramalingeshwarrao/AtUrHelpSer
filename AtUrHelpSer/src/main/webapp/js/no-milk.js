@@ -61,14 +61,56 @@
 
 					};
 				  //End of submit function
-				  
-				//Get apartment details
-					$scope.apartmentdetailsFun = function() {
+					
+					//Get route details
+					$scope.routedetails = function() {
 						$scope.loading = true;
 						$http (
 							 {
 								 method :  'GET',
-								 url : $PROVIDER.providerMilkRest+'/appartmentdetails',
+								 url : $PROVIDER.providerMilkRest+'/routedetails',
+								 headers : {
+										'Content-Type' : 'application/json'
+									}
+							 }).success(function(data) {
+								 $scope.loading = false;
+								 if (data != "") {
+									 if (data.route.length == undefined) {
+										 $scope.routedetailsArray = [];
+										 $scope.routedetailsArray[0] = data.route;
+										 $scope.routedetails = $scope.routedetailsArray;
+										 $scope.routesel = {type : $scope.routedetailsArray[0].id};
+									 } else  {
+										 $scope.routedetails = data.route;
+										 $scope.routesel = {type : $scope.routedetails[0].id};
+									 }	 
+								 } else {
+									 $scope.routedetails = "";
+									 BootstrapDialog.alert("No routes found please create a route and continue");
+									 $location.path( '/milkroute' );
+								 }
+							 }).error(function(data, status, headers, config) {
+								$scope.loading = false;
+								BootstrapDialog.alert("Fail to get route details, contact administrator for support");
+							 });
+					};
+					// End of route details
+					$scope.routedetails();	
+				  
+					//Change Route
+					$scope.changeRoute = function(id) {
+						$scope.apartmentdetailsFun(id);
+					};
+					//End of change route
+					
+					
+				//Get apartment details
+					$scope.apartmentdetailsFun = function(id) {
+						$scope.loading = true;
+						$http (
+							 {
+								 method :  'GET',
+								 url : $PROVIDER.providerMilkRest+'/appartmentdetails?route_id='+id+'',
 								 headers : {
 										'Content-Type' : 'application/json'
 									}
@@ -95,7 +137,6 @@
 							 });
 					};
 				  // End of apartment details
-					$scope.apartmentdetailsFun();
 					
 					
 					//Get flatno details

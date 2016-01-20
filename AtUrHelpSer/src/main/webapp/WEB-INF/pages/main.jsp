@@ -20,10 +20,12 @@
 <script type="text/javascript" src="js/projects.js"></script>
 <script type="text/javascript" src="js/register.js"></script>
 
-
 <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="js/jquery.slide.js"></script>
 
+<script type="text/javascript"
+src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
 
 </head>
 <body ng-app="MainModule">
