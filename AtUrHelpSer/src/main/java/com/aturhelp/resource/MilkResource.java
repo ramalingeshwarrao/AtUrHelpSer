@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.aturhelp.common.Help;
 import com.aturhelp.common.UserInfo;
 import com.aturhelp.common.milk.Appartment;
+import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.ListRoomMilk;
@@ -293,5 +294,13 @@ public class MilkResource {
 			LOG.error("Fail to generate bill", e);
 		}
 		return null;
+	}
+	
+	@GET
+	@Path("getconsumedmilk")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<BalanceSheet> getConsumedMilk() {
+		return milkService.getMilkSpendinLts();
 	}
 }

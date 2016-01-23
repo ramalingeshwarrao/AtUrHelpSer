@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.milk.Appartment;
+import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
@@ -62,5 +63,7 @@ public interface MilkDAO {
 	 * @return
 	 */
 	public NoMilk getNoMilkDetailsByIdForNull(NoMilk noMilk);
+	
+	public List<BalanceSheet> getMilkSpendinLts();
 
 }

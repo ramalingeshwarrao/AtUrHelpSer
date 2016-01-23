@@ -111,6 +111,9 @@
 				}).when('/milkbill', {
 					templateUrl : 'milk-bill.html',
 					controller : $PROVIDER.MilkBillController
+				}).when('/milkbalancesheet', {
+					templateUrl : 'milk-balancesheet.html',
+					controller : $PROVIDER.MilkBillController
 				})
 				.otherwise({
 					redirectTo : '/provider'

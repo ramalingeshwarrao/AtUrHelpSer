@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.UserInfo;
 import com.aturhelp.common.milk.Appartment;
+import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
@@ -813,6 +814,32 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			LOG.error("Fail to get firstcase ", e);
 			return false;
 		}
+	}
+
+	@Override
+	public List<BalanceSheet> getMilkSpendinLts() {
+		try {
+			String providerName = AtUrHelpUtils.getLoggedUserName();
+			List<BalanceSheet> list = this.jdbcTemplate.query(
+					SQLQuery.GET_CONSUMED_MILK, new Object[] {providerName},
+					new RowMapper<BalanceSheet>() {
+						@Override
+						public BalanceSheet mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							BalanceSheet balanceSheet = new BalanceSheet();
+							balanceSheet.setCategory(rs.getString("category"));
+							balanceSheet.setCategory(rs.getString("liters"));
+							return balanceSheet;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return	list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get nomilk details by id details", e);
+			return null;
+		}
+		return null;
 	}
 
 }

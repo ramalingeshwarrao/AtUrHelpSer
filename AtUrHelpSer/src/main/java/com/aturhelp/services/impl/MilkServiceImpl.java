@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.milk.Appartment;
+import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
@@ -310,6 +311,11 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public boolean validateRangeInRange(int rid, String fromDate, String toDate) {
 		return milkDAO.validateRangeInRange(rid, fromDate, toDate);
+	}
+
+	@Override
+	public List<BalanceSheet> getMilkSpendinLts() {
+		return milkDAO.getMilkSpendinLts();
 	}
 
 

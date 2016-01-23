@@ -64,5 +64,6 @@ public class SQLQuery {
 	public static final String GET_MILK_COST_BY_APP_ID = "select mfn.id, mfn.room_id, sum(cost) as cost, count(1) as quantity from milk_flat_no mfn inner join milk_room mr on mfn.id = mr.room_id inner join milk_packats mp on mp.id = mr.milk_id inner join milk_appartment ma on ma.id = mfn.app_id where app_id=? AND mfn.provider_id=? group by mfn.room_id order by mfn.room_id";
 	public static final String GET_NO_MILK_FOR_COST_BY_RID = "select fromdate, todate from milk_nomilk where fromdate >= ? and fromdate <= ? and rid=? and provider_id=?";
 	public static final String GET_NO_MILK_FOR_COST_BY_RID_NULL = "select * from milk_nomilk where todate is null and rid=? and provider_id=?";
+	public static final String GET_CONSUMED_MILK = "select category, ROUND(SUM(lts), 2) as liters from milk_packats mp INNER JOIN milk_room mr ON mp.id = mr.milk_id where mp.provider_id=? group by category order by category";
 	
 }
