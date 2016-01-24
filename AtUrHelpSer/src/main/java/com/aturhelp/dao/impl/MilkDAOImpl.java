@@ -817,18 +817,18 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	}
 
 	@Override
-	public List<BalanceSheet> getMilkSpendinLts() {
+	public List<BalanceSheet> getMilkSpendinLts(String strDate) {
 		try {
 			String providerName = AtUrHelpUtils.getLoggedUserName();
 			List<BalanceSheet> list = this.jdbcTemplate.query(
-					SQLQuery.GET_CONSUMED_MILK, new Object[] {providerName},
+					SQLQuery.GET_CONSUMED_MILK, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()),providerName, providerName},
 					new RowMapper<BalanceSheet>() {
 						@Override
 						public BalanceSheet mapRow(ResultSet rs, int rowNum)
 								throws SQLException {
 							BalanceSheet balanceSheet = new BalanceSheet();
 							balanceSheet.setCategory(rs.getString("category"));
-							balanceSheet.setCategory(rs.getString("liters"));
+							balanceSheet.setLiters(rs.getFloat("liters"));
 							return balanceSheet;
 						}
 					});

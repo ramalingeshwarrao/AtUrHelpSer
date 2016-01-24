@@ -65,6 +65,6 @@ public interface MilkService {
 	public NoMilk getNoMilkDetailsByIdForNull(NoMilk noMilk);
 	
 	public List<RoomBill> getFinalCostForRoomByAppId(int appId, String fromDate, String toDate) throws Exception;
-	public List<BalanceSheet> getMilkSpendinLts();
+	public List<BalanceSheet> getMilkSpendinLts(String strDate);
 
 }

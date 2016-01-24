@@ -314,8 +314,8 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	}
 
 	@Override
-	public List<BalanceSheet> getMilkSpendinLts() {
-		return milkDAO.getMilkSpendinLts();
+	public List<BalanceSheet> getMilkSpendinLts(String strDate) {
+		return milkDAO.getMilkSpendinLts(strDate);
 	}
 
 

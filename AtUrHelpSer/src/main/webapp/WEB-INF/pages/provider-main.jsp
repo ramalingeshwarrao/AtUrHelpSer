@@ -41,6 +41,7 @@
 	<script type="text/javascript" src="js/milk-required.js"></script>
 	<script type="text/javascript" src="js/milk-room-status.js"></script>
 	<script type="text/javascript" src="js/milk-bill.js"></script>
+	<script type="text/javascript" src="js/milk-balancesheet.js"></script>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-aria.min.js"></script>

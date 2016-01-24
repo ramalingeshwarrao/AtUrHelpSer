@@ -113,7 +113,7 @@
 					controller : $PROVIDER.MilkBillController
 				}).when('/milkbalancesheet', {
 					templateUrl : 'milk-balancesheet.html',
-					controller : $PROVIDER.MilkBillController
+					controller : $PROVIDER.MilkBalanceSheetController
 				})
 				.otherwise({
 					redirectTo : '/provider'

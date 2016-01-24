@@ -64,6 +64,6 @@ public interface MilkDAO {
 	 */
 	public NoMilk getNoMilkDetailsByIdForNull(NoMilk noMilk);
 	
-	public List<BalanceSheet> getMilkSpendinLts();
+	public List<BalanceSheet> getMilkSpendinLts(String strDate);
 
 }

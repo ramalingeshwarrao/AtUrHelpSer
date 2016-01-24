@@ -297,10 +297,10 @@ public class MilkResource {
 	}
 	
 	@GET
-	@Path("getconsumedmilk")
+	@Path("balancesheetdetails")
 	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
 	@Produces({ MediaType.APPLICATION_JSON })
-	public List<BalanceSheet> getConsumedMilk() {
-		return milkService.getMilkSpendinLts();
+	public List<BalanceSheet> getConsumedMilk(@QueryParam(Constants.DATE) String date) {
+		return milkService.getMilkSpendinLts(date);
 	}
 }
