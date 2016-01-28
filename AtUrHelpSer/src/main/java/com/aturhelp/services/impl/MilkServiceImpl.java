@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
+import com.aturhelp.common.milk.Category;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
@@ -316,6 +317,22 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public List<BalanceSheet> getMilkSpendinLts(String strDate) {
 		return milkDAO.getMilkSpendinLts(strDate);
+	}
+
+	@Override
+	public List<BalanceSheet> getMilkSpendinLtsByRoute(String strDate) {
+		List<BalanceSheet> balanceSheet = milkDAO.getMilkSpendinLtsByRoute(strDate);
+		return balanceSheet;
+	}
+
+	@Override
+	public boolean createCategory(Category cat) {
+		return milkDAO.createCategory(cat);
+	}
+
+	@Override
+	public List<Category> getCategories() {
+		return milkDAO.getCategories();
 	}
 
 

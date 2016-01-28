@@ -42,15 +42,16 @@
 	<script type="text/javascript" src="js/milk-room-status.js"></script>
 	<script type="text/javascript" src="js/milk-bill.js"></script>
 	<script type="text/javascript" src="js/milk-balancesheet.js"></script>
+	<script type="text/javascript" src="js/milk-category.js"></script>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-aria.min.js"></script>
-    <script src="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.js"></script>
+    <script type="text/javascript" src="js/angular-material.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js"></script>
     
     
-	<link rel="stylesheet" href="https://gitcdn.xyz/repo/angular/bower-material/v0.11.0/angular-material.css">
+	<link rel="stylesheet" href="css/angular-material.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
 	
 	

@@ -22,54 +22,34 @@
 	</div>		
     <table id="users" class="table table-bordered table-condensed" style="width:100%">
         <tr><th>Milk Category</th><th>Estimated Liters</th><th>Actual Liters</th><th>Difference In Liters</th></tr>
-        <tr>
-            <td width="40%">{{ AMUL }}</td>
-            <td width="20%">{{AMUL_LTS}}</td>
-            <td width="10%"><input type="text" ng-model="AMUL_LTS_TD" name="AMUL_LTS_TD"/></td>
-            <td width="30%">{{AMUL_DIFF}}</td>       
+        <tr ng-repeat="bs in balancesheetarray">
+            <td width="30%">{{ bs.category }}</td>
+            <td width="20%">{{bs.expectedliters}}</td>
+            <td width="10%"><input type="text" ng-model="bs.todaylts"  /></td>
+            <td width="10%"><input type="text" ng-model="bs.diff" disabled/></td>       
         </tr>
-       <tr>
-            <td>{{ HERITAGE }}</td>
-            <td>{{HERITAGE_LTS}}</td>
-            <td><input type="text" ng-model="HERITAGE_LTS_TD" name="HERITAGE_LTS_TD"/></td>
-            <td>{{HERITAGE_DIFF}}</td>       
-        </tr>
-        <tr>
-            <td>{{ JERSEY }}</td>
-            <td>{{JERSEY_LTS}}</td>
-            <td><input type="text" ng-model="JERSEY_LTS_TD" name="JERSEY_LTS_TD"/></td>
-            <td>{{JERSEY_DIFF}}</td>       
-        </tr>
-        <tr>
-            <td>{{ NADANI }}</td>
-            <td>{{NADANI_LTS}}</td>
-            <td><input type="text" ng-model="NADANI_LTS_TD" name="NADANI_LTS_TD"/></td>
-            <td>{{NADANI_DIFF}}</td>       
-        </tr>
-        <tr>
-            <td>{{ SANGAM }}</td>
-            <td>{{SANGAM_LTS}}</td>
-            <td><input type="text" ng-model="SANGAM_LTS_TD" name="SANGAM_LTS_TD"/></td>
-            <td>{{SANGAM_DIFF}}</td>       
-        </tr>
-        <tr>
-            <td>{{ TIRUMALA }}</td>
-            <td>{{TIRUMALA_LTS}}</td>
-            <td><input type="text" ng-model="TIRUMALA_LTS_TD" name="TIRUMALA_LTS_TD"/></td>
-            <td>{{TIRUMALA_DIFF}}</td>       
-        </tr>
-        <tr>
-            <td>{{ VIJAYA }}</td>
-            <td>{{VIJAYA_LTS}}</td>
-            <td><input type="text" ng-model="VIJAYA_LTS_TD" name="VIJAYA_LTS_TD"/></td>
-            <td>{{VIJAYA_DIFF}}</td>       
-        </tr>        
     </table> 
     <div class="form-group col-lg-3">
 			<button  class="btn btn-info btn-primary" ng-click="submit()">
 			Generate
 			</button>
-	</div>   
+	</div>
+	<table class="table table-striped" ng-hide="loading">
+  <thead>
+    <tr>
+      <th>Route</th>
+      <th>Category</th>
+      <th>Liters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="bsr in balancesheetbyroute">
+      <td>{{ bsr.route }}</td>
+      <td>{{ bsr.category }}</td>
+      <td>{{ bsr.liters }}</td>
+    </tr>
+  </tbody>
+</table>   
 </div>
 </form>
 	<img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>

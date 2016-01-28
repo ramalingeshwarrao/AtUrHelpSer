@@ -37,6 +37,7 @@ public class SQLQuery {
 	public static final String INSERT_MILK_PACKETS = "INSERT INTO milk_packats (subject, milkid, cost, provider_id) VALUES (?, ?, ?, ?)";
 	public static final String INSERT_ROOM_MILK = "INSERT INTO milk_room (room_id, milk_id, quantity, provider_id) VALUES (?, ?, ?, ?)";
 	public static final String INSERT_ROUTE = "INSERT INTO milk_route (subject, route_id, provider_id) VALUES (?, ?, ?)";
+	public static final String INSERT_CATEGORY = "INSERT INTO milk_category (name) VALUES (?)";
 	public static final String INSERT_NO_MILK = "INSERT INTO milk_nomilk (fromdate, rid, isUpdated, todate, provider_id) values (?, ?, ?, ?, ?)";
 	public static final String INSERT_NO_MILK_NO_TODATE = "INSERT INTO milk_nomilk (fromdate, rid, isUpdated, provider_id) values (?, ?, ?, ?)";
 	
@@ -46,6 +47,7 @@ public class SQLQuery {
 	public static final String GET_FALT_NOS_IN_APP = "SELECT ma.subject as appsubject, ma.name, mfn.room_id, mr.route_id, mp.milkid, mp.cost, mroom.quantity FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id AND mfn.provider_id=? limit ?,?";
 	public static final String GET_LOCATIONS = "select subject, name FROM milk_location  where provider_id=?";
 	public static final String GET_ROUTES = "SELECT id, subject, route_id FROM milk_route where provider_id=?";
+	public static final String GET_CATEGORIES = "SELECT name from milk_category";
 	public static final String GET_MILK_PACKETS = "SELECT id, subject, milkid, cost FROM milk_packats where provider_id=?";
 	public static final String GET_FLAT_NO = "SELECT id, room_id, app_id FROM milk_flat_no where provider_id=?";
 	public static final String GET_FLAT_N0_BY_AP_ID = "SELECT id, room_id, app_id FROM milk_flat_no WHERE app_id=? AND provider_id=?";
@@ -64,6 +66,7 @@ public class SQLQuery {
 	public static final String GET_MILK_COST_BY_APP_ID = "select mfn.id, mfn.room_id, sum(cost) as cost, count(1) as quantity from milk_flat_no mfn inner join milk_room mr on mfn.id = mr.room_id inner join milk_packats mp on mp.id = mr.milk_id inner join milk_appartment ma on ma.id = mfn.app_id where app_id=? AND mfn.provider_id=? group by mfn.room_id order by mfn.room_id";
 	public static final String GET_NO_MILK_FOR_COST_BY_RID = "select fromdate, todate from milk_nomilk where fromdate >= ? and fromdate <= ? and rid=? and provider_id=?";
 	public static final String GET_NO_MILK_FOR_COST_BY_RID_NULL = "select * from milk_nomilk where todate is null and rid=? and provider_id=?";
-	public static final String GET_CONSUMED_MILK = "SELECT category, ROUND(SUM(lts), 2) as liters FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id WHERE mfn.id NOT IN (select rid from milk_nomilk where fromdate <= ? AND isUpdated=0  OR fromdate <= ? AND todate >= ? AND provider_id=?)  AND ma.provider_id=? group by category order by category";
+	public static final String GET_CONSUMED_MILK = "SELECT mp.milkid, ROUND(SUM(quantity * lts), 2) as liters FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id WHERE mfn.id NOT IN (select rid from milk_nomilk where fromdate <= ? AND isUpdated=0  OR fromdate <= ? AND todate >= ? AND provider_id=?)  AND ma.provider_id=? group by mp.milkid order by mp.milkid, category";
+	public static final String GET_CONSUMED_MILK_BY_ROUTE_ID = "SELECT mp.milkid ,mr.route_id, ROUND(SUM(quantity * lts), 2) as liters FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id WHERE mfn.id NOT IN (select rid from milk_nomilk where fromdate <= ? AND isUpdated=0  OR fromdate <= ? AND todate >= ? AND provider_id=?)  AND ma.provider_id=? group by mp.milkid, mr.route_id order by mr.route_id, mp.milkid, category";
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
+import com.aturhelp.common.milk.Category;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
@@ -26,6 +27,7 @@ public interface MilkDAO {
 	public boolean createLocation(Location location);
 	public boolean createRoomMilk(RoomMilk roomMilk);
 	public boolean createRoute(Route route);
+	public boolean createCategory(Category cat);
 	
 	
 	//Select Queries
@@ -33,6 +35,7 @@ public interface MilkDAO {
 	public List<Appartment> getAppartments(String id);
 	public List<Location> getLocations();
 	public List<Route> getRoutes();
+	public List<Category> getCategories();
 	public List<GetFlatsData> getFlatDetails(String recordsPerPage, String fromRecord);
 	public List<FlatNo> getFlatNoDetails(String apartmentId);
 	public Integer getMilkCount();
@@ -65,5 +68,7 @@ public interface MilkDAO {
 	public NoMilk getNoMilkDetailsByIdForNull(NoMilk noMilk);
 	
 	public List<BalanceSheet> getMilkSpendinLts(String strDate);
+	
+	public List<BalanceSheet> getMilkSpendinLtsByRoute(String strDate);
 
 }

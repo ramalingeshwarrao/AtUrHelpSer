@@ -19,6 +19,7 @@ import com.aturhelp.common.Help;
 import com.aturhelp.common.UserInfo;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
+import com.aturhelp.common.milk.Category;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.ListRoomMilk;
@@ -166,6 +167,26 @@ public class MilkResource {
 	}
 	
 	@POST
+	@Path("insert/category")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Category createCategory(Category cat) {
+		Category status = new Category();
+		boolean insertStatus = false;
+		try {
+			insertStatus = milkService.createCategory(cat);
+		} catch (Exception e) {
+			LOG.error("Fail to create route record", e);
+		}
+		if (insertStatus) {
+			status.setStatus(0);
+			return status;
+		} else {
+			status.setStatus(1);
+			return status;
+		}
+	}
+	
+	@POST
 	@Path("insert/nomilk")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public NoMilk createNoMilk(NoMilk noMilk  ) {
@@ -205,6 +226,13 @@ public class MilkResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<Route> getRouteDetails() {
 		return milkService.getRoutes();
+	}
+	
+	@GET
+	@Path("catdetails")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<Category> getCategoryDetails() {
+		return milkService.getCategories();
 	}
 	
 	@GET
@@ -302,5 +330,13 @@ public class MilkResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<BalanceSheet> getConsumedMilk(@QueryParam(Constants.DATE) String date) {
 		return milkService.getMilkSpendinLts(date);
+	}
+	
+	@GET
+	@Path("balancesheetdetailsbyroute")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<BalanceSheet> getConsumedMilkByRoute(@QueryParam(Constants.DATE) String date) {
+		return milkService.getMilkSpendinLtsByRoute(date);
 	}
 }

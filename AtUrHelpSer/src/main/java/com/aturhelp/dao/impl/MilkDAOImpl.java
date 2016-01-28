@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import com.aturhelp.common.UserInfo;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
+import com.aturhelp.common.milk.Category;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
@@ -827,7 +828,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 						public BalanceSheet mapRow(ResultSet rs, int rowNum)
 								throws SQLException {
 							BalanceSheet balanceSheet = new BalanceSheet();
-							balanceSheet.setCategory(rs.getString("category"));
+							balanceSheet.setCategory(rs.getString("milkid"));
 							balanceSheet.setLiters(rs.getFloat("liters"));
 							return balanceSheet;
 						}
@@ -837,6 +838,81 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			}
 		} catch (Exception e) {
 			LOG.error("Fail to get nomilk details by id details", e);
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public List<BalanceSheet> getMilkSpendinLtsByRoute(String strDate) {
+		try {
+			String providerName = AtUrHelpUtils.getLoggedUserName();
+			List<BalanceSheet> list = this.jdbcTemplate.query(
+					SQLQuery.GET_CONSUMED_MILK_BY_ROUTE_ID, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()),providerName, providerName},
+					new RowMapper<BalanceSheet>() {
+						@Override
+						public BalanceSheet mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							BalanceSheet balanceSheet = new BalanceSheet();
+							balanceSheet.setCategory(rs.getString("milkid"));
+							balanceSheet.setLiters(rs.getFloat("liters"));
+							balanceSheet.setRoute(rs.getString("route_id"));
+							return balanceSheet;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return	list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get nomilk details by id details", e);
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean createCategory(final Category cat) {
+		try {
+			this.jdbcTemplate.update(new PreparedStatementCreator() {
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con)
+						throws SQLException {
+					PreparedStatement ps = con
+							.prepareStatement(SQLQuery.INSERT_CATEGORY);
+					ps.setString(1, cat.getCategory());
+					return ps;
+				}
+			});
+		} catch (Exception e) {
+			LOG.error("Fail to create route", e);
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public List<Category> getCategories() {
+		try {
+			Category selectCat = new Category();
+			selectCat.setCategory("SELECT");
+			
+			List<Category> list = this.jdbcTemplate.query(
+					SQLQuery.GET_CATEGORIES, new Object[] {},
+					new RowMapper<Category>() {
+						@Override
+						public Category mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							Category cat = new Category();
+							cat.setCategory(rs.getString("name"));
+							return cat;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				list.add(0, selectCat);
+				return	list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get cat details", e);
 			return null;
 		}
 		return null;

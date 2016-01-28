@@ -1,0 +1,32 @@
+<div ng-include src="'provider-milk-header.html'" >
+</div>
+
+<div class="container">
+	<form name="categoryform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
+
+		<div class="row">
+			<div class="form-group col-lg-3">
+				<h3 class="text-primary" style="float: left">
+					Add Milk Category
+				</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-lg-3">
+				<label for="categoryname" style="float: left">Category Name:</label>
+				 <input type="text" class="form-control" name="category" ng-model="category" maxlength="10" placeholder="Enter Category Name" required>
+				 <span style="color: red" ng-show="categoryform.category.$dirty && categoryform.category.$invalid">
+				<span ng-show="categoryform.category.$error.required">
+				Please Enter Category Name
+				</span>
+				</span>
+			</div>
+		</div>
+		<div class="form-group col-lg-3">
+			<button  class="btn btn-info btn-primary" ng-click="submit()"
+			ng-disabled="categoryform.category.$invalid">
+			Submit</button>
+		</div>
+	</form>
+	<img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+</div>
