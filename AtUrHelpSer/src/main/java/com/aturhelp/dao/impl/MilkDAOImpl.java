@@ -21,6 +21,7 @@ import com.aturhelp.common.UserInfo;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.Category;
+import com.aturhelp.common.milk.Comment;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
@@ -909,6 +910,54 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 					});
 			if (list != null && list.size() > 0) {
 				list.add(0, selectCat);
+				return	list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get cat details", e);
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean setComment(final String roomId, final String comment) {
+		try {
+			this.jdbcTemplate.update(new PreparedStatementCreator() {
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con)
+						throws SQLException {
+					PreparedStatement ps = con
+							.prepareStatement(SQLQuery.UPDATE_COMMENT_FOR_FLAT);
+					ps.setString(1, comment);
+					ps.setString(2, roomId);
+					return ps;
+				}
+			});
+		} catch (Exception e) {
+			LOG.error("Fail to update admin state", e);
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public List<Comment> getComment(String roomId) {
+		try {
+			
+			List<Comment> list = this.jdbcTemplate.query(
+					SQLQuery.GET_COMMENT, new Object[] {roomId},
+					new RowMapper<Comment>() {
+						@Override
+						public Comment mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							Comment cm = new Comment();
+							String name = rs.getString("comments");
+							cm.setName(name);
+							return cm;
+						}
+					});
+			if (list != null && list.size() > 0) {
 				return	list;
 			}
 		} catch (Exception e) {

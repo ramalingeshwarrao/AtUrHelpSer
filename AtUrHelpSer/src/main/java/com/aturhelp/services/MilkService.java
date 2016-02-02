@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.Category;
+import com.aturhelp.common.milk.Comment;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
@@ -70,5 +71,7 @@ public interface MilkService {
 	public List<RoomBill> getFinalCostForRoomByAppId(int appId, String fromDate, String toDate) throws Exception;
 	public List<BalanceSheet> getMilkSpendinLts(String strDate);
 	public List<BalanceSheet> getMilkSpendinLtsByRoute(String strDate);
+	public boolean setComment(String roomId, String comment);
+	public List<Comment> getComment(String roomId);
 
 }

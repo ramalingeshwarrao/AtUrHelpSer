@@ -1,5 +1,6 @@
 package com.aturhelp.resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -20,6 +21,7 @@ import com.aturhelp.common.UserInfo;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.Category;
+import com.aturhelp.common.milk.Comment;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.ListRoomMilk;
@@ -338,5 +340,34 @@ public class MilkResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<BalanceSheet> getConsumedMilkByRoute(@QueryParam(Constants.DATE) String date) {
 		return milkService.getMilkSpendinLtsByRoute(date);
+	}
+	
+	@GET
+	@Path("updatecomment")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public FlatNo updateComment(@QueryParam("roomid") String roomId, @QueryParam("comment") String comment) {
+		FlatNo fn = new FlatNo();
+		try {
+			if (milkService.setComment(roomId, comment)) {
+				fn.setStatus(0);
+			} else {
+				fn.setStatus(1);
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to set comment", e);
+			fn.setStatus(1);
+		}
+		return fn;
+	}
+	
+	@GET
+	@Path("comment")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<Comment> getComment(@QueryParam("roomid") String roomId) {
+		
+		return milkService.getComment(roomId);
+		
 	}
 }

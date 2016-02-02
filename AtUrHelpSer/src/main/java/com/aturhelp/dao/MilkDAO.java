@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.Category;
+import com.aturhelp.common.milk.Comment;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
@@ -52,6 +53,8 @@ public interface MilkDAO {
 	public List<NoMilkCost> getMilkCostForAllFlatByApp(int appId);
 	public boolean validateDateInRange(String date, int rid);
 	public boolean validateRangeInRange(int rid, String fromDate, String toDate);
+	public boolean setComment(String roomId, String comment);
+	public List<Comment> getComment(String roomId);
 	
 	/**
 	 * Get data like how many days the user did not take milk

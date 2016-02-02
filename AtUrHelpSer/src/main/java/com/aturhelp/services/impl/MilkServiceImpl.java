@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.Category;
+import com.aturhelp.common.milk.Comment;
 import com.aturhelp.common.milk.FlatNo;
 import com.aturhelp.common.milk.GetFlatsData;
 import com.aturhelp.common.milk.Location;
@@ -333,6 +334,16 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public List<Category> getCategories() {
 		return milkDAO.getCategories();
+	}
+
+	@Override
+	public boolean setComment(String roomId, String comment) {
+		return milkDAO.setComment(roomId, comment);
+	}
+
+	@Override
+	public List<Comment> getComment(String roomId) {
+		return milkDAO.getComment(roomId);
 	}
 
 

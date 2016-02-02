@@ -68,5 +68,7 @@ public class SQLQuery {
 	public static final String GET_NO_MILK_FOR_COST_BY_RID_NULL = "select * from milk_nomilk where todate is null and rid=? and provider_id=?";
 	public static final String GET_CONSUMED_MILK = "SELECT mp.milkid, ROUND(SUM(quantity * lts), 2) as liters FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id WHERE mfn.id NOT IN (select rid from milk_nomilk where fromdate <= ? AND isUpdated=0  OR fromdate <= ? AND todate >= ? AND provider_id=?)  AND ma.provider_id=? group by mp.milkid order by mp.milkid, category";
 	public static final String GET_CONSUMED_MILK_BY_ROUTE_ID = "SELECT mp.milkid ,mr.route_id, ROUND(SUM(quantity * lts), 2) as liters FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id WHERE mfn.id NOT IN (select rid from milk_nomilk where fromdate <= ? AND isUpdated=0  OR fromdate <= ? AND todate >= ? AND provider_id=?)  AND ma.provider_id=? group by mp.milkid, mr.route_id order by mr.route_id, mp.milkid, category";
+	public static final String UPDATE_COMMENT_FOR_FLAT = "UPDATE milk_flat_no set comments = ? WHERE id = ?";
+	public static final String GET_COMMENT = "SELECT comments FROM milk_flat_no WHERE id = ?";
 	
 }
