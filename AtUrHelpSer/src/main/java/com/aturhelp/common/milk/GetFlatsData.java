@@ -17,6 +17,7 @@ public class GetFlatsData {
 	private String date;
 	private String todate;
 	private int noMilkId;
+	private String comment;
 	
 	
 	@XmlElement(name ="nomilkid")
@@ -105,5 +106,13 @@ public class GetFlatsData {
 	}
 	public void setTodate(String todate) {
 		this.todate = todate;
+	}
+	
+	@XmlElement(name ="comment")
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 }

@@ -44,7 +44,7 @@ public class SQLQuery {
 	//Select Qureries
 	public static final String GET_APPARTMENTS = "SELECT subject, name, id FROM milk_appartment where provider_id=?";
 	public static final String GET_APPARTMENTS_BY_ID = "SELECT subject, name, id FROM milk_appartment where route_id=? AND provider_id=?";
-	public static final String GET_FALT_NOS_IN_APP = "SELECT ma.subject as appsubject, ma.name, mfn.room_id, mr.route_id, mp.milkid, mp.cost, mroom.quantity FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id AND mfn.provider_id=? limit ?,?";
+	public static final String GET_FALT_NOS_IN_APP = "SELECT ma.subject as appsubject, ma.name, mfn.room_id, mr.route_id, mp.milkid, mp.cost, mroom.quantity, mfn.comments FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id AND mfn.provider_id=? limit ?,?";
 	public static final String GET_LOCATIONS = "select subject, name FROM milk_location  where provider_id=?";
 	public static final String GET_ROUTES = "SELECT id, subject, route_id FROM milk_route where provider_id=?";
 	public static final String GET_CATEGORIES = "SELECT name from milk_category";

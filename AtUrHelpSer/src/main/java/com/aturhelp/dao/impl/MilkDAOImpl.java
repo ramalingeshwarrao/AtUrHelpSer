@@ -327,6 +327,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 							flatsData.setMilkId(rs.getString("milkid"));
 							flatsData.setCost(rs.getFloat("cost"));
 							flatsData.setQuantity(rs.getInt("quantity"));
+							flatsData.setComment(rs.getString("comments"));
 							return flatsData;
 						}
 					});
