@@ -120,6 +120,9 @@
 				}).when('/milkcomment', {
 					templateUrl : 'milk-comment.html',
 					controller : $PROVIDER.MilkCommentController
+				}).when('/milkalternative', {
+					templateUrl : 'milk-alternative.html',
+					controller : $PROVIDER.MilkAlternativeController
 				})
 				.otherwise({
 					redirectTo : '/provider'

@@ -35,7 +35,7 @@ public class SQLQuery {
 	public static final String INSERT_FLAT_NO = "INSERT INTO milk_flat_no (room_id, app_id, provider_id) VALUES (?, ?, ?)";
 	public static final String INSERT_LOCATION = "INSERT INTO milk_location (subject, name, provider_id) VALUES (?, ?, ?)";
 	public static final String INSERT_MILK_PACKETS = "INSERT INTO milk_packats (subject, milkid, cost, provider_id) VALUES (?, ?, ?, ?)";
-	public static final String INSERT_ROOM_MILK = "INSERT INTO milk_room (room_id, milk_id, quantity, provider_id) VALUES (?, ?, ?, ?)";
+	public static final String INSERT_ROOM_MILK = "INSERT INTO milk_room (room_id, milk_id, quantity, provider_id, is_alternative) VALUES (?, ?, ?, ?, ?)";
 	public static final String INSERT_ROUTE = "INSERT INTO milk_route (subject, route_id, provider_id) VALUES (?, ?, ?)";
 	public static final String INSERT_CATEGORY = "INSERT INTO milk_category (name) VALUES (?)";
 	public static final String INSERT_NO_MILK = "INSERT INTO milk_nomilk (fromdate, rid, isUpdated, todate, provider_id) values (?, ?, ?, ?, ?)";
@@ -70,5 +70,8 @@ public class SQLQuery {
 	public static final String GET_CONSUMED_MILK_BY_ROUTE_ID = "SELECT mp.milkid ,mr.route_id, ROUND(SUM(quantity * lts), 2) as liters FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id WHERE mfn.id NOT IN (select rid from milk_nomilk where fromdate <= ? AND isUpdated=0  OR fromdate <= ? AND todate >= ? AND provider_id=?)  AND ma.provider_id=? group by mp.milkid, mr.route_id order by mr.route_id, mp.milkid, category";
 	public static final String UPDATE_COMMENT_FOR_FLAT = "UPDATE milk_flat_no set comments = ? WHERE id = ?";
 	public static final String GET_COMMENT = "SELECT comments FROM milk_flat_no WHERE id = ?";
+	public static final String GET_MILK_BY_ROOM_ID = "select mp.id, mp.subject, mp.milkid, mp.cost, mp.category, mr.quantity from milk_packats mp INNER JOIN milk_room mr ON mp.id = mr.milk_id where mr.room_id = ? AND mp.provider_id = ? AND mr.is_alternative=0";
+	public static final String GET_QUANTITY_BY_ROOMID_MILK_ID = "select quantity from milk_room where room_id =? AND milk_id=?";
+	public static final String UPDATE_IS_ALTERNATIVE = "UPDATE milk_room set is_alternative = ?, alter_count = ? WHERE room_id = ? AND milk_id = ?";
 	
 }

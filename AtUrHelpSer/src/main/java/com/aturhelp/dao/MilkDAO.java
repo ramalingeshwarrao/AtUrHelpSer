@@ -73,5 +73,11 @@ public interface MilkDAO {
 	public List<BalanceSheet> getMilkSpendinLts(String strDate);
 	
 	public List<BalanceSheet> getMilkSpendinLtsByRoute(String strDate);
+	
+	public List<MilkPackets> getMilkByRoomId(String roomId);
+	
+	public int getCountByMilkId(String roomId, String milkId);
+	
+	public boolean updateIsAlternativeToTrue(String roomId, String milkId, int alterCount) ;
 
 }

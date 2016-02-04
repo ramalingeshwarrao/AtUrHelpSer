@@ -346,5 +346,20 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 		return milkDAO.getComment(roomId);
 	}
 
+	@Override
+	public List<MilkPackets> getMilkByRoomId(String roomId) {
+		return milkDAO.getMilkByRoomId(roomId);
+	}
+
+	@Override
+	public int getCountByMilkId(String roomId, String milkId) {
+		return milkDAO.getCountByMilkId(roomId, milkId);
+	}
+
+	@Override
+	public boolean updateIsAlternativeToTrue(String roomId, String milkId, int alterCount) {
+		return milkDAO.updateIsAlternativeToTrue(roomId, milkId, alterCount);
+	}
+
 
 }

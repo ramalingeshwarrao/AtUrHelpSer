@@ -143,6 +143,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 					ps.setInt(2, roomMilk.getMilkId());
 					ps.setInt(3, roomMilk.getQuantity());
 					ps.setString(4, AtUrHelpUtils.getLoggedUserName());
+					ps.setString(5, "0");
 					return ps;
 				}
 			});
@@ -966,6 +967,85 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			return null;
 		}
 		return null;
+	}
+
+	@Override
+	public List<MilkPackets> getMilkByRoomId(String roomId) {
+		try {
+			MilkPackets milkP = new MilkPackets();
+			milkP.setId(0);
+			milkP.setMilkName("SELECT");
+			milkP.setSubject("SELECT");
+			String providerName = AtUrHelpUtils.getLoggedUserName();
+			List<MilkPackets> list = this.jdbcTemplate.query(
+					SQLQuery.GET_MILK_BY_ROOM_ID, new Object[] {roomId, providerName},
+					new RowMapper<MilkPackets>() {
+						@Override
+						public MilkPackets mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							MilkPackets mp = new MilkPackets();
+							mp.setId(rs.getInt("id"));
+							mp.setSubject(rs.getString("subject"));
+							mp.setMilkName(rs.getString("milkid"));
+							mp.setCost(rs.getFloat("cost"));
+							return mp;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				list.add(0, milkP);
+				return	list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get milk details by room id details", e);
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public int getCountByMilkId(String roomId, String milkId) {
+		try {
+			String providerName = AtUrHelpUtils.getLoggedUserName();
+			List<Integer> list = this.jdbcTemplate.query(
+					SQLQuery.GET_QUANTITY_BY_ROOMID_MILK_ID, new Object[] {roomId, milkId},
+					new RowMapper<Integer>() {
+						@Override
+						public Integer mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							return rs.getInt("quantity");
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return	list.get(0);
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get milk details by room id details", e);
+			return 0;
+		}
+		return 0;
+	}
+
+	@Override
+	public boolean updateIsAlternativeToTrue(final String roomId, final String milkId, final int alterCount) {
+		try {
+			this.jdbcTemplate.update(new PreparedStatementCreator() {
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con)
+						throws SQLException {
+					PreparedStatement ps = con
+							.prepareStatement(SQLQuery.UPDATE_IS_ALTERNATIVE);
+					ps.setInt(1, 1);
+					ps.setInt(2, alterCount);
+					ps.setString(3, roomId);
+					ps.setString(4, milkId);
+					return ps;
+				}
+			});
+		} catch (Exception e) {
+			LOG.error("Fail to update alternative is required", e);
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -73,5 +73,11 @@ public interface MilkService {
 	public List<BalanceSheet> getMilkSpendinLtsByRoute(String strDate);
 	public boolean setComment(String roomId, String comment);
 	public List<Comment> getComment(String roomId);
+	
+	public List<MilkPackets> getMilkByRoomId(String roomId);
+	
+	public int getCountByMilkId(String roomId, String milkId);
+	
+	public boolean updateIsAlternativeToTrue(String roomId, String milkId, int alterCount) ;
 
 }

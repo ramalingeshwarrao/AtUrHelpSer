@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -370,4 +371,36 @@ public class MilkResource {
 		return milkService.getComment(roomId);
 		
 	}
+	
+	@GET
+	@Path("milkdetailsbyid")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<MilkPackets> getMilkDetailsByRoomId(@QueryParam("roomid") String roomId) {
+		return milkService.getMilkByRoomId(roomId);
+	}
+	
+	@GET
+	@Path("milkquantity")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	public Response getMilkQuantityByRoomIdMilkId(@QueryParam("roomid") String roomId, @QueryParam("milkid") String milkId) {
+		
+		int res =  milkService.getCountByMilkId(roomId, milkId);
+		return Response.ok(res+"").build();
+	}
+	
+	@GET
+	@Path("updatealternative")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	public Response updateAlternative(@QueryParam("roomid") String roomId, @QueryParam("milkid") String milkId, @QueryParam("altercount") int alterCount) {
+		
+		boolean res = milkService.updateIsAlternativeToTrue(roomId, milkId, alterCount);
+		if (res) {
+			return Response.ok(0+"").build();
+		} else {
+			return Response.ok(1+"").build();
+		}
+	}
 }
+
+
