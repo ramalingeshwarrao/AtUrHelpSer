@@ -1,0 +1,4 @@
+//If any time mysql was not started use the following commands : 
+
+ln -s /var/lib/mysql/mysql.sock /tmp/mysql.sock
+service mysql restart
