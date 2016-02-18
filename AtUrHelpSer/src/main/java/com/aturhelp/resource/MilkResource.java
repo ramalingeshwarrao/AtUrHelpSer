@@ -401,6 +401,19 @@ public class MilkResource {
 			return Response.ok(1+"").build();
 		}
 	}
+	
+	@GET
+	@Path("inactive")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	public Response flatInactive(@QueryParam("roomid") String roomId, @QueryParam("cd") String cancelDate) {
+		
+		boolean res = milkService.inActiveFalt(roomId, cancelDate);
+		if (res) {
+			return Response.ok(0+"").build();
+		} else {
+			return Response.ok(1+"").build();
+		}
+	}
 }
 
 

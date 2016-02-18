@@ -40,7 +40,7 @@ public class AtUrHelpController {
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Custom Login Form");
 		model.addObject("message", "This is protected page!");
-		model.setViewName("provider-main");
+		model.setViewName("provider-main-test");
 
 		return model;
 

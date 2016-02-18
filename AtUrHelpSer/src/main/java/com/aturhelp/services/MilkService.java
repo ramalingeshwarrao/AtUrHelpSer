@@ -79,5 +79,7 @@ public interface MilkService {
 	public int getCountByMilkId(String roomId, String milkId);
 	
 	public boolean updateIsAlternativeToTrue(String roomId, String milkId, int alterCount) ;
+	
+	public boolean inActiveFalt(String roomId, String cancelDate);
 
 }

@@ -7,11 +7,24 @@
 <meta name="keywords" content="aturhelp web page, aturhelp web page template" />
 <meta name="description" content="This is aturhelp style web pag" />
 
-
+<link type="text/css" rel="stylesheet" href="css/leftmenu.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<!--  New UI-->
+<link type="text/css" rel="stylesheet" href="css/jquery-ui-1.10.4.custom.min.css">
+<link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
+
+
+
 <link rel="stylesheet" type="text/css" href="css/menu.css" />
 <link rel="stylesheet" type="text/css" href="css/fullcalendar.min.css" />
 
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/bootstrap-hover-dropdown.js"></script>
+
+<script type="text/javascript" src="js/jquery.menu.js"></script>
 <script type="text/javascript" src="js/moment.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>
@@ -55,7 +68,7 @@
 
 
 <link rel="stylesheet" href="css/angular-material.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
+
 
 
 
@@ -132,30 +145,51 @@ End of fieldset
 </head>
 <body ng-app="ProviderModule" ng-conroller="ProviderController">
 
-	<div id='cssmenu'>
-		<ul>
-			<li style="float: left"><a href="#provider"><span>Home</span></a></li>
-			<c:url value="/j_spring_security_logout" var="logoutUrl" />
-			<!-- csrt for log out-->
-			<form action="${logoutUrl}" method="post" id="logoutForm">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-			</form>
-			<c:if test="${pageContext.request.userPrincipal.name != null}">
-				<li style="float: right"><a href="javascript:formSubmit()"><span>Logout</span></a></li>
-				<li style="float: right"><a href='#'>Welcome : ${pageContext.request.userPrincipal.name} | </a></li>
-			</c:if>
-			<li class='has-sub' style="float: right"><a href='#' onclick="return false;"><span>Profile</span></a>
-				<ul>
-					<li><a href='#providerprofile'><span>View Profile</span></a></li>
-					<li><a href='#providerclosecomplaints'><span>Change Password</span></a></li>
-				</ul></li>
-		</ul>
+
+	<div id="header-topbar-option-demo" class="page-header-topbar">
+		<c:url value="/j_spring_security_logout" var="logoutUrl" />
+		<!-- csrt for log out-->
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		</form>
+		<nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
+			<div class="navbar-header">
+				<button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle">
+					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+				</button>
+				<a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">AtUrHelp</span><span
+					style="display: none" class="logo-text-icon">µ</span></a>
+			</div>
+			<div class="topbar-main">
+				<a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+
+
+
+				<ul class="nav navbar navbar-top-links navbar-right mbn">
+					<li class="dropdown"><a data-hover="dropdown" href="#route" class="dropdown-toggle"><i class="fa fa-home"></i></a>
+					</li>
+					<li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span
+							class="badge badge-green">0</span></a>
+					</li>
+					<li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/48.jpg" alt=""
+							class="img-responsive img-circle" />&nbsp;<span class="hidden-xs;">${pageContext.request.userPrincipal.name} </span>&nbsp;<span class="caret"></span></a>
+						<ul class="dropdown-menu dropdown-user pull-right">
+							<li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
+							<li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">0</span></a></li>
+							<li class="divider"></li>
+							<li><a href="javascript:formSubmit()"><i class="fa fa-key"></i>Log Out</a></li>
+						</ul></li>
+
+				</ul>
+			</div>
+		</nav>
+		<!--BEGIN MODAL CONFIG PORTLET-->
+
+		<!--END MODAL CONFIG PORTLET-->
 	</div>
 
 	<center>
-		<div>
-			<div ng-view>..loading</div>
-			<div>
+		<div ng-view>..loading</div>
 	</center>
 </body>
 </html>

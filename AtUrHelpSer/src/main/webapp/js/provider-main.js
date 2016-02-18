@@ -123,6 +123,9 @@
 				}).when('/milkalternative', {
 					templateUrl : 'milk-alternative.html',
 					controller : $PROVIDER.MilkAlternativeController
+				}).when('/milkfaltinactive', {
+					templateUrl : 'milk-flat-inactive.html',
+					controller : $PROVIDER.MilkInActiveController
 				})
 				.otherwise({
 					redirectTo : '/provider'

@@ -1,63 +1,165 @@
-<div ng-include src="'provider-milk-header.html'" >
+
+<div id="wrapper">
+	<!--BEGIN SIDEBAR MENU-->
+	<nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;" data-position="right"
+		class="navbar-default navbar-static-side">
+		<div class="sidebar-collapse menu-scroll">
+			<ul id="side-menu" class="nav">
+
+				<div class="clearfix"></div>
+				<li><a href="#milkroute"><i class="fa fa-road">
+							<div class="icon-bg bg-orange"></div>
+					</i><span class="menu-title">Route</span></a></li>
+				<li><a href="#milklocation"><i class="fa fa-location-arrow">
+							<div class="icon-bg bg-pink"></div>
+					</i><span class="menu-title">Location</span></a></li>
+				<li><a href="#milkappartment"><i class="fa fa-font">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Apartment</span></a></li>
+				<li><a href="#milkpacket"><i class="fa fa-tint">
+							<div class="icon-bg bg-violet"></div>
+					</i><span class="menu-title">Milk</span></a></li>
+				<li><a href="#milkflatno"><i class="fa fa-home">
+							<div class="icon-bg bg-blue"></div>
+					</i><span class="menu-title">Flat</span></a></li>
+				<li><a href="#milkflatnovsmilk"><i class="fa fa-align-justify">
+							<div class="icon-bg bg-red"></div>
+					</i><span class="menu-title">Flat Vs Milk</span></a></li>
+				<li><a href="#milkdetails"><i class="fa fa-th-list">
+							<div class="icon-bg bg-yellow"></div>
+					</i><span class="menu-title">Milk Details</span></a></li>
+				<li><a href="#nomilk"><i class="fa fa-eject">
+							<div class="icon-bg bg-grey"></div>
+					</i><span class="menu-title">No Milk</span></a></li>
+				<li><a href="#dailymilk"><i class="fa fa-shopping-cart">
+							<div class="icon-bg bg-dark"></div>
+					</i><span class="menu-title">Daily Milk</span></a></li>
+				<li class="active"><a href="#milkrequired"><i class="fa fa-glass">
+							<div class="icon-bg bg-primary"></div>
+					</i><span class="menu-title">Milk Required</span></a></li>
+				<li><a href="#milkroomstatus"><i class="fa fa-bar-chart-o fa-fw">
+							<div class="icon-bg bg-orange"></div>
+					</i><span class="menu-title">Room Vs Milk Status</span></a></li>
+
+				<li><a href="#milkbill"><i class="fa fa-heart">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Bill</span></a></li>
+
+				<li><a href="#milkbalancesheet"><i class="fa fa-file">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Balance Sheet</span></a></li>
+
+				<li><a href="#milkcomment"><i class="fa fa-comment">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Comment</span></a></li>
+
+				<li><a href="#milkfaltinactive"><i class="fa fa-minus">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Flat InActive</span></a></li>
+
+				<li><a href="#milkalternative"><i class="fa fa-random">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Alternate Milk</span></a></li>
+			</ul>
+		</div>
+	</nav>
+	<!--END SIDEBAR MENU-->
+
+
 </div>
 
+<!--BEGIN PAGE WRAPPER-->
+<div id="page-wrapper">
+	<!--BEGIN TITLE & BREADCRUMB PAGE-->
+	<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+		<div class="page-header pull-left">
+			<div class="page-title">Milk Required</div>
+		</div>
+		<ol class="breadcrumb page-breadcrumb pull-right">
+			<li><i class="fa fa-home"></i>&nbsp;<a href="#provider">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+			<li class="hidden"><a href="#">Milk Required</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+			<li class="active">Milk Required</li>
+		</ol>
+		<div class="clearfix"></div>
+	</div>
+	<!--END TITLE & BREADCRUMB PAGE-->
+	<!--BEGIN CONTENT-->
+	<div class="page-content">
+		<div id="tab-general">
 
-	<div class="container">
-		<form name="flatform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
-		
-	<div class="row">
-		<div class="form-group col-lg-3">
-			<h3 class="text-primary" style="float: left">
-				Milk Required
-			</h3>
+
+			<div class="row mbl">
+
+				<div class="col-lg-8">
+					<div class="portlet box">
+						<div style="overflow: hidden;" class="portlet-body">
+
+
+
+
+							<form name="flatform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
+
+								<div class="row">
+									<div class="form-group col-lg-6">
+										<label for="flatform" style="float: left">Apartment Name:</label> <select ng-model="apartmentsel.type"
+											ng-options="a.id as a.appsubject for a in apartmentdetails" class="form-control" ng-change="changeApp(apartmentsel.type)">
+										</select>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-lg-6">
+										<label for="flatform" style="float: left">Flat No:</label> <select ng-model="flatNosel.type"
+											ng-options="f.id as f.roomno for f in flatNodetails" class="form-control" ng-change="changeroom(flatNosel.type)">
+										</select>
+									</div>
+								</div>
+								<div class="row" ng-show="isShow">
+									<div class="form-group col-lg-10">
+										<label style="float: left">Appartment Name : {{appName}}</label>
+									</div>
+								</div>
+								<div class="row" ng-show="isShow">
+									<div class="form-group col-lg-10">
+										<label style="float: left">Roo No : {{roomId }}</label>
+									</div>
+								</div>
+								<div class="row" ng-show="isShow">
+									<div class="form-group col-lg-10">
+										<label style="float: left">From Date : {{date}} (Year-Month-Date)</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-lg-3">
+										<label for="flatform" style="float: left">Date:</label>
+									</div>
+								</div>
+								<div class="form-inline datepickerdemoBasicUsage">
+									<fieldset>
+										<md-content> <md-datepicker style="float: left" ng-model="toDate" md-placeholder="Date" md-min-date="minDate"
+											md-max-date="maxDate"></md-datepicker> </md-content>
+									</fieldset>
+								</div>
+								<div class="form-group col-lg-3">
+									<button style="margin-top: 30px" class="btn btn-info btn-primary" ng-click="submit()">Submit</button>
+								</div>
+							</form>
+							<img src="images/aturhelp/loading.gif" ng-show="loading" style="position: relative;" />
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
-	</div>	
-	<div class="row">
-			<div class="form-group col-lg-3">
-				<label for="flatform" style="float: left">Apartment Name:</label>
-			<select ng-model="apartmentsel.type" ng-options="a.id as a.appsubject for a in apartmentdetails" class="form-control" ng-change="changeApp(apartmentsel.type)">
-			</select>
-		</div>
 	</div>
-	<div class="row">
-		<div class="form-group col-lg-3">
-			<label for="flatform" style="float: left">Flat No:</label>
-			<select ng-model="flatNosel.type" ng-options="f.id as f.roomno for f in flatNodetails" class="form-control" ng-change="changeroom(flatNosel.type)">
-			</select>
-		</div>
+	<!--END CONTENT-->
+	<!--BEGIN FOOTER-->
+	<div id="footer">
+		<!-- <div class="copyright">
+			<a href="http://aturhelp.com">2016 © AtUrHelp</a>
+		</div> -->
 	</div>
-	<div class="row" ng-show="isShow">
-		<div class="form-group col-lg-10">
-			<label  style="float: left">Appartment Name : {{appName}}</label>
-		</div>
-	</div>
-	<div class="row" ng-show="isShow">
-		<div class="form-group col-lg-10">
-			<label  style="float: left">Roo No : {{roomId }}</label>
-		</div>
-	</div>
-	<div class="row" ng-show="isShow">
-		<div class="form-group col-lg-10">
-			<label  style="float: left">From Date : {{date}} (Year-Month-Date)</label>
-		</div>
-	</div>
-	<div class="row">
-		<div class="form-group col-lg-3">
-			<label for="flatform" style="float: left">Date:</label>
-		</div>
-	</div>
-	<div class="form-inline datepickerdemoBasicUsage" >
-			<fieldset >
-			<md-content>
-    		<md-datepicker style="float: left" ng-model="toDate" md-placeholder="Date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
-			</md-content>
-			</fieldset>
-	</div>
-	<div class="form-group col-lg-3">
-			<button  style="margin-top:30px" class="btn btn-info btn-primary" ng-click="submit()" >
-			Submit</button>
-	</div>
- </form>
- <img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+	<!--END FOOTER-->
 </div>
-

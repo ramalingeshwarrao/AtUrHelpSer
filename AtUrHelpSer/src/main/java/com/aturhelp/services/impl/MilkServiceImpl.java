@@ -361,5 +361,10 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 		return milkDAO.updateIsAlternativeToTrue(roomId, milkId, alterCount);
 	}
 
+	@Override
+	public boolean inActiveFalt(String roomId, String cancelDate) {
+		return milkDAO.inActiveFalt(roomId, cancelDate);
+	}
+
 
 }

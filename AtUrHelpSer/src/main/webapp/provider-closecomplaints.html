@@ -1,34 +1,29 @@
 <div ng-include src="'provider-broadband-header.html'" />
 <div class="container">
 
-<h3 style="text-align: left;">Closed Complaints :</h3>
+	<h3 style="text-align: left;">Closed Complaints :</h3>
 
 
-<table class="table table-striped" ng-hide="loading">
-  <thead>
-    <tr>
-      <th>Ticket No</th>
-      <th>Subject</th>
-      <th>Description</th>
-      <th ng-show="( userType == 'SU')">Location</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="log in log">
-      <td>{{ log.ticketno }}</td>
-      <td>{{ log.htype }}</td>
-      <td>{{ log.hdes }}</td>
-      <td ng-show="( userType == 'SU')">{{ log.area }}</td>
-    </tr>
-  </tbody>
-</table>
+	<table class="table table-striped" ng-hide="loading">
+		<thead>
+			<tr>
+				<th>Ticket No</th>
+				<th>Subject</th>
+				<th>Description</th>
+				<th ng-show="( userType == 'SU')">Location</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="log in log">
+				<td>{{ log.ticketno }}</td>
+				<td>{{ log.htype }}</td>
+				<td>{{ log.hdes }}</td>
+				<td ng-show="( userType == 'SU')">{{ log.area }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-<img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+	<img src="images/aturhelp/loading.gif" ng-show="loading" style="position: relative;" />
 
-<pagination ng-hide="loading"
-      ng-model="currentPage"
-      total-items="count"
-      max-size="maxSize"  
-      boundary-links="true">
-    </pagination>
+	<pagination ng-hide="loading" ng-model="currentPage" total-items="count" max-size="maxSize" boundary-links="true"> </pagination>
 </div>

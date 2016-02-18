@@ -1,43 +1,139 @@
-<div ng-include src="'provider-milk-header.html'" >
-</div>
-    
-<div class="container">
-	<form name="locationform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
 
-		<div class="row">
-			<div class="form-group col-lg-3">
-				<h3 class="text-primary" style="float: left">
-					Add Location
-					<h3>
+<div id="wrapper">
+	<!--BEGIN SIDEBAR MENU-->
+	<nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;" data-position="right"
+		class="navbar-default navbar-static-side">
+		<div class="sidebar-collapse menu-scroll">
+			<ul id="side-menu" class="nav">
+
+				<div class="clearfix"></div>
+				<li><a href="#milkroute"><i class="fa fa-road">
+							<div class="icon-bg bg-orange"></div>
+					</i><span class="menu-title">Route</span></a></li>
+				<li class="active"><a href="#milklocation"><i class="fa fa-location-arrow">
+							<div class="icon-bg bg-pink"></div>
+					</i><span class="menu-title">Location</span></a></li>
+				<li><a href="#milkappartment"><i class="fa fa-font">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Apartment</span></a></li>
+				<li><a href="#milkpacket"><i class="fa fa-tint">
+							<div class="icon-bg bg-violet"></div>
+					</i><span class="menu-title">Milk</span></a></li>
+				<li><a href="#milkflatno"><i class="fa fa-home">
+							<div class="icon-bg bg-blue"></div>
+					</i><span class="menu-title">Flat</span></a></li>
+				<li><a href="#milkflatnovsmilk"><i class="fa fa-align-justify">
+							<div class="icon-bg bg-red"></div>
+					</i><span class="menu-title">Flat Vs Milk</span></a></li>
+				<li><a href="#milkdetails"><i class="fa fa-th-list">
+							<div class="icon-bg bg-yellow"></div>
+					</i><span class="menu-title">Milk Details</span></a></li>
+				<li><a href="#nomilk"><i class="fa fa-eject">
+							<div class="icon-bg bg-grey"></div>
+					</i><span class="menu-title">No Milk</span></a></li>
+				<li><a href="#dailymilk"><i class="fa fa-shopping-cart">
+							<div class="icon-bg bg-dark"></div>
+					</i><span class="menu-title">Daily Milk</span></a></li>
+				<li><a href="#milkrequired"><i class="fa fa-glass">
+							<div class="icon-bg bg-primary"></div>
+					</i><span class="menu-title">Milk Required</span></a></li>
+				<li><a href="#milkroomstatus"><i class="fa fa-bar-chart-o fa-fw">
+							<div class="icon-bg bg-orange"></div>
+					</i><span class="menu-title">Room Vs Milk Status</span></a></li>
+
+				<li><a href="#milkbill"><i class="fa fa-heart">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Bill</span></a></li>
+
+				<li><a href="#milkbalancesheet"><i class="fa fa-file">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Balance Sheet</span></a></li>
+
+				<li><a href="#milkcomment"><i class="fa fa-comment">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Comment</span></a></li>
+
+				<li><a href="#milkfaltinactive"><i class="fa fa-minus">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Flat InActive</span></a></li>
+
+				<li><a href="#milkalternative"><i class="fa fa-random">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">Alternate Milk</span></a></li>
+			</ul>
+		</div>
+	</nav>
+	<!--END SIDEBAR MENU-->
+
+
+</div>
+
+<!--BEGIN PAGE WRAPPER-->
+<div id="page-wrapper">
+	<!--BEGIN TITLE & BREADCRUMB PAGE-->
+	<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+		<div class="page-header pull-left">
+			<div class="page-title">Location</div>
+		</div>
+		<ol class="breadcrumb page-breadcrumb pull-right">
+			<li><i class="fa fa-home"></i>&nbsp;<a href="#provider">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+			<li class="hidden"><a href="#">Location</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+			<li class="active">Location</li>
+		</ol>
+		<div class="clearfix"></div>
+	</div>
+	<!--END TITLE & BREADCRUMB PAGE-->
+	<!--BEGIN CONTENT-->
+	<div class="page-content">
+		<div id="tab-general">
+
+
+			<div class="row mbl">
+
+				<div class="col-lg-8">
+					<div class="portlet box">
+						<div class="portlet-header">
+							<div class="caption">Add Location</div>
+						</div>
+						<div style="overflow: hidden;" class="portlet-body">
+							<form name="locationform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
+								<div class="row">
+									<div class="form-group col-lg-6">
+										<label for="subject" style="float: left">Subject:</label> <input type="text" class="form-control" name="subject" ng-model="subject"
+											placeholder="Enter Subject" required> <span style="color: red"
+											ng-show="locationform.subject.$dirty && locationform.subject.$invalid"> <span ng-show="locationform.subject.$error.required">
+												Please Enter Location Subject </span>
+										</span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-lg-6">
+										<label for="locationname" style="float: left">Location Name:</label> <input type="text" class="form-control" name="location"
+											ng-model="location" placeholder="Enter Location Name" required> <span style="color: red"
+											ng-show="locationform.location.$dirty && locationform.location.$invalid"> <span ng-show="locationform.location.$error.required">
+												Please Enter Location Id </span>
+										</span>
+									</div>
+								</div>
+								<div class="form-group col-lg-6">
+									<button class="btn btn-info btn-primary" ng-click="submit()" ng-disabled="locationform.subject.$invalid || locationform.location.$invalid">
+										Submit</button>
+								</div>
+							</form>
+							<img src="images/aturhelp/loading.gif" ng-show="loading" style="position: relative;" />
+						</div>
+					</div>
+				</div>
 			</div>
+
 		</div>
-		<div class="row">
-			<div class="form-group col-lg-3">
-				<label for="subject" style="float: left">Subject:</label>
-				<input type="text" class="form-control" name="subject" ng-model="subject" placeholder="Enter Subject" required>
-				<span style="color: red" ng-show="locationform.subject.$dirty && locationform.subject.$invalid">
-				<span ng-show="locationform.subject.$error.required">
-				Please Enter Location Subject
-				</span>
-				</span>
-			</div>
-		</div>
-		<div class="row">
-			<div class="form-group col-lg-3">
-				<label for="locationname" style="float: left">Location Name:</label>
-				 <input type="text" class="form-control" name="location" ng-model="location" placeholder="Enter Location Name" required>
-				 <span style="color: red" ng-show="locationform.location.$dirty && locationform.location.$invalid">
-				<span ng-show="locationform.location.$error.required">
-				Please Enter Location Id
-				</span>
-				</span>
-			</div>
-		</div>
-		<div class="form-group col-lg-3">
-			<button  class="btn btn-info btn-primary" ng-click="submit()"
-			ng-disabled="locationform.subject.$invalid || locationform.location.$invalid">
-			Submit</button>
-		</div>
-	</form>
-	<img src="images/aturhelp/loading.gif" ng-show="loading" style="position:relative;"/>
+	</div>
+	<!--END CONTENT-->
+	<!--BEGIN FOOTER-->
+	<div id="footer">
+		<!-- <div class="copyright">
+			<a href="http://aturhelp.com">2016 © AtUrHelp</a>
+		</div> -->
+	</div>
+	<!--END FOOTER-->
 </div>

@@ -49,11 +49,11 @@
 							<div class="icon-bg bg-green"></div>
 					</i><span class="menu-title">Balance Sheet</span></a></li>
 
-				<li class="active"><a href="#milkcomment"><i class="fa fa-comment">
+				<li><a href="#milkcomment"><i class="fa fa-comment">
 							<div class="icon-bg bg-green"></div>
 					</i><span class="menu-title">Comment</span></a></li>
 
-				<li><a href="#milkfaltinactive"><i class="fa fa-minus">
+				<li class="active"><a href="#milkfaltinactive"><i class="fa fa-minus">
 							<div class="icon-bg bg-green"></div>
 					</i><span class="menu-title">Flat InActive</span></a></li>
 
@@ -73,12 +73,12 @@
 	<!--BEGIN TITLE & BREADCRUMB PAGE-->
 	<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
 		<div class="page-header pull-left">
-			<div class="page-title">Comment</div>
+			<div class="page-title">Flat InActive</div>
 		</div>
 		<ol class="breadcrumb page-breadcrumb pull-right">
 			<li><i class="fa fa-home"></i>&nbsp;<a href="#provider">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-			<li class="hidden"><a href="#">Comment</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-			<li class="active">Comment</li>
+			<li class="hidden"><a href="#">Flat InActive</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+			<li class="active">Flat InActive</li>
 		</ol>
 		<div class="clearfix"></div>
 	</div>
@@ -93,7 +93,7 @@
 				<div class="col-lg-8">
 					<div class="portlet box">
 						<div class="portlet-header">
-							<div class="caption">Add Comment</div>
+							<div class="caption">Flat InActive</div>
 						</div>
 						<div style="overflow: hidden;" class="portlet-body">
 
@@ -118,18 +118,22 @@
 								<div class="row">
 									<div class="form-group col-lg-6">
 										<label for="flatform" style="float: left">Flat No:</label> <select ng-model="flatNosel.type"
-											ng-options="f.id as f.roomno for f in flatNodetails" class="form-control" ng-change="changeFlat(flatNosel.type)">
+											ng-options="f.id as f.roomno for f in flatNodetails" class="form-control">
 										</select>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-lg-6">
-										<label for="flatform" style="float: left">Comment:</label>
-										<textarea class="form-control" rows="5" ng-model="comment" id="comment"></textarea>
+										<label for="flatform" style="float: left">Cancel From:</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-lg-3">
+										<md-datepicker style="float: left" ng-model="cancelDate" md-placeholder="Cancel Date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
 									</div>
 								</div>
 								<div class="form-group col-lg-6">
-									<button class="btn btn-info btn-primary" ng-click="submit()">Submit</button>
+									<button class="btn btn-info btn-primary" ng-click="inactive()">InActive</button>
 								</div>
 							</form>
 							<img src="images/aturhelp/loading.gif" ng-show="loading" style="position: relative;" />

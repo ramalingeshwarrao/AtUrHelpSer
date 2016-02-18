@@ -98,6 +98,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 					ps.setString(1, flatNo.getRoomno());
 					ps.setInt(2, flatNo.getAppId());
 					ps.setString(3, AtUrHelpUtils.getLoggedUserName());
+					ps.setBoolean(4, true);
 					return ps;
 				}
 			});
@@ -1043,6 +1044,33 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			});
 		} catch (Exception e) {
 			LOG.error("Fail to update alternative is required", e);
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean inActiveFalt(final String roomId, final String cancelDate) {
+		try {
+			this.jdbcTemplate.update(new PreparedStatementCreator() {
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con)
+						throws SQLException {
+					try {
+					PreparedStatement ps = con
+							.prepareStatement(SQLQuery.UPDATE_FLAT_IN_ACTIVE);
+					ps.setInt(1, 0);
+					ps.setDate(2, new java.sql.Date(AtUrHelpUtils.getDate(cancelDate).getTime()));
+					ps.setString(3, roomId);
+					return ps;
+					}
+					catch (Exception e ) {
+						throw new SQLException("Fail to update record");
+					}
+				}
+			});
+		} catch (Exception e) {
+			LOG.error("Fail to update inActive", e);
 			return false;
 		}
 		return true;
