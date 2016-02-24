@@ -11,12 +11,14 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import com.aturhelp.common.UpdateMilk;
 import com.aturhelp.common.UserInfo;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
@@ -279,13 +281,16 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	}
 
 	@Override
-	public List<Route> getRoutes() {
+	public List<Route> getRoutes(Boolean isSelReq) {
 		try {
 			String providerName = AtUrHelpUtils.getLoggedUserName();
-			Route selectRoute = new Route();
-			selectRoute.setId(0);
-			selectRoute.setSubject("SELECT");
-			selectRoute.setRouteId("SELECT");
+			Route selectRoute = null;
+			if (isSelReq) {
+				selectRoute = new Route();
+				selectRoute.setId(0);
+				selectRoute.setSubject("SELECT");
+				selectRoute.setRouteId("SELECT");				
+			}
 			
 			List<Route> list = this.jdbcTemplate.query(
 					SQLQuery.GET_ROUTES, new Object[] {providerName},
@@ -301,7 +306,9 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 						}
 					});
 			if (list != null && list.size() > 0) {
-				list.add(0, selectRoute);
+				if (isSelReq) {
+					list.add(0, selectRoute);					
+				}
 				return	list;
 			}
 		} catch (Exception e) {
@@ -463,12 +470,12 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		return null;
 	}
 
+	//We are using this method for scheduler
 	@Override
-	public List<GetFlatsData> getMilkDetailsByRouteId(int routeId, String strDate) {
+	public List<GetFlatsData> getMilkDetails(String strDate, String providerName) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
 			List<GetFlatsData> list = this.jdbcTemplate.query(
-					SQLQuery.GET_DAY_MILK_BY_ROUTE_ID, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()),providerName, routeId, providerName},
+					SQLQuery.GET_DAY_MILK, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()),providerName, providerName},
 					new RowMapper<GetFlatsData>() {
 						@Override
 						public GetFlatsData mapRow(ResultSet rs, int rowNum)
@@ -481,6 +488,48 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 							flatsData.setMilkId(rs.getString("milkid"));
 							flatsData.setCost(rs.getFloat("cost"));
 							flatsData.setQuantity(rs.getInt("quantity"));
+							int cat = rs.getInt("is_alternative");
+							String category = null;
+							if (cat == 1) {
+								category = com.aturhelp.common.Category.ALTERNATE.getCategory();
+							} else {
+								category = com.aturhelp.common.Category.GENERAL.getCategory();
+							}
+							flatsData.setProviderName(rs.getString("provider_id"));
+							flatsData.setCategory(category);
+							return flatsData;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return	list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get flat details", e);
+			return null;
+		}
+		return null;
+	}
+	
+	@Override
+	public List<GetFlatsData> getMilkDetailsByRouteId(int routeId, String strDate) {
+		try {
+			String providerName = AtUrHelpUtils.getLoggedUserName();
+			List<GetFlatsData> list = this.jdbcTemplate.query(
+					SQLQuery.GET_TIMER_DAY_MILK_BY_ROUTE_ID, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), routeId, providerName},
+					new RowMapper<GetFlatsData>() {
+						@Override
+						public GetFlatsData mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							GetFlatsData flatsData = new GetFlatsData();
+							flatsData.setAppartmentSubject(rs.getString("appsubject"));
+							flatsData.setAppartmentName(rs.getString("name"));
+							flatsData.setRoomId(rs.getString("room_id"));
+							flatsData.setRouteName(rs.getString("route_id"));
+							flatsData.setMilkId(rs.getString("milkid"));
+							flatsData.setCost(rs.getFloat("cost"));
+							flatsData.setQuantity(rs.getInt("quantity"));
+							flatsData.setFlatPrimaryKey(rs.getString("mfnid"));
+							flatsData.setPacketPrimaryKey(rs.getString("pid"));
 							return flatsData;
 						}
 					});
@@ -1006,7 +1055,6 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public int getCountByMilkId(String roomId, String milkId) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
 			List<Integer> list = this.jdbcTemplate.query(
 					SQLQuery.GET_QUANTITY_BY_ROOMID_MILK_ID, new Object[] {roomId, milkId},
 					new RowMapper<Integer>() {
@@ -1073,6 +1121,151 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			LOG.error("Fail to update inActive", e);
 			return false;
 		}
+		return true;
+	}
+
+	@Override
+	public void updateMilkTimerData(final List<GetFlatsData> flatsData) {
+
+		try {
+
+			// To improve performance we need executing batch of statements
+			String sql = SQLQuery.INSERT_TIMER_DATA;
+			final String date = AtUrHelpUtils.getCurrentDate();
+
+			this.jdbcTemplate.batchUpdate(sql,
+					new BatchPreparedStatementSetter() {
+
+						@Override
+						public void setValues(PreparedStatement ps, int i)
+								throws SQLException {
+							try {
+								GetFlatsData flatData = flatsData.get(i);
+								ps.setString(1, flatData.getCategory());
+								ps.setString(2, flatData.getRoomId());
+								ps.setString(3, flatData.getMilkId());
+								ps.setInt(4, flatData.getQuantity());
+								ps.setDate(5, new java.sql.Date(AtUrHelpUtils.getDate(date).getTime()));
+								ps.setString(6, flatData.getProviderName());
+								
+							} catch (Exception e) {
+								LOG.error("Fail to update record", e);
+							}
+						}
+
+						@Override
+						public int getBatchSize() {
+							return flatsData.size();
+						}
+					});
+		} catch (Exception e) {
+			LOG.error("Fail to insert batch statements", e);
+		}
+	}
+
+	@Override
+	public List<String> getProviders() {
+		try {
+			List<String> list = this.jdbcTemplate.query(SQLQuery.GET_PROVIDERS,
+					new Object[] {}, new RowMapper<String>() {
+						@Override
+						public String mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							return rs.getString(1);
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get milk details by room id details", e);
+			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean updateMilkData(final UpdateMilk um) {
+		try {
+			updateRoomMilkData(um);
+			updateTimerMilkData(um);
+		} catch (Exception e) {
+			LOG.error("Fail to edit data", e);
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean updateRoomMilkData(final UpdateMilk um) {
+		//Update Room milk data
+		this.jdbcTemplate.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				try {
+				PreparedStatement ps = null;
+				if (um.getNewMilkId() != null && um.getNewQuantity() != null) {
+					ps = con.prepareStatement(SQLQuery.EDIT_M_ROOM_MID_QTY);  
+					ps.setInt(1, um.getNewMilkId());
+					ps.setInt(2, um.getNewQuantity());
+					ps.setInt(3, um.getMilkRoomRoomId());
+					ps.setInt(4, um.getMilkRoomMilkId());
+				} else if (um.getNewMilkId() != null) {
+					ps = con.prepareStatement(SQLQuery.EDIT_M_ROOM_MID);  
+					ps.setInt(1, um.getNewMilkId());
+					ps.setInt(2, um.getMilkRoomRoomId());
+					ps.setInt(3, um.getMilkRoomMilkId());
+				} else if (um.getNewQuantity() != null) {
+					ps = con.prepareStatement(SQLQuery.EDIT_M_ROOM_QTY);  
+					ps.setInt(1, um.getNewQuantity());
+					ps.setInt(2, um.getMilkRoomRoomId());
+					ps.setInt(3, um.getMilkRoomMilkId());
+				}
+				return ps;
+				}
+				catch (Exception e ) {
+					throw new SQLException("Fail to update record");
+				}
+			}
+		});
+		return true;
+	}
+	
+	public boolean updateTimerMilkData(final UpdateMilk um) {
+		//Update Timer milk data
+		this.jdbcTemplate.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				try {
+				PreparedStatement ps = null;
+				if (um.getNewMilkId() != null && um.getNewQuantity() != null) {
+					ps = con.prepareStatement(SQLQuery.EDIT_TIMER_MID_QTY);  
+					ps.setInt(1, um.getNewMilkId());
+					ps.setInt(2, um.getNewQuantity());
+					ps.setInt(3, um.getMilkRoomRoomId());
+					ps.setInt(4, um.getMilkRoomMilkId());
+					ps.setDate(5, new java.sql.Date(AtUrHelpUtils.getDate(um.getSupplyDate()).getTime()));
+				} else if (um.getNewMilkId() != null) {
+					ps = con.prepareStatement(SQLQuery.EDIT_TIMER_MID);  
+					ps.setInt(1, um.getNewMilkId());
+					ps.setInt(2, um.getMilkRoomRoomId());
+					ps.setInt(3, um.getMilkRoomMilkId());
+					ps.setDate(4, new java.sql.Date(AtUrHelpUtils.getDate(um.getSupplyDate()).getTime()));
+				} else if (um.getNewQuantity() != null) {
+					ps = con.prepareStatement(SQLQuery.EDIT_TIMER_QTY);  
+					ps.setInt(1, um.getNewQuantity());
+					ps.setInt(2, um.getMilkRoomRoomId());
+					ps.setInt(3, um.getMilkRoomMilkId());
+					ps.setDate(4, new java.sql.Date(AtUrHelpUtils.getDate(um.getSupplyDate()).getTime()));
+				}
+				return ps;
+				}
+				catch (Exception e ) {
+					throw new SQLException("Fail to update record");
+				}
+			}
+		});
 		return true;
 	}
 

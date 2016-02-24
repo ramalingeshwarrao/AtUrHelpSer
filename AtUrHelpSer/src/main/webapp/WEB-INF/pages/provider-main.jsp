@@ -46,6 +46,7 @@
 <script type="text/javascript" src="js/milk-comment.js"></script>
 <script type="text/javascript" src="js/milk-alternative.js"></script>
 <script type="text/javascript" src="js/milk-flat-inactive.js"></script>
+<script type="text/javascript" src="js/milk-edit.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-aria.min.js"></script>

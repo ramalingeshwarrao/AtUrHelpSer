@@ -13,6 +13,7 @@
 		<param-value>
 		    classpath:spring-security.xml
 			classpath:ApplicationContext.xml
+			classpath:spring-quartz.xml
 				<!-- classpath:ApplicationContext.xml classpath:mdm-common.xml classpath:applicationContext-OneTier.xml classpath:middleware-api.xml -->
 		</param-value>
 	</context-param>

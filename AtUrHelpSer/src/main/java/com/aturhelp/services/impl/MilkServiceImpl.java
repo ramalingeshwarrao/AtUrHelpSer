@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.aturhelp.common.UpdateMilk;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.Category;
@@ -84,7 +85,7 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 
 	@Override
 	public List<Route> getRoutes() {
-		return milkDAO.getRoutes();
+		return milkDAO.getRoutes(true);
 	}
 
 	@Override
@@ -364,6 +365,30 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public boolean inActiveFalt(String roomId, String cancelDate) {
 		return milkDAO.inActiveFalt(roomId, cancelDate);
+	}
+
+	@Override
+	public void dailyTimer() {
+		String todayDate = AtUrHelpUtils.getTodayDate();
+		List<GetFlatsData> mainList = new ArrayList<GetFlatsData>();
+		
+		// Get List of provider names
+		List<String> providerList = milkDAO.getProviders();
+		
+		// Get data for each providers
+		for (String provider : providerList) {
+			List<GetFlatsData> flatsData = milkDAO.getMilkDetails(todayDate,
+					provider);
+			mainList.addAll(flatsData);
+		}
+
+		// update statements in batch
+		milkDAO.updateMilkTimerData(mainList);
+	}
+
+	@Override
+	public boolean updateMilkData(UpdateMilk um) {
+		return milkDAO.updateMilkData(um);
 	}
 
 

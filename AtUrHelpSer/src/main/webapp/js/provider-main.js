@@ -17,6 +17,32 @@
 			ProviderModule = angular.module('ProviderModule', ['ngRoute', 'ui.bootstrap', 'ngMaterial', 'ui.calendar']);
 			$PROVIDER.providerModule = ProviderModule;
 			
+			ProviderModule.factory('dailymilkedit', function() {
+				
+				var dailyMilkObj = {};
+				var itemsService = {};
+				var dailyMilkDate = "";
+				
+				itemsService.addDailyMilkDate = function(date) {
+					dailyMilkDate = date;
+				};
+				
+				itemsService.getDailyMilkDate = function() {
+					return dailyMilkDate;
+				};
+				
+				itemsService.addDailyMilkOjb = function(obj) {
+					dailyMilkObj = obj;
+				};
+				
+				itemsService.getDailyMilkObj = function() {
+					return dailyMilkObj;
+				};
+				
+				return itemsService;
+				
+			});
+			
 			ProviderModule.factory('printitems', function() {
 				var headerItems = [];
 				var bodyItems = [];
@@ -126,6 +152,9 @@
 				}).when('/milkfaltinactive', {
 					templateUrl : 'milk-flat-inactive.html',
 					controller : $PROVIDER.MilkInActiveController
+				}).when('/milkedit', {
+					templateUrl : 'milk-edit.html',
+					controller : $PROVIDER.MilkEditController
 				})
 				.otherwise({
 					redirectTo : '/provider'

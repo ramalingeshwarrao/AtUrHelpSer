@@ -2,9 +2,27 @@
 	
 	'use strict';
 	
-	$PROVIDER.DailyMilkController = ['$scope', '$http', '$location', 'printitems',  function ($scope, $http, $location, printitems) {
+	$PROVIDER.DailyMilkController = ['$scope', '$http', '$location', 'printitems', 'dailymilkedit',  function ($scope, $http, $location, printitems, dailymilkedit) {
 		
 		$scope.printshow = false;
+		
+		//edit daily milk data
+		$scope.edit = function(obj) {
+			var fDate = moment($scope.supplyDate).format('MM/DD/YYYY');
+			var dailyobj = {};
+			dailyobj.appsubject = obj.appsubject;
+			dailyobj.routename = obj.routename;
+			dailyobj.roomid = obj.roomid; 
+			dailyobj.milkid = obj.milkid;
+			dailyobj.quantity = obj.quantity; 
+			dailyobj.cost = obj.cost;
+			dailyobj.packetprimarykey = obj.ppk;
+			dailyobj.flatprimarykey = obj.fpk;
+			dailymilkedit.addDailyMilkOjb(dailyobj);
+			dailymilkedit.addDailyMilkDate(fDate);
+			$location.path( '/milkedit' );
+		};
+		
 		//print
 		$scope.print = function() {
 			var headerItems = [];

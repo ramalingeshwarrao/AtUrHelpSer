@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.aturhelp.common.UpdateMilk;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.Category;
@@ -35,7 +36,7 @@ public interface MilkDAO {
 	public List<MilkPackets> getMilkPackets();
 	public List<Appartment> getAppartments(String id);
 	public List<Location> getLocations();
-	public List<Route> getRoutes();
+	public List<Route> getRoutes(Boolean isSelReq);
 	public List<Category> getCategories();
 	public List<GetFlatsData> getFlatDetails(String recordsPerPage, String fromRecord);
 	public List<FlatNo> getFlatNoDetails(String apartmentId);
@@ -43,6 +44,7 @@ public interface MilkDAO {
 	public boolean craeteNoMilk(NoMilk noMilk);
 	public Boolean getMilkStatusByRid(int roomId);
 	public List<GetFlatsData> getMilkDetailsByRouteId(int routeId, String date);
+	public List<GetFlatsData> getMilkDetails(String date, String providerName);
 	public GetFlatsData getNoMilkDetails(int roomId, int appId);
 	public List<GetFlatsData> getAllNoMilkDetails(int roomId, int appId);
 	public boolean updateNoMilkToGetMilk(int roomId, String toDate);
@@ -81,5 +83,11 @@ public interface MilkDAO {
 	public boolean updateIsAlternativeToTrue(String roomId, String milkId, int alterCount) ;
 	
 	public boolean inActiveFalt(String roomId, String cancelDate);
+	
+	public void updateMilkTimerData(List<GetFlatsData> flatsData);
+	
+	public List<String> getProviders();
+	
+	public boolean updateMilkData(UpdateMilk um);
 
 }

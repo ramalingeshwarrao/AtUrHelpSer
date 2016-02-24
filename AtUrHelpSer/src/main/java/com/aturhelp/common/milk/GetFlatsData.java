@@ -18,7 +18,46 @@ public class GetFlatsData {
 	private String todate;
 	private int noMilkId;
 	private String comment;
+	private String category;
+	private String providerName;
+	private String packetPrimaryKey;
+	private String flatPrimaryKey;
 	
+	@XmlElement(name ="ppk")
+	public String getPacketPrimaryKey() {
+		return packetPrimaryKey;
+	}
+
+	public void setPacketPrimaryKey(String packetPrimaryKey) {
+		this.packetPrimaryKey = packetPrimaryKey;
+	}
+
+	@XmlElement(name ="fpk")
+	public String getFlatPrimaryKey() {
+		return flatPrimaryKey;
+	}
+
+	public void setFlatPrimaryKey(String flatPrimaryKey) {
+		this.flatPrimaryKey = flatPrimaryKey;
+	}
+
+	@XmlElement(name ="providerid")
+	public String getProviderName() {
+		return providerName;
+	}
+
+	public void setProviderName(String providerName) {
+		this.providerName = providerName;
+	}
+
+	@XmlElement(name ="category")
+	public String getCategory() {
+		return category;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	
 	@XmlElement(name ="nomilkid")
 	public int getNoMilkId() {

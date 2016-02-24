@@ -1,6 +1,5 @@
 package com.aturhelp.resource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -17,8 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.aturhelp.common.Help;
-import com.aturhelp.common.UserInfo;
+import com.aturhelp.common.UpdateMilk;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.Category;
@@ -412,6 +410,18 @@ public class MilkResource {
 			return Response.ok(0+"").build();
 		} else {
 			return Response.ok(1+"").build();
+		}
+	}
+	
+	@POST
+	@Path("editmilk")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response editMilk(UpdateMilk um) {
+		boolean res = milkService.updateMilkData(um);
+		if (res) {
+			return Response.ok(0 + "").build();
+		} else {
+			return Response.ok(1 + "").build();
 		}
 	}
 }

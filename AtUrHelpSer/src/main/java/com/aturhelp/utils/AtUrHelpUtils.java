@@ -74,6 +74,13 @@ public class AtUrHelpUtils {
 		return utcDate;
 	}
 	*/
+	
+	public static String getTodayDate() {
+		Date date = Calendar.getInstance().getTime();
+		SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+		return dateFormat.format(date);
+		
+	}
 	public static Date getDate(String strDate) throws Exception {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
 		Date formatedDate = dateFormat.parse(strDate);

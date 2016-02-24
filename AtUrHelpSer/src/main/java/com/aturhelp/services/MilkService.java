@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.aturhelp.common.UpdateMilk;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
 import com.aturhelp.common.milk.Category;
@@ -81,5 +82,17 @@ public interface MilkService {
 	public boolean updateIsAlternativeToTrue(String roomId, String milkId, int alterCount) ;
 	
 	public boolean inActiveFalt(String roomId, String cancelDate);
+	
+	/**
+	 * This method is helpful for copying data from main tables to timer table.
+	 */
+	public void dailyTimer();
+	
+	/**
+	 * The method will update milkid or quantity in milk_room and milk_timer tables.
+	 * @param um
+	 * @return
+	 */
+	public boolean updateMilkData(UpdateMilk um);
 
 }

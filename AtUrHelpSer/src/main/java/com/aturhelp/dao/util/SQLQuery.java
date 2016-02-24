@@ -54,6 +54,10 @@ public class SQLQuery {
 	public static final String GET_COUNT_MILK_DATA = "SELECT count(1) from milk_flat_no mfn inner join milk_room mr on mfn.id = mr.room_id where mfn.provider_id=? and is_active=1"; 
 	public static final String GET_STATUS_ROOM_MILK = "SELECT isUpdated FROM milk_nomilk WHERE rid=? AND provider_id=?";
 	public static final String GET_DAY_MILK_BY_ROUTE_ID = "SELECT ma.subject as appsubject, ma.name, mfn.room_id, mr.route_id, mp.milkid, mp.cost, mroom.quantity FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id AND mfn.is_active = 1 INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id WHERE mfn.id NOT IN (select rid from milk_nomilk where fromdate <= ? AND isUpdated=0  OR fromdate <= ? AND todate >= ? AND provider_id=?) AND ma.route_id=? AND ma.provider_id=? order by ma.name, mfn.room_id";
+	
+	public static final String GET_TIMER_DAY_MILK_BY_ROUTE_ID = "SELECT ma.subject as appsubject, ma.name, mfn.room_id, mr.route_id, mp.milkid, mp.cost, mroom.quantity, mp.id as pid, mfn.id as mfnid  FROM milk_timer mt INNER JOIN milk_flat_no mfn ON mfn.id = mt.rid INNER JOIN milk_packats mp ON mp.id = mt.mid INNER JOIN milk_appartment ma ON ma.id = mfn.app_id INNER JOIN milk_route mr ON mr.id = ma.route_id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id AND mroom.milk_id = mp.id WHERE mt.milkdate= ? AND ma.route_id = ? AND mt.provider_id = ?";
+	
+	public static final String GET_DAY_MILK = "SELECT ma.subject as appsubject, ma.name, mfn.id as room_id, mr.route_id, mp.id as milkid, mp.cost, mroom.quantity, mroom.is_alternative, mroom.provider_id FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id AND mfn.is_active = 1 INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id WHERE mfn.id NOT IN (select rid from milk_nomilk where fromdate <= ? AND isUpdated=0  OR fromdate <= ? AND todate >= ? AND provider_id=?) AND ma.provider_id=? order by ma.name, mfn.room_id";
 	public static final String GET_NO_MILK_BY_ROOM_ID_APP_ID = "select mn.id, ma.name, mfn.room_id, mn.fromdate from milk_nomilk mn INNER JOIN milk_flat_no mfn ON mn.rid = mfn.id INNER JOIN milk_appartment ma ON ma.id = mfn.app_id WHERE isUpdated=? AND ma.id=? AND mfn.id=? AND mfn.provider_id=?";
 	public static final String UPDATE_NO_MILK_TO_GET_MILK = "update milk_nomilk set isUpdated=?,todate=? WHERE rid=? AND isUpdated=0 AND provider_id=?";
 	public static final String NO_MILK_FIRST_CASE = "SELECT count(1) FROM milk_nomilk WHERE rid=? AND fromdate <=? AND isUpdated=? AND provider_id=?";
@@ -74,5 +78,15 @@ public class SQLQuery {
 	public static final String GET_QUANTITY_BY_ROOMID_MILK_ID = "select quantity from milk_room where room_id =? AND milk_id=?";
 	public static final String UPDATE_IS_ALTERNATIVE = "UPDATE milk_room set is_alternative = ?, alter_count = ? WHERE room_id = ? AND milk_id = ?";
 	public static final String UPDATE_FLAT_IN_ACTIVE = "UPDATE milk_flat_no set is_active = ?, in_active_from = ? where id = ?";
+	public static final String INSERT_TIMER_DATA = "INSERT INTO milk_timer (cat, rid, mid, quantity, milkdate, provider_id) VALUES (?, ?, ?, ?, ?, ?)";
+	public static final String GET_PROVIDERS = "select distinct provider_id from milk_room";
+	
+	//milk edit update queries
+	public static final String EDIT_TIMER_MID_QTY = "update milk_timer set mid=?, quantity=? where rid=? and mid=? and milkdate=?";
+	public static final String EDIT_TIMER_MID = "update milk_timer set mid=? where rid=? and mid=? and milkdate=?";
+	public static final String EDIT_TIMER_QTY = "update milk_timer set quantity=? where rid=? and mid=? and milkdate=?";
+	public static final String EDIT_M_ROOM_MID_QTY = "update milk_room set milk_id=?, quantity=? where room_id=? and milk_id=?";
+	public static final String EDIT_M_ROOM_MID = "update milk_room set milk_id=? where room_id=? and milk_id=?";
+	public static final String EDIT_M_ROOM_QTY = "update milk_room set quantity=? where room_id=? and milk_id=?";
 	
 }
