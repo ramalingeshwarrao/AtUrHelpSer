@@ -69,7 +69,10 @@ public interface MilkService {
 	 */
 	public NoMilk getNoMilkDetailsByIdForNull(NoMilk noMilk);
 	
+	@Deprecated
 	public List<RoomBill> getFinalCostForRoomByAppId(int appId, String fromDate, String toDate) throws Exception;
+	public List<RoomBill> getBillByAppId(int appId, String fromDate, String toDate);
+	
 	public List<BalanceSheet> getMilkSpendinLts(String strDate);
 	public List<BalanceSheet> getMilkSpendinLtsByRoute(String strDate);
 	public boolean setComment(String roomId, String comment);
@@ -94,5 +97,14 @@ public interface MilkService {
 	 * @return
 	 */
 	public boolean updateMilkData(UpdateMilk um);
+	
+	/**
+	 * Delete data in milk timer
+	 * @param rid
+	 * @param mid
+	 * @param supplyDate
+	 * @return
+	 */
+	public boolean deleteMilkTimerData(Integer rid, Integer mid, String supplyDate);
 
 }

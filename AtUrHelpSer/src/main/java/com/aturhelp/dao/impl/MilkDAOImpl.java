@@ -30,9 +30,9 @@ import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.NoMilk;
 import com.aturhelp.common.milk.NoMilkCost;
+import com.aturhelp.common.milk.RoomBill;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
-import com.aturhelp.constants.Constants;
 import com.aturhelp.dao.MilkDAO;
 import com.aturhelp.dao.util.SQLQuery;
 import com.aturhelp.utils.AtUrHelpUtils;
@@ -1267,6 +1267,58 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			}
 		});
 		return true;
+	}
+
+	@Override
+	public boolean deleteMilkTimerData(final Integer rid, final Integer mid, final String supplyDate) {
+		final String providerName = AtUrHelpUtils.getLoggedUserName();
+		//Update Timer milk data
+		this.jdbcTemplate.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				try {
+					PreparedStatement ps = null;
+					ps = con.prepareStatement(SQLQuery.DELETE_MILK_TIMER_DATA);  
+					ps.setInt(1, rid);
+					ps.setInt(2, mid);
+					ps.setDate(3, new java.sql.Date(AtUrHelpUtils.getDate(supplyDate).getTime()));
+					ps.setString(4, providerName);
+				return ps;
+				}
+				catch (Exception e ) {
+					throw new SQLException("Fail to update record");
+				}
+			}
+		});
+		return true;
+	}
+
+	@Override
+	public List<RoomBill> getBillByAppId(final int appId, final String fromDate, final String toDate) {
+		final String providerName = AtUrHelpUtils.getLoggedUserName();
+		try {
+			List<RoomBill> list = this.jdbcTemplate.query(SQLQuery.GET_BILL_BY_APP_ID,
+					new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(fromDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(toDate).getTime()), providerName, appId}, new RowMapper<RoomBill>() {
+						@Override
+						public RoomBill mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							RoomBill rb = new RoomBill();
+							rb.setAppName(rs.getString("subject"));
+							rb.setCost(rs.getInt("finalcost"));
+							rb.setRoomId(rs.getString("room_id"));
+							return rb;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get milk details by room id details", e);
+			return null;
+		}
+		return null;
+	
 	}
 
 }

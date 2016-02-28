@@ -99,7 +99,6 @@
 							<div class="caption">Edit Milk Details</div>
 						</div>
 						<div style="overflow: hidden;" class="portlet-body">
-						<form name="appnameform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
 
 							<form name="appnameform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
 
@@ -125,7 +124,7 @@
 									<div class="form-inline">
 									<div class=" form-group col-lg-10">
 										<label style="float: left">Edit Milk Id:
-										<input type="checkbox" ng-model="edit.milkid" id="milkid" name="milkid"></label>
+										<input type="checkbox" ng-model="edit.milkid" id="milkid" name="milkid" ng-click="milkfun()"></label>
 									</div>
 									</div>
 									<div class="form-group col-lg-10" ng-show="edit.milkid">
@@ -141,22 +140,31 @@
 									<div class="form-group col-lg-10" ng-show="edit.quantity">
 										<input style="float: left;margin-bottom: 10px" type="text" ng-model="editquantity" id="editquantity" name="editquantity" />
 									</div>
+									<div class="form-inline">
+									<div class=" form-group col-lg-10">
+										<label style="float: left">Not Required:
+										<input type="checkbox" ng-model="edit.notreq" id="notreq" name="notreq" ng-click="delfun()"></label>
+									</div>
+									</div>
+									<div class="form-group col-lg-6" ng-show="edit.notreq" >
+									<button class="btn btn-info btn-primary" ng-click="deleteRec()" >
+										Delete</button>
+									</div>
 									<div class="form-group col-lg-6">
 									<button class="btn btn-info btn-primary" ng-click="submit()" ng-show="edit.milkid || edit.quantity">
 										Submit</button>
 									</div>
-									</form>
-									<img src="images/aturhelp/loading.gif" ng-show="loading" style="position: relative;" />
 									</div>
+									</form>
 								</div>
-							</form>
-
 						</div>
+						<img src="images/aturhelp/loading.gif" ng-show="loading" style="position: relative;" />
 					</div>
 				</div>
 			</div>
 
 		</div>
+		
 	</div>
 	<!--END CONTENT-->
 	<!--BEGIN FOOTER-->

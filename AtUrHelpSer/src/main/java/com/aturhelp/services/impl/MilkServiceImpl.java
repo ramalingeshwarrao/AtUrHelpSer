@@ -391,5 +391,15 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 		return milkDAO.updateMilkData(um);
 	}
 
+	@Override
+	public boolean deleteMilkTimerData(Integer rid, Integer mid, String supplyDate) {
+		return milkDAO.deleteMilkTimerData(rid, mid, supplyDate);
+	}
+
+	@Override
+	public List<RoomBill> getBillByAppId(int appId, String fromDate, String toDate) {
+		return milkDAO.getBillByAppId(appId, fromDate, toDate);
+	}
+
 
 }

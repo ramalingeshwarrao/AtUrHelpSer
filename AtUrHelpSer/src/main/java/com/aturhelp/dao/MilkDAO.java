@@ -16,6 +16,7 @@ import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.NoMilk;
 import com.aturhelp.common.milk.NoMilkCost;
+import com.aturhelp.common.milk.RoomBill;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
 
@@ -89,5 +90,9 @@ public interface MilkDAO {
 	public List<String> getProviders();
 	
 	public boolean updateMilkData(UpdateMilk um);
+	
+	public boolean deleteMilkTimerData(Integer rid, Integer mid, String supplyDate);
+	
+	public List<RoomBill> getBillByAppId(int appId, String fromDate, String toDate);
 
 }

@@ -318,7 +318,7 @@ public class MilkResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<RoomBill> getBill(@QueryParam(Constants.FROM_DATE) String fromDate, @QueryParam(Constants.TO_DATE) String toDate,  @QueryParam(Constants.APP_ID) int appId) {
 		try {
-			return milkService.getFinalCostForRoomByAppId(appId, fromDate, toDate);
+			return milkService.getBillByAppId(appId, fromDate, toDate);
 		} catch(Exception e) {
 			LOG.error("Fail to generate bill", e);
 		}
@@ -422,6 +422,19 @@ public class MilkResource {
 			return Response.ok(0 + "").build();
 		} else {
 			return Response.ok(1 + "").build();
+		}
+	}
+	
+	@GET
+	@Path("dmt")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	public Response deleteMilkTimerData(@QueryParam("roomid") Integer rid, @QueryParam("milkid") Integer mid, @QueryParam("sd") String supplyDate) {
+		
+		boolean res = milkService.deleteMilkTimerData(rid, mid, supplyDate);
+		if (res) {
+			return Response.ok(0+"").build();
+		} else {
+			return Response.ok(1+"").build();
 		}
 	}
 }

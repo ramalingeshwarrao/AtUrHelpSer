@@ -11,9 +11,44 @@
 		$scope.edit.milkid = false;
 		$scope.edit.quantity = false;
 		
+		$scope.milkfun = function() {
+			$scope.edit.notreq = false;
+		};
+		
 		$scope.editQuan = function() {
+			$scope.edit.notreq = false;
 			$scope.editquantity = $scope.milkObj.quantity;			
 		}; 
+		
+		$scope.deleteRec = function() {
+			$scope.loading = true;
+			$http (
+					 {
+						 method :  'GET',
+						 url : $PROVIDER.providerMilkRest+'/dmt?roomid='+$scope.milkObj.flatprimarykey+'&milkid='+$scope.milkObj.packetprimarykey+'&sd='+supplyDate,
+						 headers : {
+								'Content-Type' : 'application/json'
+							}
+					 }).success(function(data) {
+						 $scope.loading = false;
+						 if (data == 0) {
+							 BootstrapDialog.alert("Succesfuly Deleted");
+							 $location.path( '/dailymilk' );
+						} else {
+							$scope.loading = false;
+							BootstrapDialog.alert("Fail To Updtea Record");
+						}
+						 
+					 }).error(function(data, status, headers, config) {
+						 $scope.loading = false;
+						 BootstrapDialog.alert("Fail to delete record contact admin for the support");
+					 });
+		};
+		
+		$scope.delfun = function() {
+			$scope.edit.quantity = false;
+			$scope.edit.milkid = false;
+		};
 		
 		$scope.submit = function() {
 			var isMilkIdSelect = $scope.edit.milkid;

@@ -88,5 +88,7 @@ public class SQLQuery {
 	public static final String EDIT_M_ROOM_MID_QTY = "update milk_room set milk_id=?, quantity=? where room_id=? and milk_id=?";
 	public static final String EDIT_M_ROOM_MID = "update milk_room set milk_id=? where room_id=? and milk_id=?";
 	public static final String EDIT_M_ROOM_QTY = "update milk_room set quantity=? where room_id=? and milk_id=?";
+	public static final String DELETE_MILK_TIMER_DATA = "delete from milk_timer where rid=? AND  mid=? AND milkdate=? AND provider_id=?";
+	public static final String GET_BILL_BY_APP_ID = "select ma.subject , mfn.room_id,  sum(mt.quantity * mp.cost) as finalcost from milk_timer mt inner join milk_flat_no mfn on mt.rid = mfn.id inner join milk_packats mp on mp.id = mt.mid inner join milk_room mr on mr.room_id = mt.rid and mr.milk_id = mt.mid inner join milk_appartment ma on ma.id = mfn.app_id where mt.milkdate between ? and ? and mt.provider_id = ? and ma.id = ? group by ma.subject, mfn.room_id, mt.provider_id";
 	
 }
