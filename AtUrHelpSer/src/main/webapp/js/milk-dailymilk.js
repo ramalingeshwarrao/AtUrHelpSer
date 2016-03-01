@@ -79,6 +79,7 @@
 			var fromDate = $scope.supplyDate;
 			if (fromDate == undefined) {
 				BootstrapDialog.alert("Please select from From Date");
+				$scope.loading = false;
 				return;
 			}
 			var fDate = moment($scope.supplyDate).format('MM/DD/YYYY');

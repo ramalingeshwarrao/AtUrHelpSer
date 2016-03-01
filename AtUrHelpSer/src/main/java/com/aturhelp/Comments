@@ -8,3 +8,13 @@ service mysql restart
 //Alternative query : 
 
 public static final String GET_DAY_MILK_BY_ROUTE_ID = "SELECT ma.subject as appsubject, ma.name, mfn.room_id, mr.route_id, mp.milkid, mp.cost, IF(malt.room_id = mroom.room_id AND malt.milk_id = mroom.milk_id, malt.today_count, mroom.quantity) as quantity FROM milk_appartment ma INNER JOIN milk_flat_no mfn ON ma.id = mfn.app_id INNER JOIN milk_route mr ON ma.route_id = mr.id INNER JOIN milk_room mroom ON mroom.room_id = mfn.id INNER JOIN milk_packats mp ON mp.id = mroom.milk_id LEFT JOIN milk_alternative malt ON malt.room_id = mroom.room_id AND malt.milk_id = mroom.milk_id AND malt.da = ? WHERE mfn.id NOT IN (select rid from milk_nomilk where fromdate <= ? AND isUpdated=0  OR fromdate <= ? AND todate >= ? AND provider_id=?) AND ma.route_id=? AND ma.provider_id=? order by ma.name, mfn.room_id";
+
+
+
+
+
+----------
+DB Changes : 
+
+alter table milk_appartment add column priority int;
+update milk_appartment set priority=0;

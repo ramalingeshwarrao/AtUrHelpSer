@@ -16,6 +16,7 @@ import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.NoMilk;
 import com.aturhelp.common.milk.NoMilkCost;
+import com.aturhelp.common.milk.Priority;
 import com.aturhelp.common.milk.RoomBill;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
@@ -94,5 +95,9 @@ public interface MilkDAO {
 	public boolean deleteMilkTimerData(Integer rid, Integer mid, String supplyDate);
 	
 	public List<RoomBill> getBillByAppId(int appId, String fromDate, String toDate);
+	
+	public List<Priority> getPriorityListByRouteId(int routeId);
+	
+	public void updatePriority(List<Priority> priority) throws Exception;
 
 }

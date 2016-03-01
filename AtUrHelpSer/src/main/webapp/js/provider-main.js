@@ -155,6 +155,9 @@
 				}).when('/milkedit', {
 					templateUrl : 'milk-edit.html',
 					controller : $PROVIDER.MilkEditController
+				}).when('/milkapppriority', {
+					templateUrl : 'milk-priority.html',
+					controller : $PROVIDER.MilkPriorityController
 				})
 				.otherwise({
 					redirectTo : '/provider'

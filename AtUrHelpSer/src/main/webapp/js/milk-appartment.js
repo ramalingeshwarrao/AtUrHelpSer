@@ -5,6 +5,11 @@
 			
 			$PROVIDER.MilkAppartmentController = ['$scope', '$http', '$location', function ($scope, $http, $location) {
 				
+				$scope.addpriority = function() {
+					
+					$location.path( '/milkapppriority' );
+				};
+				
 				$scope.submit = function() {
 
 					if ($scope.routesel.type == undefined || $scope.routesel.type == "0") {

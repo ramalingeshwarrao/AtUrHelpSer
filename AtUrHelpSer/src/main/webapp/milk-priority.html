@@ -78,7 +78,8 @@
 		<ol class="breadcrumb page-breadcrumb pull-right">
 			<li><i class="fa fa-home"></i>&nbsp;<a href="#provider">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
 			<li class="hidden"><a href="#">Apartment</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-			<li class="active">Apartment</li>
+			<li class="active"><a href="#milkappartment">Apartment</a></li>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+			<li class="active">Add Priority</li>
 		</ol>
 		<div class="clearfix"></div>
 	</div>
@@ -93,40 +94,32 @@
 				<div class="col-lg-8">
 					<div class="portlet box">
 						<div class="portlet-header">
-							<div class="caption">Add Apartment</div>
-							<button style="float:right" class="btn btn-info btn-primary fa fa-plus"  ng-click="addpriority()" >
-										AddPriority</button>
+							<div class="caption">Add Priority</div>
 						</div>
 						<div style="overflow: hidden;" class="portlet-body">
+
+
 							<form name="appnameform" style="margin-left: 70px; margin-top: 40px" ng-hide="loading">
-								<div class="row">
-									<div class="form-group col-lg-6">
-										<label for="subject" style="float: left">Subject:</label> <input type="text" class="form-control" name="subject" maxlength="50"
-											ng-model="subject" placeholder="Enter Subject" required> <span style="color: red"
-											ng-show="appnameform.subject.$dirty && appnameform.subject.$invalid"> <span ng-show="appnameform.subject.$error.required">
-												Please Enter appname Subject </span>
-										</span>
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-lg-6">
-										<label for="appnamename" style="float: left">Apartment Name:</label> <input type="text" class="form-control" name="appname"
-											ng-model="appname" maxlength="150" placeholder="Enter Apartment Name" required> <span style="color: red"
-											ng-show="appnameform.appname.$dirty && appnameform.appname.$invalid"> <span ng-show="appnameform.appname.$error.required">
-												Please Enter appname Id </span>
-										</span>
-									</div>
-								</div>
+
 								<div class="row">
 									<div class="form-group col-lg-6">
 										<label for="appnamename" style="float: left">Route:</label> <select ng-model="routesel.type"
-											ng-options="r.id as r.routeid for r in routedetails" class="form-control">
+											ng-options="r.id as r.routeid for r in routedetails" class="form-control" ng-change="routeChange(routesel.type)">
 										</select>
 									</div>
 								</div>
+								<table id="users" class="table table-bordered table-condensed" style="width: 100%">
+									<tr>
+										<th>Appartment Name</th>
+										<th>Priority</th>
+									</tr>
+									<tr ng-repeat="pa in priorityarray">
+										<td width="30%">{{ pa.appname }}</td>
+										<td width="10%"><input type="text" ng-model="pa.pnumber" /></td>
+									</tr>
+								</table>
 								<div class="form-group col-lg-6">
-									<button class="btn btn-info btn-primary" ng-click="submit()" ng-disabled="appnameform.subject.$invalid || appnameform.appname.$invalid">
-										Submit</button>
+								 <button class="btn btn-info btn-primary" ng-click="submit()">Submit</button>
 								</div>
 							</form>
 							<img src="images/aturhelp/loading.gif" ng-show="loading" style="position: relative;" />

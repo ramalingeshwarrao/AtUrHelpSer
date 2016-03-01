@@ -27,6 +27,8 @@ import com.aturhelp.common.milk.ListRoomMilk;
 import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.NoMilk;
+import com.aturhelp.common.milk.Priority;
+import com.aturhelp.common.milk.PriorityList;
 import com.aturhelp.common.milk.RoomBill;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
@@ -436,6 +438,31 @@ public class MilkResource {
 		} else {
 			return Response.ok(1+"").build();
 		}
+	}
+	
+	@GET
+	@Path("priority")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<Priority> getPriorityData(@QueryParam("routeid") Integer routeId) {
+		return milkService.getPriorityListByRouteId(routeId);
+	}
+	
+	@POST
+	@Path("updatepriority")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response updatePriority(@RequestBody PriorityList pl) {
+		try {
+			 if (pl != null && pl.getpList().size() > 0) {
+				 milkService.updatePriority(pl.getpList());	 
+			 } else {
+				 return Response.ok(1 + "").build();
+			 }
+		} catch (Exception e) {
+			LOG.error("Fail to update priority",e);
+			return Response.ok(1 + "").build();
+		}
+		return Response.ok(0 + "").build();
 	}
 }
 

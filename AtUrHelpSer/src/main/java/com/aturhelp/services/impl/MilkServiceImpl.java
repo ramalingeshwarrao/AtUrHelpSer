@@ -23,6 +23,7 @@ import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.NoMilk;
 import com.aturhelp.common.milk.NoMilkCost;
+import com.aturhelp.common.milk.Priority;
 import com.aturhelp.common.milk.RoomBill;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
@@ -399,6 +400,16 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public List<RoomBill> getBillByAppId(int appId, String fromDate, String toDate) {
 		return milkDAO.getBillByAppId(appId, fromDate, toDate);
+	}
+
+	@Override
+	public List<Priority> getPriorityListByRouteId(int routeId) {
+		return milkDAO.getPriorityListByRouteId(routeId);
+	}
+
+	@Override
+	public void updatePriority(List<Priority> priority) throws Exception{
+		milkDAO.updatePriority(priority);
 	}
 
 

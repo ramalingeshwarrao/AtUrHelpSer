@@ -30,6 +30,7 @@ import com.aturhelp.common.milk.Location;
 import com.aturhelp.common.milk.MilkPackets;
 import com.aturhelp.common.milk.NoMilk;
 import com.aturhelp.common.milk.NoMilkCost;
+import com.aturhelp.common.milk.Priority;
 import com.aturhelp.common.milk.RoomBill;
 import com.aturhelp.common.milk.RoomMilk;
 import com.aturhelp.common.milk.Route;
@@ -875,7 +876,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		try {
 			String providerName = AtUrHelpUtils.getLoggedUserName();
 			List<BalanceSheet> list = this.jdbcTemplate.query(
-					SQLQuery.GET_CONSUMED_MILK, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()),providerName, providerName},
+					SQLQuery.GET_CONSUMED_MILK, new Object[] {providerName, new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime())},
 					new RowMapper<BalanceSheet>() {
 						@Override
 						public BalanceSheet mapRow(ResultSet rs, int rowNum)
@@ -901,7 +902,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		try {
 			String providerName = AtUrHelpUtils.getLoggedUserName();
 			List<BalanceSheet> list = this.jdbcTemplate.query(
-					SQLQuery.GET_CONSUMED_MILK_BY_ROUTE_ID, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()),providerName, providerName},
+					SQLQuery.GET_CONSUMED_MILK_BY_ROUTE_ID, new Object[] {providerName, new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime())},
 					new RowMapper<BalanceSheet>() {
 						@Override
 						public BalanceSheet mapRow(ResultSet rs, int rowNum)
@@ -1319,6 +1320,61 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		}
 		return null;
 	
+	}
+
+	@Override
+	public List<Priority> getPriorityListByRouteId(final int routeId) {
+		try {
+			List<Priority> list = this.jdbcTemplate.query(SQLQuery.GET_APP_ID_PRIORITY_BY_ROUTE_ID,
+					new Object[] {routeId}, new RowMapper<Priority>() {
+						@Override
+						public Priority mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							Priority p = new Priority();
+							p.setAppName(rs.getString("appname"));
+							p.setAppId(rs.getInt("appid"));
+							p.setPriorityId(rs.getInt("priority"));
+							return p;
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return list;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get milk details by room id details", e);
+			return null;
+		}
+		return null;
+	
+	}
+
+	@Override
+	public void updatePriority(final List<Priority> priority) throws Exception{
+
+		try {
+			String sql = SQLQuery.UPDATE_PRIORITY;
+			this.jdbcTemplate.batchUpdate(sql,
+					new BatchPreparedStatementSetter() {
+						@Override
+						public void setValues(PreparedStatement ps, int i)
+								throws SQLException {
+							try {
+								Priority p = priority.get(i);
+								ps.setInt(1, p.getPriorityId());
+								ps.setInt(2, p.getAppId());
+							} catch (Exception e) {
+								LOG.error("Fail to update record", e);
+							}
+						}
+						@Override
+						public int getBatchSize() {
+							return priority.size();
+						}
+					});
+		} catch (Exception e) {
+			LOG.error("Fail to insert batch statements", e);
+			throw new Exception("Fail to update priority");
+		}
 	}
 
 }
