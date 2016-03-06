@@ -99,5 +99,7 @@ public interface MilkDAO {
 	public List<Priority> getPriorityListByRouteId(int routeId);
 	
 	public void updatePriority(List<Priority> priority) throws Exception;
+	
+	public void updateTestMilkTimerData(final List<GetFlatsData> flatsData, String date) ;
 
 }

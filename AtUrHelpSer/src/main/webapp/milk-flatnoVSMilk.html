@@ -104,21 +104,21 @@
 
 								<div class="row">
 									<div class="form-group col-lg-6">
-										<label for="flatform" style="float: left">Route:</label> <select ng-model="routesel.type"
+										<label for="flatform" style="float: left">Route:</label> <select ng-model="routesel.type" id="routesel.type"
 											ng-options="r.id as r.routeid for r in routedetails" class="form-control" ng-change="changeRoute(routesel.type)">
 										</select>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-lg-6">
-										<label for="flatform" style="float: left">Apartment Name:</label> <select ng-model="apartmentsel.type"
+										<label for="flatform" style="float: left">Apartment Name:</label> <select ng-model="apartmentsel.type" id="apartmentsel.type"
 											ng-options="a.id as a.appsubject for a in apartmentdetails" class="form-control" ng-change="changeApp(apartmentsel.type)">
 										</select>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-lg-6">
-										<label for="flatform" style="float: left">Flat No:</label> <select ng-model="flatNosel.type"
+										<label for="flatform" style="float: left">Flat No:</label> <select ng-model="flatNosel.type" id="flatNosel.type"
 											ng-options="f.id as f.roomno for f in flatNodetails" class="form-control">
 										</select>
 									</div>
@@ -130,9 +130,9 @@
 								</div>
 								<div class="form-inline">
 									<fieldset data-ng-repeat="choice in choices">
-										<select ng-model="choice.type" ng-options="f.id as f.milkname for f in milkdetails" class="form-control"
+										<select ng-model="choice.type" id="choice.type" ng-options="f.id as f.milkname for f in milkdetails" class="form-control"
 											style="float: left; margin-right: 10px; margin-top: 10px">
-										</select> <input type="number" ng-model="choice.mquant" name="" placeholder="Enter Quantity" style="float: left; margin-top: 10px">
+										</select> <input type="number" id="choice.mquant" ng-model="choice.mquant" name="" placeholder="Enter Quantity" style="float: left; margin-top: 10px">
 										<button class="remove" ng-show="$last" ng-click="removeChoice()" style="float: left; margin-left: 10px; margin-top: 10px">-</button>
 									</fieldset>
 								</div>

@@ -18,3 +18,7 @@ DB Changes :
 
 alter table milk_appartment add column priority int;
 update milk_appartment set priority=0;
+
+JStack : 
+jstack -l 16666 > jstack.out
+

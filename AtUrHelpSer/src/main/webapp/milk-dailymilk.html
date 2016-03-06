@@ -109,13 +109,13 @@
 								</div>
 								<div class="row">
 									<div class="form-group col-lg-6">
-										<md-datepicker style="float: left" ng-model="supplyDate" md-placeholder="Supply Date" md-min-date="minDate" md-max-date="maxDate"
+										<md-datepicker style="float: left" name="supplyDate" ng-model="supplyDate" md-placeholder="Supply Date" md-min-date="minDate" md-max-date="maxDate"
 											ng-change="changeDate()"></md-datepicker>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-lg-6">
-										<label for="routename" style="float: left">Route:</label> <select ng-model="routesel.type"
+										<label for="routename" style="float: left">Route:</label> <select ng-model="routesel.type" id="routesel.type"
 											ng-options="r.id as r.routeid for r in routedetails" class="form-control" ng-change="dailymilkdata(routesel.type)">
 										</select>
 									</div>

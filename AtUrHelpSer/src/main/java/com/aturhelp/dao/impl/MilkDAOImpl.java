@@ -1163,6 +1163,43 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			LOG.error("Fail to insert batch statements", e);
 		}
 	}
+	
+	@Override
+	public void updateTestMilkTimerData(final List<GetFlatsData> flatsData, final String date) {
+		try {
+
+			// To improve performance we need executing batch of statements
+			String sql = SQLQuery.INSERT_TIMER_DATA;
+
+			this.jdbcTemplate.batchUpdate(sql,
+					new BatchPreparedStatementSetter() {
+
+						@Override
+						public void setValues(PreparedStatement ps, int i)
+								throws SQLException {
+							try {
+								GetFlatsData flatData = flatsData.get(i);
+								ps.setString(1, flatData.getCategory());
+								ps.setString(2, flatData.getRoomId());
+								ps.setString(3, flatData.getMilkId());
+								ps.setInt(4, flatData.getQuantity());
+								ps.setDate(5, new java.sql.Date(AtUrHelpUtils.getDate(date).getTime()));
+								ps.setString(6, flatData.getProviderName());
+								
+							} catch (Exception e) {
+								LOG.error("Fail to update record", e);
+							}
+						}
+
+						@Override
+						public int getBatchSize() {
+							return flatsData.size();
+						}
+					});
+		} catch (Exception e) {
+			LOG.error("Fail to insert batch statements", e);
+		}
+	}
 
 	@Override
 	public List<String> getProviders() {
@@ -1376,5 +1413,5 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			throw new Exception("Fail to update priority");
 		}
 	}
-
+	
 }

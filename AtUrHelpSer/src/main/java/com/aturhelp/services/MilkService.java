@@ -92,6 +92,13 @@ public interface MilkService {
 	 */
 	public void dailyTimer();
 	
+	
+	/**
+	 * This is sample quartz test
+	 * @param date
+	 */
+	public void testDailyTimer(String date);
+	
 	/**
 	 * The method will update milkid or quantity in milk_room and milk_timer tables.
 	 * @param um

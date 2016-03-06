@@ -386,6 +386,24 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 		// update statements in batch
 		milkDAO.updateMilkTimerData(mainList);
 	}
+	
+	@Override
+	public void testDailyTimer(String date) {
+		List<GetFlatsData> mainList = new ArrayList<GetFlatsData>();
+		
+		// Get List of provider names
+		List<String> providerList = milkDAO.getProviders();
+		
+		// Get data for each providers
+		for (String provider : providerList) {
+			List<GetFlatsData> flatsData = milkDAO.getMilkDetails(date,
+					provider);
+			mainList.addAll(flatsData);
+		}
+
+		// update statements in batch
+		milkDAO.updateTestMilkTimerData(mainList, date);;
+	}
 
 	@Override
 	public boolean updateMilkData(UpdateMilk um) {
