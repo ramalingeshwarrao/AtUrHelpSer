@@ -430,5 +430,10 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 		milkDAO.updatePriority(priority);
 	}
 
+	@Override
+	public boolean routeInactive(String routeId) {
+		return milkDAO.routeInactive(routeId);
+	}
+
 
 }

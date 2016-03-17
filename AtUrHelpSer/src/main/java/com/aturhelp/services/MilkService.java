@@ -118,5 +118,7 @@ public interface MilkService {
 	public List<Priority> getPriorityListByRouteId(int routeId);
 	
 	public void updatePriority(List<Priority> priority) throws Exception;
+	
+	public boolean routeInactive(String routeId);
 
 }

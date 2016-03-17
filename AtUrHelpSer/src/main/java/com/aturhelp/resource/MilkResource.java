@@ -464,6 +464,18 @@ public class MilkResource {
 		}
 		return Response.ok(0 + "").build();
 	}
+	
+	@GET
+	@Path("inactiveroute")
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+	public Response routeInactive(@QueryParam("routeid") String routeId) {
+		boolean res = milkService.routeInactive(routeId);
+		if (res) {
+			return Response.ok(0+"").build();
+		} else {
+			return Response.ok(1+"").build();
+		}
+	}
 }
 
 

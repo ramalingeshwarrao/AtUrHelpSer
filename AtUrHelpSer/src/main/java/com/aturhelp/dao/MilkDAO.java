@@ -101,5 +101,7 @@ public interface MilkDAO {
 	public void updatePriority(List<Priority> priority) throws Exception;
 	
 	public void updateTestMilkTimerData(final List<GetFlatsData> flatsData, String date) ;
+	
+	public boolean routeInactive(String routeId);
 
 }

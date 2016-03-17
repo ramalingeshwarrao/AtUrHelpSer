@@ -170,6 +170,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 					ps.setString(1, route.getSubject());
 					ps.setString(2, route.getRouteId());
 					ps.setString(3, AtUrHelpUtils.getLoggedUserName());
+					ps.setBoolean(4, true);
 					return ps;
 				}
 			});
@@ -1412,6 +1413,27 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			LOG.error("Fail to insert batch statements", e);
 			throw new Exception("Fail to update priority");
 		}
+	}
+
+	@Override
+	public boolean routeInactive(final String routeId) {
+		this.jdbcTemplate.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				try {
+					PreparedStatement ps = null;
+					ps = con.prepareStatement(SQLQuery.ROUTE_INACTIVE);  
+					ps.setBoolean(1, false);
+					ps.setString(2, routeId);
+				return ps;
+				}
+				catch (Exception e ) {
+					throw new SQLException("Fail to inactive route");
+				}
+			}
+		});
+		return true;
 	}
 	
 }
