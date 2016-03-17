@@ -158,6 +158,9 @@
 				}).when('/milkapppriority', {
 					templateUrl : 'milk-priority.html',
 					controller : $PROVIDER.MilkPriorityController
+				}).when('/milkrouteinactive', {
+					templateUrl : 'milk-route-inactive.html',
+					controller : $PROVIDER.MilkRouteInactiveController
 				})
 				.otherwise({
 					redirectTo : '/provider'
