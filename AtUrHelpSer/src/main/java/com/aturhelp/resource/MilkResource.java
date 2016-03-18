@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.aturhelp.common.Login;
 import com.aturhelp.common.UpdateMilk;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
@@ -474,6 +475,20 @@ public class MilkResource {
 			return Response.ok(0+"").build();
 		} else {
 			return Response.ok(1+"").build();
+		}
+	}
+	
+	//Login Validation
+	@POST
+	@Path("lv")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response loginValidation(Login login) {
+		System.out.println("Inside the login method");
+		boolean res = milkService.validateLogin(login);
+		if (res) {
+			return Response.ok(0 + "").build();
+		} else {
+			return Response.ok(1 + "").build();
 		}
 	}
 }

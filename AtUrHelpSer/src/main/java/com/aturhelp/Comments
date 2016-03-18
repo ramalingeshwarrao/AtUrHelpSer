@@ -22,3 +22,11 @@ update milk_appartment set priority=0;
 JStack : 
 jstack -l 16666 > jstack.out
 
+
+
+To create mysql cron job
+
+http://www.backuphowto.info/how-backup-mysql-database-automatically-linux-users
+
+http://unix.stackexchange.com/questions/167036/send-backup-by-email-with-crontab
+

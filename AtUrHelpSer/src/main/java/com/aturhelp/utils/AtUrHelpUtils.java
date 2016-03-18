@@ -92,6 +92,15 @@ public class AtUrHelpUtils {
 		return dateFormat.format(new Date());
 	}
 	
+	public static String getTomorrowDate() throws Exception {
+		SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+		Date date = new Date();
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DATE, 1);
+		date = c.getTime();
+		return dateFormat.format(date);
+	}
+	
 	public static int getNoOfDaysInRange(String fromDate, String toDate, String pat) {
 			DateTimeFormatter dateStringFormat = null;
 			if (StringUtils.isNotBlank(pat)) {

@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.aturhelp.common.Login;
 import com.aturhelp.common.UpdateMilk;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
@@ -433,6 +434,11 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	@Override
 	public boolean routeInactive(String routeId) {
 		return milkDAO.routeInactive(routeId);
+	}
+
+	@Override
+	public boolean validateLogin(Login login) {
+		return milkDAO.validateLogin(login);
 	}
 
 

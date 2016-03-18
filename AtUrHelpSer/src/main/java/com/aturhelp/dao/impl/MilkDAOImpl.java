@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import com.aturhelp.common.Login;
 import com.aturhelp.common.UpdateMilk;
 import com.aturhelp.common.UserInfo;
 import com.aturhelp.common.milk.Appartment;
@@ -1133,7 +1134,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 
 			// To improve performance we need executing batch of statements
 			String sql = SQLQuery.INSERT_TIMER_DATA;
-			final String date = AtUrHelpUtils.getCurrentDate();
+			final String date = AtUrHelpUtils.getTomorrowDate();
 
 			this.jdbcTemplate.batchUpdate(sql,
 					new BatchPreparedStatementSetter() {
@@ -1434,6 +1435,27 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			}
 		});
 		return true;
+	}
+
+	@Override
+	public boolean validateLogin(final Login login) {
+		try {
+			List<String> list = this.jdbcTemplate.query(SQLQuery.VALIDATE_USER,
+					new Object[] {login.getUserName(), login.getPassword()}, new RowMapper<String>() {
+						@Override
+						public String mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+							return rs.getString(1);
+						}
+					});
+			if (list != null && list.size() > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			LOG.error("Fail to get milk details by room id details", e);
+			return false;
+		}
+		return false;
 	}
 	
 }

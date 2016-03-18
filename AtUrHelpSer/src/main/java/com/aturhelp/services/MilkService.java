@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.aturhelp.common.Login;
 import com.aturhelp.common.UpdateMilk;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
@@ -120,5 +121,7 @@ public interface MilkService {
 	public void updatePriority(List<Priority> priority) throws Exception;
 	
 	public boolean routeInactive(String routeId);
+	
+	public boolean validateLogin(Login login);
 
 }

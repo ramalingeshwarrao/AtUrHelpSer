@@ -96,5 +96,6 @@ public class SQLQuery {
 	public static final String GET_APP_ID_PRIORITY_BY_ROUTE_ID = "select ma.subject as appname, ma.id as appid, ma.priority  from milk_appartment ma where ma.route_id = ?";
 	public static final String UPDATE_PRIORITY = "update milk_appartment set priority=? where id=?";
 	public static final String ROUTE_INACTIVE = "update milk_route set is_active=? where id=?";
+	public static final String VALIDATE_USER = "select name from admins where name=? and password=?";
 	
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.aturhelp.common.Login;
 import com.aturhelp.common.UpdateMilk;
 import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.BalanceSheet;
@@ -103,5 +104,7 @@ public interface MilkDAO {
 	public void updateTestMilkTimerData(final List<GetFlatsData> flatsData, String date) ;
 	
 	public boolean routeInactive(String routeId);
+	
+	public boolean validateLogin(Login login);
 
 }
