@@ -6,8 +6,8 @@
 						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
 						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<security:http auto-config="true">
-		<security:intercept-url pattern="/provideradmin**" access="ROLE_USER" />
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/provideradmin**"  />
 		<security:form-login 
 		    login-page="/providerlogin" 
 		    default-target-url="/provideradmin" 
@@ -16,11 +16,10 @@
 			password-parameter="password" />
 		<security:logout logout-success-url="/providerlogin?logout" />
 		<!-- enable csrf protection -->
-		<!-- 
-		<security:csrf/>
-		<security:intercept-url pattern="/aturhelp/hr/insert/registeradmin" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		 -->
+		<security:csrf request-matcher-ref="csrfCustomRequestMatcher"/>
+		
 	</security:http>
+	
 	
 	<!-- 
 	<http auto-config="true">
@@ -42,7 +41,15 @@
 	
 	
 	<util:list id="csrfIgnoreURLs">
-	    <value>/aturhelp/hr/insert/registeradmin</value>
+	    <value>/AtUrHelpSer/aturhelp/device/*</value>
 	</util:list>
+	
+	<bean id="csrfIgnoreURLsOrRequestMatcher" class="com.aturhelp.security.csrf.CSRFIgnoreURLSFactoryBean">
+		<property name="csrfIgnoreUrlsList" ref="csrfIgnoreURLs" />
+	</bean>
 
+	<bean id="csrfCustomRequestMatcher" class="com.aturhelp.security.csrf.CsrfSecurityRequestMatcher">
+		  <property name="unprotectedRequestMatcher"><ref bean="csrfIgnoreURLsOrRequestMatcher"/></property>
+	</bean>
+	
 </beans>

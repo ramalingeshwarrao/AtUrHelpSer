@@ -478,19 +478,6 @@ public class MilkResource {
 		}
 	}
 	
-	//Login Validation
-	@POST
-	@Path("lv")
-	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response loginValidation(Login login) {
-		System.out.println("Inside the login method");
-		boolean res = milkService.validateLogin(login);
-		if (res) {
-			return Response.ok(0 + "").build();
-		} else {
-			return Response.ok(1 + "").build();
-		}
-	}
 }
 
 
