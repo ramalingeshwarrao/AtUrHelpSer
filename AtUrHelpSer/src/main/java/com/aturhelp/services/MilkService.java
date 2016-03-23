@@ -37,7 +37,7 @@ public interface MilkService {
 	
 	//select queries
 	public List<MilkPackets> getMilkPackets();
-	public List<Appartment> getAppartments(String id);
+	public List<Appartment> getAppartments(String id, Boolean isDeviceReq, String userName);
 	public List<Location> getLocations();
 	public List<Route> getRoutes(Boolean isDeviceReq, String providerName);
 	public List<Category> getCategories();

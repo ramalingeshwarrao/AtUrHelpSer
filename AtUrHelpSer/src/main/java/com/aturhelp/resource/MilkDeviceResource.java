@@ -19,7 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.aturhelp.common.Login;
+import com.aturhelp.common.milk.Appartment;
 import com.aturhelp.common.milk.Route;
+import com.aturhelp.constants.Constants;
 import com.aturhelp.services.MilkService;
 
 @Component
@@ -51,6 +53,14 @@ final static Logger LOG = Logger.getLogger(MilkDeviceResource.class);
 		@Produces({ MediaType.APPLICATION_JSON })
 		public List<Route> getRouteDetails(@QueryParam("n") String userName) {
 			return milkService.getRoutes(true, userName);
+		}
+		
+		@GET
+		@Path("appartmentdetails")
+		@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+		@Produces({ MediaType.APPLICATION_JSON })
+		public List<Appartment> getAppartmentDetails(@QueryParam(Constants.ROUTE_ID) String id, @QueryParam("n") String userName) {
+			return milkService.getAppartments(id, true, userName);
 		}
 
 }

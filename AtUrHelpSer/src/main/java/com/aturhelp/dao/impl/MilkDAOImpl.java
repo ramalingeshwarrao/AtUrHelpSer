@@ -216,9 +216,9 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	}
 
 	@Override
-	public List<Appartment> getAppartments(String rotueId) {
+	public List<Appartment> getAppartments(String rotueId, Boolean isDeviceReq, String userName) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
+			String providerName = AtUrHelpUtils.getLoggedUserName(isDeviceReq, userName);
 			Appartment selectApp = new Appartment();
 			selectApp.setId(0);
 			selectApp.setAppName("SELECT");

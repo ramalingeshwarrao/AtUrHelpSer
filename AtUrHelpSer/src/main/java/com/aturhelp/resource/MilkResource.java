@@ -251,7 +251,7 @@ public class MilkResource {
 	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<Appartment> getAppartmentDetails(@QueryParam(Constants.ROUTE_ID) String id) {
-		return milkService.getAppartments(id);
+		return milkService.getAppartments(id, null, null);
 	}
 	
 	@GET

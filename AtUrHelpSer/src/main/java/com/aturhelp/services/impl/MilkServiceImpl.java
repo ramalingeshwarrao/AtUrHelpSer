@@ -76,8 +76,8 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	}
 
 	@Override
-	public List<Appartment> getAppartments(String id) {
-		return milkDAO.getAppartments(id);
+	public List<Appartment> getAppartments(String id, Boolean isDeviceReq, String userName) {
+		return milkDAO.getAppartments(id, isDeviceReq, userName);
 	}
 
 	@Override
