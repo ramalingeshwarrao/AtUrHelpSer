@@ -86,8 +86,8 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	}
 
 	@Override
-	public List<Route> getRoutes() {
-		return milkDAO.getRoutes(true);
+	public List<Route> getRoutes(Boolean isDeviceReq, String providerName) {
+		return milkDAO.getRoutes(true, isDeviceReq, providerName);
 	}
 
 	@Override

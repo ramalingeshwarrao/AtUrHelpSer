@@ -147,7 +147,10 @@ public class AtUrHelpUtils {
 		return formattedDate;
 	}
 	
-	public static String getLoggedUserName() {
+	public static String getLoggedUserName(Boolean isDeviceReq, String userName) {
+		if (isDeviceReq != null && isDeviceReq) 
+			return userName;
+		
 		Authentication authObj = SecurityContextHolder.getContext().getAuthentication();
 		String providerName = authObj.getName();
 		return providerName;

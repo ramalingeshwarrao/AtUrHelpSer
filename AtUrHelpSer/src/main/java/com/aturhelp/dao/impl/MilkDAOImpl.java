@@ -56,7 +56,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 					ps.setString(1, milkPackets.getSubject());
 					ps.setString(2, milkPackets.getMilkName());
 					ps.setFloat(3, milkPackets.getCost());
-					ps.setString(4, AtUrHelpUtils.getLoggedUserName());
+					ps.setString(4, AtUrHelpUtils.getLoggedUserName(null, null));
 					return ps;
 				}
 			});
@@ -79,7 +79,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 					ps.setString(1, appartment.getAppSubject());
 					ps.setString(2, appartment.getAppName());
 					ps.setInt(3, appartment.getRouteId());
-					ps.setString(4, AtUrHelpUtils.getLoggedUserName());
+					ps.setString(4, AtUrHelpUtils.getLoggedUserName(null, null));
 					return ps;
 				}
 			});
@@ -101,7 +101,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 							.prepareStatement(SQLQuery.INSERT_FLAT_NO);
 					ps.setString(1, flatNo.getRoomno());
 					ps.setInt(2, flatNo.getAppId());
-					ps.setString(3, AtUrHelpUtils.getLoggedUserName());
+					ps.setString(3, AtUrHelpUtils.getLoggedUserName(null, null));
 					ps.setBoolean(4, true);
 					return ps;
 				}
@@ -124,7 +124,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 							.prepareStatement(SQLQuery.INSERT_LOCATION);
 					ps.setString(1, location.getSubject());
 					ps.setString(2, location.getName());
-					ps.setString(3, AtUrHelpUtils.getLoggedUserName());
+					ps.setString(3, AtUrHelpUtils.getLoggedUserName(null, null));
 					return ps;
 				}
 			});
@@ -147,7 +147,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 					ps.setInt(1, roomMilk.getRoomId());
 					ps.setInt(2, roomMilk.getMilkId());
 					ps.setInt(3, roomMilk.getQuantity());
-					ps.setString(4, AtUrHelpUtils.getLoggedUserName());
+					ps.setString(4, AtUrHelpUtils.getLoggedUserName(null, null));
 					ps.setString(5, "0");
 					return ps;
 				}
@@ -170,7 +170,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 							.prepareStatement(SQLQuery.INSERT_ROUTE);
 					ps.setString(1, route.getSubject());
 					ps.setString(2, route.getRouteId());
-					ps.setString(3, AtUrHelpUtils.getLoggedUserName());
+					ps.setString(3, AtUrHelpUtils.getLoggedUserName(null, null));
 					ps.setBoolean(4, true);
 					return ps;
 				}
@@ -185,7 +185,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<MilkPackets> getMilkPackets() {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			MilkPackets milkP = new MilkPackets();
 			milkP.setId(0);
 			milkP.setMilkName("SELECT");
@@ -218,7 +218,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<Appartment> getAppartments(String rotueId) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			Appartment selectApp = new Appartment();
 			selectApp.setId(0);
 			selectApp.setAppName("SELECT");
@@ -260,7 +260,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<Location> getLocations() {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			List<Location> list = this.jdbcTemplate.query(
 					SQLQuery.GET_LOCATIONS, new Object[] {providerName},
 					new RowMapper<Location>() {
@@ -284,9 +284,9 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	}
 
 	@Override
-	public List<Route> getRoutes(Boolean isSelReq) {
+	public List<Route> getRoutes(Boolean isSelReq, Boolean isDeviceReq, String userName) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(isDeviceReq, userName);
 			Route selectRoute = null;
 			if (isSelReq) {
 				selectRoute = new Route();
@@ -324,7 +324,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<GetFlatsData> getFlatDetails(String recordsPerPage, String fromRecord) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			List<GetFlatsData> list = this.jdbcTemplate.query(
 					SQLQuery.GET_FALT_NOS_IN_APP, new Object[] {providerName, Integer.parseInt(fromRecord), Integer.parseInt(recordsPerPage)},
 					new RowMapper<GetFlatsData>() {
@@ -356,7 +356,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<FlatNo> getFlatNoDetails(String flatNoId) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			FlatNo selectFaltData = new FlatNo();
 			selectFaltData.setRoomno("SELECT");
 			
@@ -395,7 +395,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	
 	@Override
 	public Integer getMilkCount() {
-		String providerName = AtUrHelpUtils.getLoggedUserName();
+		String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 		String query = null;
 		Object[] obj = null;
 		query = SQLQuery.GET_COUNT_MILK_DATA;
@@ -433,10 +433,10 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 						if (StringUtils.isNotBlank(noMilk.getToDate())) {
 							ps.setBoolean(3, true);
 							ps.setDate(4, new java.sql.Date(AtUrHelpUtils.getDate(noMilk.getToDate()).getTime()));
-							ps.setString(5, AtUrHelpUtils.getLoggedUserName());
+							ps.setString(5, AtUrHelpUtils.getLoggedUserName(null, null));
 						} else {
 							ps.setBoolean(3, false);
-							ps.setString(4, AtUrHelpUtils.getLoggedUserName());
+							ps.setString(4, AtUrHelpUtils.getLoggedUserName(null, null));
 						}
 						return ps;	
 					} catch (Exception e) {
@@ -454,7 +454,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 
 	@Override
 	public Boolean getMilkStatusByRid(int roomId) {
-		String providerName = AtUrHelpUtils.getLoggedUserName();
+		String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 		String query = null;
 		Object[] obj = null;
 		query = SQLQuery.GET_STATUS_ROOM_MILK;
@@ -516,7 +516,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<GetFlatsData> getMilkDetailsByRouteId(int routeId, String strDate) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			List<GetFlatsData> list = this.jdbcTemplate.query(
 					SQLQuery.GET_TIMER_DAY_MILK_BY_ROUTE_ID, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime()), routeId, providerName},
 					new RowMapper<GetFlatsData>() {
@@ -549,7 +549,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public GetFlatsData getNoMilkDetails(int roomid, int appId) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			List<GetFlatsData> list = this.jdbcTemplate.query(
 					SQLQuery.GET_NO_MILK_BY_ROOM_ID_APP_ID, new Object[] {false, appId, roomid, providerName},
 					new RowMapper<GetFlatsData>() {
@@ -577,7 +577,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public boolean updateNoMilkToGetMilk(final int roomId, final String toDate) {
 		try {
-			final String providerName = AtUrHelpUtils.getLoggedUserName();
+			final String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			this.jdbcTemplate.update(new PreparedStatementCreator() {
 				@Override
 				public PreparedStatement createPreparedStatement(Connection con)
@@ -609,7 +609,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		try {
 		String query = null;
 		Object[] obj = null;
-		String providerName = AtUrHelpUtils.getLoggedUserName();
+		String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 		query = SQLQuery.NO_MILK_FIRST_CASE;
 		obj = new Object[] {nomilk.getRid(),  new java.sql.Date(AtUrHelpUtils.getDate(nomilk.getFormDate()).getTime()), false, providerName};
 		List<Boolean> list = this.jdbcTemplate.query(query, obj,
@@ -636,7 +636,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		try {
 		String query = null;
 		Object[] obj = null;
-		String providerName = AtUrHelpUtils.getLoggedUserName();
+		String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 		query = SQLQuery.NO_MILK_SECOND_CASE;
 		obj = new Object[] {nomilk.getRid(),  new java.sql.Date(AtUrHelpUtils.getDate(nomilk.getFormDate()).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(nomilk.getFormDate()).getTime()), true, providerName};
 		List<Boolean> list = this.jdbcTemplate.query(query, obj,
@@ -661,7 +661,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<GetFlatsData> getAllNoMilkDetails(int roomId, int appId) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			List<GetFlatsData> list = this.jdbcTemplate.query(
 					SQLQuery.GET_ALL_NO_MILK_BY_ROOM_ID_APP_ID, new Object[] {appId, roomId, providerName},
 					new RowMapper<GetFlatsData>() {
@@ -689,7 +689,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<NoMilkCost> getMilkCostForAllFlatByApp(int appId) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			List<NoMilkCost> list = this.jdbcTemplate.query(
 					SQLQuery.GET_MILK_COST_BY_APP_ID, new Object[] {appId, providerName},
 					new RowMapper<NoMilkCost>() {
@@ -717,7 +717,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<NoMilk> getNoMilkDetailsById(NoMilk noMilk) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			List<NoMilk> list = this.jdbcTemplate.query(
 					SQLQuery.GET_NO_MILK_FOR_COST_BY_RID, new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(noMilk.getFormDate()).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(noMilk.getToDate()).getTime()), noMilk.getRid(), providerName},
 					new RowMapper<NoMilk>() {
@@ -743,7 +743,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public NoMilk getNoMilkDetailsByIdForNull(NoMilk noMilk) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			List<NoMilk> list = this.jdbcTemplate.query(
 					SQLQuery.GET_NO_MILK_FOR_COST_BY_RID_NULL, new Object[] {noMilk.getRid(), providerName},
 					new RowMapper<NoMilk>() {
@@ -770,7 +770,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		try {
 		String query = null;
 		Object[] obj = null;
-		String providerName = AtUrHelpUtils.getLoggedUserName();
+		String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 		query = SQLQuery.NO_MILK_FIRST_CASE_IF_TO_DATE_NULL;
 		obj = new Object[] {nomilk.getRid(),  new java.sql.Date(AtUrHelpUtils.getDate(nomilk.getFormDate()).getTime()), providerName};
 		List<Boolean> list = this.jdbcTemplate.query(query, obj,
@@ -797,7 +797,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		try {
 		String query = null;
 		Object[] obj = null;
-		String providerName = AtUrHelpUtils.getLoggedUserName();
+		String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 		query = SQLQuery.NO_MILK_VALIDATE_FD_GD_GIVEN_TD;
 		obj = new Object[] {nomilk.getRid(),  new java.sql.Date(AtUrHelpUtils.getDate(nomilk.getToDate()).getTime()), providerName};
 		List<Boolean> list = this.jdbcTemplate.query(query, obj,
@@ -825,7 +825,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		String query = null;
 		Object[] obj = null;
 		query = SQLQuery.VALIDATE_DATE_IN_RANGE;
-		String providerName = AtUrHelpUtils.getLoggedUserName();
+		String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 		obj = new Object[] {rid,  new java.sql.Date(AtUrHelpUtils.getDate(date).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(date).getTime()), providerName};
 		List<Boolean> list = this.jdbcTemplate.query(query, obj,
 				new RowMapper<Boolean>() {
@@ -852,7 +852,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 		String query = null;
 		Object[] obj = null;
 		query = SQLQuery.VALIDATE_RANGE_IN_RANGE;
-		String providerName = AtUrHelpUtils.getLoggedUserName();
+		String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 		obj = new Object[] {rid,  new java.sql.Date(AtUrHelpUtils.getDate(fromDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(toDate).getTime()), providerName};
 		List<Boolean> list = this.jdbcTemplate.query(query, obj,
 				new RowMapper<Boolean>() {
@@ -876,7 +876,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<BalanceSheet> getMilkSpendinLts(String strDate) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			List<BalanceSheet> list = this.jdbcTemplate.query(
 					SQLQuery.GET_CONSUMED_MILK, new Object[] {providerName, new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime())},
 					new RowMapper<BalanceSheet>() {
@@ -902,7 +902,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	@Override
 	public List<BalanceSheet> getMilkSpendinLtsByRoute(String strDate) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			List<BalanceSheet> list = this.jdbcTemplate.query(
 					SQLQuery.GET_CONSUMED_MILK_BY_ROUTE_ID, new Object[] {providerName, new java.sql.Date(AtUrHelpUtils.getDate(strDate).getTime())},
 					new RowMapper<BalanceSheet>() {
@@ -1029,7 +1029,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 			milkP.setId(0);
 			milkP.setMilkName("SELECT");
 			milkP.setSubject("SELECT");
-			String providerName = AtUrHelpUtils.getLoggedUserName();
+			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 			List<MilkPackets> list = this.jdbcTemplate.query(
 					SQLQuery.GET_MILK_BY_ROOM_ID, new Object[] {roomId, providerName},
 					new RowMapper<MilkPackets>() {
@@ -1311,7 +1311,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 
 	@Override
 	public boolean deleteMilkTimerData(final Integer rid, final Integer mid, final String supplyDate) {
-		final String providerName = AtUrHelpUtils.getLoggedUserName();
+		final String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 		//Update Timer milk data
 		this.jdbcTemplate.update(new PreparedStatementCreator() {
 			@Override
@@ -1336,7 +1336,7 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 
 	@Override
 	public List<RoomBill> getBillByAppId(final int appId, final String fromDate, final String toDate) {
-		final String providerName = AtUrHelpUtils.getLoggedUserName();
+		final String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
 		try {
 			List<RoomBill> list = this.jdbcTemplate.query(SQLQuery.GET_BILL_BY_APP_ID,
 					new Object[] {new java.sql.Date(AtUrHelpUtils.getDate(fromDate).getTime()), new java.sql.Date(AtUrHelpUtils.getDate(toDate).getTime()), providerName, appId}, new RowMapper<RoomBill>() {

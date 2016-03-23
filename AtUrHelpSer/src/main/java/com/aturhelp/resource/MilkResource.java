@@ -229,7 +229,7 @@ public class MilkResource {
 	@Path("routedetails")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<Route> getRouteDetails() {
-		return milkService.getRoutes();
+		return milkService.getRoutes(null , null);
 	}
 	
 	@GET
