@@ -42,7 +42,7 @@ public interface MilkDAO {
 	public List<Route> getRoutes(Boolean isSelReq, Boolean isDeviceReq, String providerName);
 	public List<Category> getCategories();
 	public List<GetFlatsData> getFlatDetails(String recordsPerPage, String fromRecord);
-	public List<FlatNo> getFlatNoDetails(String apartmentId);
+	public List<FlatNo> getFlatNoDetails(String apartmentId, Boolean isDeviceReq, String providerName);
 	public Integer getMilkCount();
 	public boolean craeteNoMilk(NoMilk noMilk);
 	public Boolean getMilkStatusByRid(int roomId);

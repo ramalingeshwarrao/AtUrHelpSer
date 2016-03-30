@@ -96,8 +96,8 @@ final static Logger LOG = Logger.getLogger(MilkServiceImpl.class);
 	}
 
 	@Override
-	public List<FlatNo> getFlatNoDetails(String appId) {
-		return milkDAO.getFlatNoDetails(appId);
+	public List<FlatNo> getFlatNoDetails(String appId, Boolean isDeviceReq, String providerName) {
+		return milkDAO.getFlatNoDetails(appId, isDeviceReq, providerName);
 	}
 
 	@Override

@@ -259,7 +259,7 @@ public class MilkResource {
 	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<FlatNo> getFlatNoDetails(@QueryParam(Constants.APP_ID) String app_id) {
-		return milkService.getFlatNoDetails(app_id);
+		return milkService.getFlatNoDetails(app_id, null, null);
 	}
 	
 	@GET

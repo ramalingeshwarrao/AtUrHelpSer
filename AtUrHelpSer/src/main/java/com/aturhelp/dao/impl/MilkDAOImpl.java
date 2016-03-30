@@ -354,9 +354,9 @@ public class MilkDAOImpl extends BaseDAO implements MilkDAO{
 	}
 
 	@Override
-	public List<FlatNo> getFlatNoDetails(String flatNoId) {
+	public List<FlatNo> getFlatNoDetails(String flatNoId, Boolean isDeviceReq, String name) {
 		try {
-			String providerName = AtUrHelpUtils.getLoggedUserName(null, null);
+			String providerName = AtUrHelpUtils.getLoggedUserName(isDeviceReq, name);
 			FlatNo selectFaltData = new FlatNo();
 			selectFaltData.setRoomno("SELECT");
 			

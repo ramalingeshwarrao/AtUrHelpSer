@@ -42,7 +42,7 @@ public interface MilkService {
 	public List<Route> getRoutes(Boolean isDeviceReq, String providerName);
 	public List<Category> getCategories();
 	public List<GetFlatsData> getFlatDetails(String recordsPerPage, String fromRecord);
-	public List<FlatNo> getFlatNoDetails(String appId);
+	public List<FlatNo> getFlatNoDetails(String appId, Boolean isDeviceReq, String providerName);
 	public Integer getMilkCount();
 	public Boolean getMilkStatusByRid(int roomId);
 	public List<GetFlatsData> getMilkDetailsByRouteId(int routeId, String date);
